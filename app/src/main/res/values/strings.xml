@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">ChatUp</string>
+    <string name="btn_register">Register</string>
+    <string name="reg_header">Register</string>
+    <string name="reg_email">E-mail</string>
+    <string name="reg_username">Username</string>
+    <string name="reg_password">Password</string>
+    <string name="reg_confirm_password">Confirm password</string>
+    <string name="reg_male">Male</string>
+    <string name="reg_female">Female</string>
+    <string name="reg_date">Date of birth</string>
+    <string name="reg_btnRegister">Register</string>
+    <string name="reg_gender">Gender: </string>
+    <string name="reg_number_picker">Date of Birth</string>
+    <string name="reg_number_picker_day">Day</string>
+    <string name="reg_number_picker_month">Month</string>
+    <string name="reg_number_picker_year">Year</string>
 </resources>
