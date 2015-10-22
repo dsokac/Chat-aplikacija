@@ -15,4 +15,9 @@
     <string name="reg_number_picker_day">Day</string>
     <string name="reg_number_picker_month">Month</string>
     <string name="reg_number_picker_year">Year</string>
+    <string name="login_header">Login</string>
+    <string name="btn_login">Log in</string>
+    <string name="login_forgottenPassword">Forgot your password?</string>
+    <string name="login_email">E-mail</string>
+    <string name="login_password">Password</string>
 </resources>

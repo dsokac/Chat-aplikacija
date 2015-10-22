@@ -17,10 +17,19 @@ public class MainActivity extends AppCompatActivity {
         //Find reference to btn_register and subscribe to onClick event.
         Button btnRegister = (Button)findViewById(R.id.btn_register);
         btnRegister.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
-            startActivity(i);
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(i);
+            }
+        });
+
+        Button btnLogin = (Button) findViewById(R.id.btn_login);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(i);
             }
         });
     }
