@@ -2,10 +2,17 @@ package hr.foi.air.t18.chatup;
 
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import java.util.HashMap;
+
+import hr.foi.air.t18.webservice.HttpGET;
+import hr.foi.air.t18.webservice.HttpPOST;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,5 +39,77 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        Button bthHttpGET = (Button) findViewById(R.id.btn_HttpGET);
+        bthHttpGET.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new HttpGETAsyncTest().execute();
+            }
+        });
+
+        Button btnHttpPOST = (Button) findViewById(R.id.btn_HttpPOST);
+        btnHttpPOST.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new HttpPOSTAsyncTest().execute();
+            }
+        });
+    }
+
+    private class HttpGETAsyncTest extends AsyncTask<Void, Void, String>
+    {
+
+        @Override
+        protected String doInBackground(Void... params)
+        {
+            String response;
+            HashMap<String, String> testMap = new HashMap<String, String>();
+            testMap.put("Test1", "Danijel");
+            testMap.put("Test2", "Filipovic");
+            try {
+                HttpGET connection = new HttpGET("http://10.0.3.2:8080/Test");
+                connection.sendRequest(testMap);
+                response = connection.getResponse();
+            } catch(Exception e) {
+                response = e.getMessage();
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String result)
+        {
+            super.onPostExecute(result);
+            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private class HttpPOSTAsyncTest extends AsyncTask<Void, Void, String>
+    {
+
+        @Override
+        protected String doInBackground(Void... params)
+        {
+            String response;
+            HashMap<String, String> testMap = new HashMap<String, String>();
+            testMap.put("var1", "Danijel");
+            testMap.put("var2", "Filipovic");
+            try {
+                HttpPOST connection = new HttpPOST("http://10.0.3.2:8080/Test");
+                connection.sendRequest(testMap);
+                response = connection.getResponse();
+            } catch (Exception e) {
+                response = e.getMessage();
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String result)
+        {
+            super.onPostExecute(result);
+            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+        }
     }
 }
