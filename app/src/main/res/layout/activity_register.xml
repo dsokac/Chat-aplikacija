@@ -15,7 +15,6 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="@string/reg_header"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="@dimen/font_22" />
 
         <EditText
@@ -26,8 +25,7 @@
             android:layout_centerHorizontal="true"
             android:ems="10"
             android:hint="Enter email"
-            android:inputType="textEmailAddress" >
-        </EditText>
+            android:inputType="textEmailAddress"/>
 
         <EditText
             android:id="@+id/regUsername"
@@ -68,7 +66,6 @@
             android:layout_marginTop="7dp"
             android:text="@string/reg_gender"
             android:textSize="@dimen/font_16"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_marginLeft="90dp"/>
 
         <RadioGroup
@@ -100,9 +97,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="21dp"
             android:text="@string/reg_date"
-            android:textSize="@dimen/font_16"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textSize="@dimen/font_16"/>
 
+        <!--
         <NumberPicker
             android:id="@+id/regNumberPicker1"
             android:layout_width="wrap_content"
@@ -145,7 +142,6 @@
             android:layout_marginTop="7dp"
             android:text="@string/reg_number_picker_day"
             android:textSize="@dimen/font_16"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_marginLeft="90dp"/>
 
         <TextView
@@ -157,7 +153,6 @@
             android:layout_marginTop="7dp"
             android:text="@string/reg_number_picker_month"
             android:textSize="@dimen/font_16"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_marginLeft="160dp"/>
 
         <TextView
@@ -169,14 +164,22 @@
             android:layout_marginTop="7dp"
             android:text="@string/reg_number_picker_year"
             android:textSize="@dimen/font_16"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_marginLeft="230dp"/>
+        -->
+
+        <DatePicker
+            android:id="@+id/regDatePicker"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:calendarViewShown="false"
+            android:layout_below="@id/regDate"/>
 
         <Button
             android:id="@+id/btnRegOk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/regNumberPicker1LabelDay"
+            android:layout_below="@id/regDatePicker"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:text="@string/reg_btnRegister" />
