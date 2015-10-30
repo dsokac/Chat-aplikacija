@@ -87,4 +87,5 @@ public class User
     {
         return password1.equals(password2);
     }
+
 }
