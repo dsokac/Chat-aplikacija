@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import hr.foi.air.t18.core.LoginAsync;
 import hr.foi.air.t18.core.RegisterAsync;
+import hr.foi.air.t18.core.User;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -65,22 +66,29 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(currentClass.emailText.getText().toString().isEmpty() || currentClass.passwordText.getText().toString().isEmpty())
                 {
-                    if(currentClass.emailText.getText().toString().isEmpty())
+                    if(currentClass.emailText.getText().toString().isEmpty()) {
                         currentClass.emailText.setError("E-mail is required!");
-                    if(currentClass.passwordText.getText().toString().isEmpty())
+                    }
+
+                    if(currentClass.passwordText.getText().toString().isEmpty()) {
                         currentClass.passwordText.setError("Password is required!");
-                    currentClass.emailText.setText("");
-                    currentClass.passwordText.setText("");
+                    }
                 }
                 else
                 {
-                    Login(currentClass.emailText.getText().toString(), currentClass.passwordText.getText().toString());
+                    User user = new User();
+                    user.setEmail(currentClass.emailText.getText().toString());
+                    if(!user.validateEmail())
+                    {
+                        currentClass.emailText.setError("Invalid e-mail format!");
+                    }
+                    else Login(currentClass.emailText.getText().toString(), currentClass.passwordText.getText().toString(), currentClass);
                 }
             }
         });
     }
 
-    private void Login(String email, String password)
+    private void Login(String email, String password, final LoginActivity currentClass)
     {
         LoginAsync loginAsync = new LoginAsync(email, password, new RegisterAsync.Listener() {
             @Override
@@ -93,8 +101,18 @@ public class LoginActivity extends AppCompatActivity {
             public void onFinish(int status, String message) {
                 if(progress.isShowing()) progress.dismiss();
 
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                if(status == 0) finish();
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                if(status == 0)
+                {
+                    finish();
+                    Intent intent = new Intent(currentClass, MainActivity.class);
+                    startActivity(intent);
+                }
+                else
+                {
+                    currentClass.emailText.setText("");
+                    currentClass.passwordText.setText("");
+                }
             }
         });
 
