@@ -1,19 +1,7 @@
 package hr.foi.air.t18.core;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.os.AsyncTask;
-import android.widget.Toast;
-
-import org.json.JSONObject;
-
-import java.util.Date;
-import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import hr.foi.air.t18.webservice.HttpPOST;
 
 /**
  * Created by Danijel on 25.10.2015..
@@ -25,7 +13,7 @@ public class User
     private char gender;
     private String dateOfBirth;
 
-    public User() {};
+    public User() {}
 
     public User(String email, String username, char gender, String dateOfBirth)
     {

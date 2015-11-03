@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import hr.foi.air.t18.core.RegisterAsync;
+import hr.foi.air.t18.webservice.RegisterAsync;
 import hr.foi.air.t18.core.User;
 
 public class RegisterActivity extends AppCompatActivity

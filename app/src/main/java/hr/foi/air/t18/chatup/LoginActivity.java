@@ -1,25 +1,16 @@
 package hr.foi.air.t18.chatup;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import hr.foi.air.t18.core.LoginAsync;
-import hr.foi.air.t18.core.RegisterAsync;
+import hr.foi.air.t18.webservice.LoginAsync;
+import hr.foi.air.t18.webservice.RegisterAsync;
 import hr.foi.air.t18.core.User;
 
 public class LoginActivity extends AppCompatActivity {
