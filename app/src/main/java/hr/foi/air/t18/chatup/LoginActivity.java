@@ -9,9 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.LoginAsync;
 import hr.foi.air.t18.webservice.RegisterAsync;
-import hr.foi.air.t18.core.User;
 
 public class LoginActivity extends AppCompatActivity {
 
