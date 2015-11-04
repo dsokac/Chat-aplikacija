@@ -7,6 +7,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import hr.foi.air.t18.core.HttpPOST;
+
 /**
  * Created by Goran on 1.11.2015..
  */

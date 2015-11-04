@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import hr.foi.air.t18.core.HttpPOST;
 import hr.foi.air.t18.core.User;
 
 /**

@@ -11,8 +11,8 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
-import hr.foi.air.t18.webservice.HttpGET;
-import hr.foi.air.t18.webservice.HttpPOST;
+import hr.foi.air.t18.core.HttpGET;
+import hr.foi.air.t18.core.HttpPOST;
 
 public class MainActivity extends AppCompatActivity {
 
