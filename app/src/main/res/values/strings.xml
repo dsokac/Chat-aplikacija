@@ -16,8 +16,12 @@
     <string name="reg_number_picker_month">Month</string>
     <string name="reg_number_picker_year">Year</string>
     <string name="login_header">Login</string>
+    <string name="login_password">Password</string>
     <string name="btn_login">Log in</string>
     <string name="login_forgottenPassword">Forgot your password?</string>
     <string name="login_email">E-mail</string>
-    <string name="login_password">Password</string>
+    <string name="forgot_naslov">Forgot your password</string>
+    <string name="forgot_podnaslov">Tell us your email address and we will send you instructions on this email.</string>
+    <string name="forgot_hint_unos">E-mail</string>
+    <string name="forgot_button_send">Send</string>
 </resources>
