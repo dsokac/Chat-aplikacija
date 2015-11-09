@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import hr.foi.air.t18.core.User;
@@ -30,6 +31,16 @@ public class LoginActivity extends AppCompatActivity {
         getControls();
         this.progress = new ProgressDialog(this);
         setEvents();
+
+        //Find reference to btnForgotPassword and subscribe to onClick event
+        TextView btnForgotPassword = (TextView)findViewById(R.id.loginForgottenPassword);
+        btnForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void getControls()
