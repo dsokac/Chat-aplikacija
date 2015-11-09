@@ -28,6 +28,7 @@ public class RegisterAsync extends AsyncTask<Void, Void, String>
     {
         this.newUser = newUser;
         this.listener = listener;
+        this.password = password;
     }
 
     @Override
@@ -42,7 +43,7 @@ public class RegisterAsync extends AsyncTask<Void, Void, String>
         String response;
 
         HashMap<String, String> parameters = new HashMap<String, String>();
-        parameters.put("mail",this. newUser.getEmail());
+        parameters.put("mail", this.newUser.getEmail());
         parameters.put("username", this.newUser.getUsername());
         parameters.put("gender", String.valueOf(this.newUser.getGender()));
         parameters.put("dateOfBirth", this.newUser.getDateOfBirth());
