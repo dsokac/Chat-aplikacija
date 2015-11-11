@@ -41,6 +41,16 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        //Find reference to loginAdminLoginButton and subscribe to onClick event
+        Button btnloginAdminLoginButton = (Button)findViewById(R.id.loginAdminLoginButton);
+        btnloginAdminLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MainClass.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void getControls()

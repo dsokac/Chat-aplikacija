@@ -70,4 +70,12 @@
         android:layout_alignRight="@+id/loginRegisterButton"
         android:layout_alignEnd="@+id/loginRegisterButton" />
 
+    <Button
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_login_admin_login"
+        android:id="@+id/loginAdminLoginButton"
+        android:layout_below="@+id/loginRegisterButton"
+        />
+
 </RelativeLayout>
