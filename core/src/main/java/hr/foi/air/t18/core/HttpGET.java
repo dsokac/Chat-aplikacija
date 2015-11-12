@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.Map;
 
 /**
+ * Class used for sending GET requests to Web services.
  * Created by Danijel on 24.10.2015..
  */
 public class HttpGET extends HttpMethod
@@ -19,6 +20,10 @@ public class HttpGET extends HttpMethod
         super(urlString);
     }
 
+    /**
+     * Sends empty GET request.
+     * @throws IOException
+     */
     @Override
     public void sendRequest() throws IOException
     {
@@ -39,6 +44,11 @@ public class HttpGET extends HttpMethod
         }
     }
 
+    /**
+     * Sends GET request with parameters.
+     * @param data GET parameters as Map object
+     * @throws IOException
+     */
     @Override
     public void sendRequest(Map<String, String> data) throws IOException
     {
@@ -61,6 +71,10 @@ public class HttpGET extends HttpMethod
         }
     }
 
+    /**
+     * Morphs Map query into String query.
+     * @param data Map query
+     */
     private void generateQuery(Map<String, String> data)
     {
         String query = "";

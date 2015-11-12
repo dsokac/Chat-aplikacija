@@ -8,17 +8,26 @@ import java.net.URL;
 import java.util.Map;
 
 /**
+ * Class used for sending POST requests to Web services.
  * Created by Danijel on 24.10.2015..
  */
 public class HttpPOST extends HttpMethod
 {
     private String query = "";
 
+    /**
+     * Constructor.
+     * @param url Web service URL as String.
+     */
     public HttpPOST(String url)
     {
         super(url);
     }
 
+    /**
+     * Sends empty POST request to Web service.
+     * @throws IOException
+     */
     @Override
     public void sendRequest() throws IOException
     {
@@ -41,6 +50,11 @@ public class HttpPOST extends HttpMethod
         }
     }
 
+    /**
+     * Sends POST request with parameters.
+     * @param data POST parameters as Map object
+     * @throws IOException
+     */
     @Override
     public void sendRequest(Map<String, String> data) throws IOException
     {
@@ -67,6 +81,10 @@ public class HttpPOST extends HttpMethod
         }
     }
 
+    /**
+     * Morphs Map query into String query.
+     * @param data Map query
+     */
     private void generateQuery(Map<String, String> data)
     {
         String query = "";

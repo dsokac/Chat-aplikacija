@@ -35,6 +35,9 @@ public class RegisterActivity extends AppCompatActivity
         addEvents();
     }
 
+    /**
+     * Initializes controls.
+     */
     private void initializeComponents()
     {
         this.editEmail = (EditText) findViewById(R.id.regEmail);
@@ -47,6 +50,9 @@ public class RegisterActivity extends AppCompatActivity
         this.progress = new ProgressDialog(this);
     }
 
+    /**
+     * Adds onClick() event to the OK button.
+     */
     private void addEvents()
     {
         this.buttonOK.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +71,10 @@ public class RegisterActivity extends AppCompatActivity
         });
     }
 
+    /**
+     * Builds User object out of user's input.
+     * @return User object
+     */
     private User buildUser()
     {
         String email = editEmail.getText().toString();
@@ -80,6 +90,11 @@ public class RegisterActivity extends AppCompatActivity
         return newUser;
     }
 
+    /**
+     * Runs async task for the registration of the new user.
+     * @param newUser New User object
+     * @param password1 User's password
+     */
     private void registerUser(User newUser, String password1)
     {
         RegisterAsync process = new RegisterAsync(newUser, password1, new RegisterAsync.Listener() {

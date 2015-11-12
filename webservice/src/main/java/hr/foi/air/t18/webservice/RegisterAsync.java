@@ -10,20 +10,32 @@ import hr.foi.air.t18.core.HttpPOST;
 import hr.foi.air.t18.core.User;
 
 /**
+ * This class is used to start an async task which will contact the
+ * Web service to start a registration process of the user.
  * Created by Danijel on 27.10.2015..
  */
 public class RegisterAsync extends AsyncTask<Void, Void, String>
 {
-    public User newUser;
+    private User newUser;
     private String password;
     private Listener listener;
 
+    /**
+     * Interface for a Listener that will have implemented onBegin()
+     * and onFinish() methods
+     */
     public interface Listener
     {
         void onBegin();
         void onFinish(int status, String message);
     }
 
+    /**
+     * Construsctor for the RegisterAsync class.
+     * @param newUser User object
+     * @param password String that contains the inputted password
+     * @param listener Listener that has implemented onBegin() and onFinish() events
+     */
     public RegisterAsync(User newUser, String password, Listener listener)
     {
         this.newUser = newUser;
@@ -31,12 +43,22 @@ public class RegisterAsync extends AsyncTask<Void, Void, String>
         this.password = password;
     }
 
+    /**
+     * Overriden onPreExecute() method which calls
+     * implemented onBegin() event.
+     */
     @Override
     protected void onPreExecute()
     {
         this.listener.onBegin();
     }
 
+    /**
+     * Overriden doInBackground() method which contacts the Web server
+     * for registration.
+     * @param params
+     * @return Web server response
+     */
     @Override
     protected String doInBackground(Void... params)
     {
@@ -60,6 +82,11 @@ public class RegisterAsync extends AsyncTask<Void, Void, String>
         return response;
     }
 
+    /**
+     * Overriden onPostExecute() method that parser JSON
+     * response and calls onFinish() event.
+     * @param result
+     */
     @Override
     protected void onPostExecute(String result)
     {
