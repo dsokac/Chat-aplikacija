@@ -1,6 +1,5 @@
 package hr.foi.air.t18.chatup;
 
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.TabLayout;
@@ -11,9 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.HashMap;
-
 import hr.foi.air.t18.core.HttpGET;
 import hr.foi.air.t18.core.HttpPOST;
 
@@ -46,12 +47,10 @@ public class MainClass extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
 
@@ -93,7 +92,6 @@ public class MainClass extends AppCompatActivity {
 //
 //    private class HttpGETAsyncTest extends AsyncTask<Void, Void, String>
 //    {
-//
 //        @Override
 //        protected String doInBackground(Void... params)
 //        {
@@ -146,4 +144,30 @@ public class MainClass extends AppCompatActivity {
 //            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
 //        }
     }
+    //menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id)
+        {
+            case R.id.action_edit_profile:
+                break;
+            case R.id.action_home:
+                break;
+            case R.id.action_about_us:
+                break;
+            case R.id.action_logout:
+                break;
+            case R.id.action_close_app:
+                break;
+        }
+        return true;
+    }
+    //menu end
 }
