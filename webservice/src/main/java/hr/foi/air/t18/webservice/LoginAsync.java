@@ -39,7 +39,7 @@ public class LoginAsync extends AsyncTask<Void, Void, String> {
 
         try
         {
-            HttpPOST connection = new HttpPOST("http://10.0.3.2:8080/login");
+            HttpPOST connection = new HttpPOST("http://104.236.58.50:8080/login");
             connection.sendRequest(parameters);
             response = connection.getResponse();
         }

@@ -72,7 +72,7 @@ public class RegisterAsync extends AsyncTask<Void, Void, String>
         parameters.put("password", this.password);
 
         try {
-            HttpPOST connection = new HttpPOST("http://10.0.3.2:8080/register");
+            HttpPOST connection = new HttpPOST("http://104.236.58.50:8080/register");
             connection.sendRequest(parameters);
             response = connection.getResponse();
         } catch(Exception e) {
