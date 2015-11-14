@@ -37,8 +37,15 @@ public class MainClass extends AppCompatActivity {
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount());
+
+        // Here is ViewPager attached with an adapter
         viewPager.setAdapter(adapter);
+
+        // Here is Android ViewPager attached to a page change listener of TabLayout
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        // Further the Android TabLayout is attached to a tab selected listener
+        // here ViewPager’s page is set when a tab is selected
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
