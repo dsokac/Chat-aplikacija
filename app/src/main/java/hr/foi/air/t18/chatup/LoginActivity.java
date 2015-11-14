@@ -23,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private ProgressDialog progress;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,9 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /***
+     * Function getControls() gets activity elements and adds them to class variables
+     */
     private void getControls()
     {
          this.emailText = (EditText) findViewById(R.id.loginEmail);
@@ -62,6 +66,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Function setEvents() sets button events. Register button opens new activity.
+     * Login button launches event to check if email and password are written and if
+     * email has correct format. If everything is fine it runs Login function.
+     */
     private void setEvents() {
         this.btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,15 +109,32 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /***
+     * Function Login() runs login async task and implements onBegin and onFinish events
+     * @param email - user's email
+     * @param password - user's password
+     * @param currentClass - current active activity class
+     */
     private void Login(String email, String password, final LoginActivity currentClass)
     {
         LoginAsync loginAsync = new LoginAsync(email, password, new RegisterAsync.Listener() {
+            /***
+             * Overridden onBegin event of LoginAsync task defines what is happening when async task starts to execute.
+             * It displays message 'Signing in...'.
+             */
             @Override
             public void onBegin() {
                 progress.setMessage("Signing in...");
                 progress.show();
             }
 
+            /***
+             * Overridden onFinish event of LoginAsync task defines what happens when async task finish execution.
+             * The event closes progress dialog and displays message returned by web service.
+             * If everything is corrent it opens MainClass activity, otherwise it empties text inputs.
+             * @param status - status integer returned by web service
+             * @param message - message string returned by web service
+             */
             @Override
             public void onFinish(int status, String message) {
                 if(progress.isShowing()) progress.dismiss();

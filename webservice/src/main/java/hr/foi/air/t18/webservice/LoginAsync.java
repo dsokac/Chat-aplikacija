@@ -9,6 +9,11 @@ import java.util.HashMap;
 import hr.foi.air.t18.core.HttpPOST;
 
 /**
+ * This class is used to communicate with database through web service. The class purpose is to
+ * log in the app user.
+ * The class creates HTTP request with e-mail and password as parameters, it sends the request to
+ * the web service and waits for its response.
+ *
  * Created by Danijel on 30.10.2015..
  */
 public class LoginAsync extends AsyncTask<Void, Void, String> {
@@ -17,6 +22,12 @@ public class LoginAsync extends AsyncTask<Void, Void, String> {
     private String password;
     private RegisterAsync.Listener listener;
 
+    /**
+     * The class constructor assigns values to the class private variables.
+     * @param email - user's unique email
+     * @param password - user's password
+     * @param listener - listener with implemented onBegin() and onFinish() events
+     */
     public LoginAsync(String email, String password, RegisterAsync.Listener listener)
     {
         this.password = password;
@@ -24,11 +35,21 @@ public class LoginAsync extends AsyncTask<Void, Void, String> {
         this.listener = listener;
     }
 
+    /***
+     * Overridden function that runs listener's onBegin event.
+     * onPreExecute is run before execution of Async task.
+     */
     @Override
     protected void onPreExecute() {
         this.listener.onBegin();
     }
 
+    /***
+     * Async task's function which is running in background and it is used to create HTTP parameters
+     * and HTTP request. It sends request to the web service for log in and waits for response.
+     * @param params
+     * @return response - Web service's response
+     */
     @Override
     protected String doInBackground(Void... params) {
         String response;
@@ -51,6 +72,13 @@ public class LoginAsync extends AsyncTask<Void, Void, String> {
         return response;
     }
 
+
+    /***
+     * Overridden async task's function onPost Execute() runs after request sending and it gets
+     * web service's response as JSON object and parses the JSON to extract message and status
+     * returned by web service. The function runs onFinish event.
+     * @param result - JSON object containing message and status returned by web service
+     */
     @Override
     protected void onPostExecute(String result) {
         String message;

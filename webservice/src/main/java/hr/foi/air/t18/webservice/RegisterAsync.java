@@ -31,7 +31,7 @@ public class RegisterAsync extends AsyncTask<Void, Void, String>
     }
 
     /**
-     * Construsctor for the RegisterAsync class.
+     * Constructor for the RegisterAsync class.
      * @param newUser User object
      * @param password String that contains the inputted password
      * @param listener Listener that has implemented onBegin() and onFinish() events
@@ -44,7 +44,7 @@ public class RegisterAsync extends AsyncTask<Void, Void, String>
     }
 
     /**
-     * Overriden onPreExecute() method which calls
+     * Overridden onPreExecute() method which calls
      * implemented onBegin() event.
      */
     @Override
@@ -54,7 +54,7 @@ public class RegisterAsync extends AsyncTask<Void, Void, String>
     }
 
     /**
-     * Overriden doInBackground() method which contacts the Web server
+     * Overridden doInBackground() method which contacts the Web server
      * for registration.
      * @param params
      * @return Web server response
@@ -83,7 +83,7 @@ public class RegisterAsync extends AsyncTask<Void, Void, String>
     }
 
     /**
-     * Overriden onPostExecute() method that parser JSON
+     * Overridden onPostExecute() method that parser JSON
      * response and calls onFinish() event.
      * @param result
      */
