@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
+ * Simple Fragment for Users Home Page
  * Created by Laptop on 9.11.2015..
  */
 public class HomePageFragment extends Fragment {

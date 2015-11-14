@@ -4,12 +4,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/searchUser"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Search tab"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+        android:layout_margin="10dp"
+        android:hint="@string/search_hint">
+        <requestFocus />
+    </EditText>
+    
+    <Button
+        android:id="@+id/searchButton"
+        android:text="@string/search"
+        android:layout_centerHorizontal="true"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/searchUser"/>
+
+    <ListView
+        android:id="@+id/searchListview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/searchButton" />
 
 </RelativeLayout>
