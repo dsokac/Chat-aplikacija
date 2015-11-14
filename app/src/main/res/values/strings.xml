@@ -32,4 +32,5 @@
     <string name="action_about_us">About us</string>
     <string name="action_logout">Logout</string>
     <string name="action_close_app">Close app</string>
+    <string name="stringProfilePicture">profile picture</string>
 </resources>

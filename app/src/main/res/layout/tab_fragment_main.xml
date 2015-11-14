@@ -1,15 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical">
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/profilePicture"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:contentDescription="@string/stringProfilePicture"
+        android:src="@drawable/default_avatar"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
+
     <TextView
-        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Main page tab"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Username"
+        android:id="@+id/profileUsername"
+        android:layout_alignBottom="@+id/profilePicture"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+        android:layout_marginLeft="10dp"
+        android:paddingLeft="10dp" />
 
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/profileOnlineStatus"
+        android:layout_alignBottom="@+id/profileUsername"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/online" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Your friends"
+        android:id="@+id/profileYourFriends"
+        android:layout_below="@+id/profilePicture"
+        android:layout_alignLeft="@+id/profilePicture"
+        android:layout_alignStart="@+id/profilePicture"
+        android:layout_marginTop="40dp" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/friendListView"
+        android:layout_alignLeft="@+id/profileYourFriends"
+        android:layout_alignStart="@+id/profileYourFriends"
+        android:layout_marginRight="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_below="@+id/profileYourFriends"
+        android:layout_marginTop="10dp"
+        android:divider="@color/colorLightGrey"
+        android:dividerHeight="1dp" />
 </RelativeLayout>
