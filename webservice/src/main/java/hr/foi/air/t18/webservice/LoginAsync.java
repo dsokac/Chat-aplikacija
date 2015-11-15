@@ -20,7 +20,7 @@ public class LoginAsync extends AsyncTask<Void, Void, String> {
 
     private String email;
     private String password;
-    private RegisterAsync.Listener listener;
+    private IListener listener;
 
     /**
      * The class constructor assigns values to the class private variables.
@@ -28,7 +28,7 @@ public class LoginAsync extends AsyncTask<Void, Void, String> {
      * @param password - user's password
      * @param listener - listener with implemented onBegin() and onFinish() events
      */
-    public LoginAsync(String email, String password, RegisterAsync.Listener listener)
+    public LoginAsync(String email, String password, IListener listener)
     {
         this.password = password;
         this.email = email;

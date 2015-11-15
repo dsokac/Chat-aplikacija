@@ -18,17 +18,8 @@ public class RegisterAsync extends AsyncTask<Void, Void, String>
 {
     private User newUser;
     private String password;
-    private Listener listener;
+    private IListener listener;
 
-    /**
-     * Interface for a Listener that will have implemented onBegin()
-     * and onFinish() methods
-     */
-    public interface Listener
-    {
-        void onBegin();
-        void onFinish(int status, String message);
-    }
 
     /**
      * Constructor for the RegisterAsync class.
@@ -36,7 +27,7 @@ public class RegisterAsync extends AsyncTask<Void, Void, String>
      * @param password String that contains the inputted password
      * @param listener Listener that has implemented onBegin() and onFinish() events
      */
-    public RegisterAsync(User newUser, String password, Listener listener)
+    public RegisterAsync(User newUser, String password, IListener listener)
     {
         this.newUser = newUser;
         this.listener = listener;

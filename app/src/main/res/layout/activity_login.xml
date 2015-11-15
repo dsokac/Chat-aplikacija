@@ -66,9 +66,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/login_forgottenPassword"
         android:id="@+id/loginForgottenPassword"
-        android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/loginRegisterButton"
-        android:layout_alignEnd="@+id/loginRegisterButton" />
+        android:layout_alignRight="@+id/loginPassword"
+        android:layout_alignEnd="@+id/loginPassword"
+        android:layout_below="@+id/loginPassword"
+        android:layout_marginTop="15dp"/>
 
     <Button
         android:layout_width="135dp"
@@ -76,6 +77,6 @@
         android:text="@string/btn_login_admin_login"
         android:id="@+id/loginAdminLoginButton"
         android:layout_below="@+id/loginRegisterButton"
-        />
+        android:layout_marginTop="15dp"/>
 
 </RelativeLayout>

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import hr.foi.air.t18.core.User;
+import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.LoginAsync;
 import hr.foi.air.t18.webservice.RegisterAsync;
 
@@ -117,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void Login(String email, String password, final LoginActivity currentClass)
     {
-        LoginAsync loginAsync = new LoginAsync(email, password, new RegisterAsync.Listener() {
+        LoginAsync loginAsync = new LoginAsync(email, password, new IListener() {
             /***
              * Overridden onBegin event of LoginAsync task defines what is happening when async task starts to execute.
              * It displays message 'Signing in...'.

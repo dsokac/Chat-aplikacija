@@ -11,6 +11,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import hr.foi.air.t18.core.User;
+import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.RegisterAsync;
 
 public class RegisterActivity extends AppCompatActivity
@@ -97,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity
      */
     private void registerUser(User newUser, String password1)
     {
-        RegisterAsync process = new RegisterAsync(newUser, password1, new RegisterAsync.Listener() {
+        RegisterAsync process = new RegisterAsync(newUser, password1, new IListener() {
             @Override
             public void onBegin() {
                 progress.setMessage("Registering...");
