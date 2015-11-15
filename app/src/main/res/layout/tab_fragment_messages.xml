@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Messages tab"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Conversations"
+        android:id="@+id/messagesConversations"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/single_conversationListView"
+        android:layout_alignLeft="@+id/messagesConversations"
+        android:layout_alignStart="@+id/messagesConversations"
+        android:layout_marginRight="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_below="@+id/messagesConversations"
+        android:layout_marginTop="10dp"
+        android:divider="@color/colorLightGrey"
+        android:dividerHeight="1dp" />
 
 </RelativeLayout>

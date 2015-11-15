@@ -19,26 +19,26 @@ import java.util.zip.Inflater;
 import hr.foi.air.t18.core.User;
 
 /**
- * Created by Danijel on 14.11.2015..
+ * Created by Jurman_Lap on 15.11.2015..
  */
-public class UserListAdapter extends BaseAdapter {
-    private ArrayList<String> friends;
+public class SingleConversationListAdapter extends BaseAdapter {
+    private ArrayList<String> single_conversations;
     private LayoutInflater inflater;
 
-    public UserListAdapter(Context fragment, ArrayList<String> results)
+    public  SingleConversationListAdapter(Context fragment, ArrayList<String> results)
     {
-        this.friends = results;
+        this.single_conversations = results;
         this.inflater = LayoutInflater.from(fragment);
     }
 
     @Override
     public int getCount() {
-        return this.friends.size();
+        return this.single_conversations.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return this.friends.get(position);
+        return this.single_conversations.get(position);
     }
 
     @Override
@@ -48,20 +48,20 @@ public class UserListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        TextView username;
+        TextView single_conversation_name;
         if(convertView == null)
         {
-            convertView = inflater.inflate(R.layout.friend_list_item_layout, null);
-            username = (TextView)convertView.findViewById(R.id.friendUsername);
+            convertView = inflater.inflate(R.layout.single_conversation_list_item_layout, null);
+            single_conversation_name = (TextView)convertView.findViewById(R.id.conversationName);
 
-            convertView.setTag(username);
+            convertView.setTag(single_conversation_name);
         }
         else
         {
-            username = (TextView) convertView.getTag();
+            single_conversation_name = (TextView) convertView.getTag();
         }
 
-        username.setText(friends.get(position).toString());
+        single_conversation_name.setText(single_conversations.get(position).toString());
 
         return convertView;
     }
