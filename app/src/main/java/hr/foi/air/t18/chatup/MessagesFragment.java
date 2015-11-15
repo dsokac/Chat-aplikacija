@@ -31,7 +31,7 @@ public class MessagesFragment extends Fragment {
         single_conversations.add("drugi susjed");
 
         ListView lv =  (ListView)root.findViewById(R.id.single_conversationListView);
-        lv.setAdapter(new UserListAdapter(getActivity(),single_conversations ));
+        lv.setAdapter(new SingleConversationListAdapter(getActivity(),single_conversations ));
         return root;
     }
 }

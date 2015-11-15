@@ -13,6 +13,7 @@ public class User
     private String username;
     private char gender;
     private String dateOfBirth;
+    private String status;
 
     /**
      * Default constructor.
@@ -130,5 +131,9 @@ public class User
     {
         return password1.equals(password2);
     }
+
+    public void setStatus(String status) {this.status = status;}
+
+    public String getStatus(){return this.status;}
 
 }

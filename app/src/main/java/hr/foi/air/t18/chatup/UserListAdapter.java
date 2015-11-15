@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
@@ -22,10 +23,10 @@ import hr.foi.air.t18.core.User;
  * Created by Danijel on 14.11.2015..
  */
 public class UserListAdapter extends BaseAdapter {
-    private ArrayList<String> friends;
+    private ArrayList<User> friends;
     private LayoutInflater inflater;
 
-    public UserListAdapter(Context fragment, ArrayList<String> results)
+    public UserListAdapter(Context fragment, ArrayList<User> results)
     {
         this.friends = results;
         this.inflater = LayoutInflater.from(fragment);
@@ -48,21 +49,32 @@ public class UserListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        TextView username;
+        CustomListItem li = new CustomListItem();
         if(convertView == null)
         {
             convertView = inflater.inflate(R.layout.friend_list_item_layout, null);
-            username = (TextView)convertView.findViewById(R.id.friendUsername);
+            li.txtUsername = (TextView)convertView.findViewById(R.id.friendUsername);
+            li.imgStatus = (ImageView) convertView.findViewById(R.id.friendOnlineStatus);
 
-            convertView.setTag(username);
+            convertView.setTag(li);
         }
         else
         {
-            username = (TextView) convertView.getTag();
+            li = (CustomListItem) convertView.getTag();
         }
+        li.txtUsername.setText(friends.get(position).getUsername());
 
-        username.setText(friends.get(position).toString());
+        String status = friends.get(position).getStatus();
+
+        if(status == "online") li.imgStatus.setImageResource(R.drawable.online);
+        else li.imgStatus.setImageResource(R.drawable.offline);
 
         return convertView;
     }
+}
+
+class CustomListItem
+{
+    TextView txtUsername;
+    ImageView imgStatus;
 }
