@@ -14,6 +14,7 @@ import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.LoginAsync;
 import hr.foi.air.t18.webservice.RegisterAsync;
+import hr.foi.air.t18.webservice.WebServiceResult;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -118,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void Login(String email, String password, final LoginActivity currentClass)
     {
-        LoginAsync loginAsync = new LoginAsync(email, password, new IListener() {
+        LoginAsync loginAsync = new LoginAsync(email, password, new IListener<Void>() {
             /***
              * Overridden onBegin event of LoginAsync task defines what is happening when async task starts to execute.
              * It displays message 'Signing in...'.
@@ -137,11 +138,11 @@ public class LoginActivity extends AppCompatActivity {
              * @param message - message string returned by web service
              */
             @Override
-            public void onFinish(int status, String message) {
+            public void onFinish(WebServiceResult<Void> wsResult) {
                 if(progress.isShowing()) progress.dismiss();
 
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-                if(status == 0)
+                Toast.makeText(getApplicationContext(), wsResult.message, Toast.LENGTH_LONG).show();
+                if(wsResult.status == 0)
                 {
                     finish();
                     Intent intent = new Intent(currentClass, MainClass.class);

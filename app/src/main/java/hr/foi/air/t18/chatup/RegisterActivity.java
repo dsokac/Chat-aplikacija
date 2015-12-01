@@ -13,6 +13,7 @@ import android.widget.Toast;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.RegisterAsync;
+import hr.foi.air.t18.webservice.WebServiceResult;
 
 public class RegisterActivity extends AppCompatActivity
 {
@@ -98,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity
      */
     private void registerUser(User newUser, String password1)
     {
-        RegisterAsync process = new RegisterAsync(newUser, password1, new IListener() {
+        RegisterAsync process = new RegisterAsync(newUser, password1, new IListener<Void>() {
             @Override
             public void onBegin() {
                 progress.setMessage("Registering...");
@@ -106,12 +107,12 @@ public class RegisterActivity extends AppCompatActivity
             }
 
             @Override
-            public void onFinish(int status, String message) {
+            public void onFinish(WebServiceResult<Void> wsResult) {
                 if (progress.isShowing()) {
                     progress.dismiss();
                 }
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                if (status == 0) {
+                Toast.makeText(getApplicationContext(), wsResult.message, Toast.LENGTH_SHORT).show();
+                if (wsResult.status == 0) {
                     finish();
                 }
             }
