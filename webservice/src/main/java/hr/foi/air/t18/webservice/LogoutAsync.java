@@ -16,17 +16,12 @@ public class LogoutAsync extends AsyncTask<Void, Void, String> {
 
     private String email;
     private String password;
-    private Listener listener;
+    private IListener<Void> listener;
 
-    public LogoutAsync(String email, String password, Listener listener) {
+    public LogoutAsync(String email, String password, IListener<Void> listener) {
         this.email = email;
         this.password = password;
         this.listener = listener;
-    }
-
-    public interface Listener
-    {
-        void onFinish(int status, String message);
     }
 
     @Override
@@ -65,6 +60,11 @@ public class LogoutAsync extends AsyncTask<Void, Void, String> {
             status = -1;
         }
 
-        this.listener.onFinish(status, message);
+        WebServiceResult<Void> wsResult = new WebServiceResult<Void>();
+        wsResult.status = status;
+        wsResult.message = message;
+        wsResult.data = null;
+
+        this.listener.onFinish(wsResult);
     }
 }

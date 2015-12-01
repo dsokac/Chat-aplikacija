@@ -16,9 +16,9 @@ public class SearchAsync extends AsyncTask<Void, Void, String> {
 
     private String email;
     private String username;
-    private IListener listener;
+    private IListener<Void> listener;
 
-    public SearchAsync(String email, String username, IListener listener)
+    public SearchAsync(String email, String username, IListener<Void> listener)
     {
         this.username = username;
         this.email = email;
@@ -68,6 +68,11 @@ public class SearchAsync extends AsyncTask<Void, Void, String> {
             status = -1;
         }
 
-        this.listener.onFinish(status, message);
+        WebServiceResult<Void> wsResult = new WebServiceResult<Void>();
+        wsResult.status = status;
+        wsResult.message = message;
+        wsResult.data = null;
+
+        this.listener.onFinish(wsResult);
     }
 }

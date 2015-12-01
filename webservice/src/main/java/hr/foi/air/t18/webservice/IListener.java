@@ -8,7 +8,7 @@ package hr.foi.air.t18.webservice;
  *
  * Created by Danijel on 15.11.2015..
  */
-public interface IListener
+public interface IListener<T>
 {
     /**
      * What happens just as async task begins.
@@ -20,5 +20,5 @@ public interface IListener
      * @param status Status cose of response (custom)
      * @param message Message retrieved with response (could also be data)
      */
-    public void onFinish(int status, String message);
+    public void onFinish(WebServiceResult<T> result);
 }

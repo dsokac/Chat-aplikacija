@@ -18,7 +18,7 @@ public class RegisterAsync extends AsyncTask<Void, Void, String>
 {
     private User newUser;
     private String password;
-    private IListener listener;
+    private IListener<Void> listener;
 
 
     /**
@@ -27,7 +27,7 @@ public class RegisterAsync extends AsyncTask<Void, Void, String>
      * @param password String that contains the inputted password
      * @param listener Listener that has implemented onBegin() and onFinish() events
      */
-    public RegisterAsync(User newUser, String password, IListener listener)
+    public RegisterAsync(User newUser, String password, IListener<Void> listener)
     {
         this.newUser = newUser;
         this.listener = listener;
@@ -93,7 +93,12 @@ public class RegisterAsync extends AsyncTask<Void, Void, String>
             status = -1;
         }
 
-        this.listener.onFinish(status, message);
+        WebServiceResult<Void> wsResult = new WebServiceResult<Void>();
+        wsResult.status = status;
+        wsResult.message = message;
+        wsResult.data = null;
+
+        this.listener.onFinish(wsResult);
     }
 }
 
