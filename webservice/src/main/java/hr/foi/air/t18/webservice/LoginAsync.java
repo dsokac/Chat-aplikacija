@@ -20,7 +20,7 @@ public class LoginAsync extends AsyncTask<Void, Void, String> {
 
     private String email;
     private String password;
-    private IListener listener;
+    private IListener<Void> listener;
 
     /**
      * The class constructor assigns values to the class private variables.
@@ -28,7 +28,7 @@ public class LoginAsync extends AsyncTask<Void, Void, String> {
      * @param password - user's password
      * @param listener - listener with implemented onBegin() and onFinish() events
      */
-    public LoginAsync(String email, String password, IListener listener)
+    public LoginAsync(String email, String password, IListener<Void> listener)
     {
         this.password = password;
         this.email = email;
@@ -97,6 +97,11 @@ public class LoginAsync extends AsyncTask<Void, Void, String> {
             status = -1;
         }
 
-        this.listener.onFinish(status, message);
+        WebServiceResult<Void> wsResult = new WebServiceResult<Void>();
+        wsResult.status = status;
+        wsResult.message = message;
+        wsResult.data = null;
+
+        this.listener.onFinish(wsResult);
     }
 }
