@@ -33,4 +33,7 @@
     <string name="action_logout">Logout</string>
     <string name="action_close_app">Close app</string>
     <string name="stringProfilePicture">profile picture</string>
+
+    <string name="conversation_send">Send</string>
+    <string name="conversation_picture">Picture</string>
 </resources>

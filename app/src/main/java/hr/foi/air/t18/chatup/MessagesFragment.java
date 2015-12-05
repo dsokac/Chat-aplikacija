@@ -1,5 +1,6 @@
 package hr.foi.air.t18.chatup;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import hr.foi.air.t18.core.Conversation;
+import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.FetchMessagesAsync;
 import hr.foi.air.t18.webservice.IListener;
@@ -32,30 +34,31 @@ public class MessagesFragment extends Fragment
     {
         View root = inflater.inflate(R.layout.tab_fragment_messages, container, false);
 
-        conversations = loadTestData();
+        conversations = new ArrayList<>();
         lv = (ListView) root.findViewById(R.id.single_conversationListView);
-        loadConversationsIntoListView();
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        User user1 = new User();
+        User user2 = new User();
+        user1.setEmail("darko@mail.hr");
+        user1.setUsername("darko");
+        user2.setEmail("mirko@mail.hr");
+        user2.setUsername("mirko");
+
+        FetchMessagesAsync fm = new FetchMessagesAsync(user1, user2, new IListener<Conversation>()
+        {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                User user1 = new User();
-                User user2 = new User();
-                user1.setEmail("darko@mail.hr");
-                user2.setEmail("mirko@mail.hr");
-                FetchMessagesAsync fm = new FetchMessagesAsync(user1, user2, new IListener<ArrayList<Conversation>>() {
-                    @Override
-                    public void onBegin() {}
+            public void onBegin() {}
 
-                    @Override
-                    public void onFinish(WebServiceResult<ArrayList<Conversation>> result) {
-                        Toast.makeText(getContext(), result.message, Toast.LENGTH_LONG).show();
-                    }
-                });
-                fm.execute();
+            @Override
+            public void onFinish(WebServiceResult<Conversation> result)
+            {
+                conversations.add(result.data);
+                loadConversationsIntoListView();
             }
         });
+        fm.execute();
 
+        addEvents();
         return root;
     }
 
@@ -64,6 +67,21 @@ public class MessagesFragment extends Fragment
         lv.setAdapter(new ConversationListAdapter(conversations, getActivity()));
     }
 
+    private void addEvents()
+    {
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                Intent intent = new Intent(getActivity(), ConversationActivity.class);
+                MiddleMan.setObject(conversations.get(position).getMessages());
+                startActivity(intent);
+            }
+        });
+    }
+
+    /*
     private ArrayList<Conversation> loadTestData()
     {
         ArrayList<Conversation> c = new ArrayList<Conversation>();
@@ -89,4 +107,5 @@ public class MessagesFragment extends Fragment
 
         return c;
     }
+    */
 }
