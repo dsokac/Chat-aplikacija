@@ -8,7 +8,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import hr.foi.air.t18.core.IMessage;
 
@@ -62,8 +66,11 @@ public class MessagesListAdapter extends BaseAdapter
 
         IMessage message = messages.get(position);
         msgUsername.setText(message.getSender());
-        msgTimeSent.setText(message.getTimeSend());
         msgContent.setText((String) message.getContent());
+
+        Date date = new Date(Long.parseLong(message.getTimeSend()));
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm, dd.MM.yyyy.");
+        msgTimeSent.setText(sdf.format(date));
 
         return view;
     }

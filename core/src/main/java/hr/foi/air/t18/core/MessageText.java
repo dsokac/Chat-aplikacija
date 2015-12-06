@@ -1,5 +1,7 @@
 package hr.foi.air.t18.core;
 
+import java.util.Comparator;
+
 /**
  * Created by Danijel on 25.11.2015..
  */

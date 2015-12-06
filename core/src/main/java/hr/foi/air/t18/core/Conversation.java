@@ -9,6 +9,7 @@ public class Conversation
 {
     private ArrayList<User> participants;
     private ArrayList<IMessage> messages;
+    private String id;
 
     public Conversation()
     {
@@ -34,5 +35,20 @@ public class Conversation
     public void addMessage(IMessage message)
     {
         messages.add(message);
+    }
+
+    public void clearMessages()
+    {
+        messages.clear();
+    }
+
+    public String getID()
+    {
+        return id;
+    }
+
+    public void setID(String id)
+    {
+        this.id = id;
     }
 }

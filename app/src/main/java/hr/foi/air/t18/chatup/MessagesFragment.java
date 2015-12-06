@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -52,8 +53,15 @@ public class MessagesFragment extends Fragment
             @Override
             public void onFinish(WebServiceResult<Conversation> result)
             {
-                conversations.add(result.data);
-                loadConversationsIntoListView();
+                if (result.status == 0)
+                {
+                    conversations.add(result.data);
+                    loadConversationsIntoListView();
+                }
+                else
+                {
+                    Toast.makeText(getContext(), result.message, Toast.LENGTH_LONG).show();
+                }
             }
         });
         fm.execute();
@@ -75,37 +83,9 @@ public class MessagesFragment extends Fragment
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 Intent intent = new Intent(getActivity(), ConversationActivity.class);
-                MiddleMan.setObject(conversations.get(position).getMessages());
+                MiddleMan.setObject(conversations.get(position));
                 startActivity(intent);
             }
         });
     }
-
-    /*
-    private ArrayList<Conversation> loadTestData()
-    {
-        ArrayList<Conversation> c = new ArrayList<Conversation>();
-
-        User u1 = new User("jovan@mail.hr", "jjovan", 'm', "12.18.1991.");
-        User u2 = new User("anabela@mail.hr", "AnnaBella", 'z', "01.11.1992.");
-        User u3 = new User("tovar@mail.hr", "Tovar", 'm', "12.12.1995.");
-
-        Conversation c1 = new Conversation();
-        Conversation c2 = new Conversation();
-        Conversation c3 = new Conversation();
-
-        c1.addParticipant(u1);
-        c1.addParticipant(u2);
-        c2.addParticipant(u2);
-        c2.addParticipant(u3);
-        c3.addParticipant(u3);
-        c3.addParticipant(u1);
-
-        c.add(c1);
-        c.add(c2);
-        c.add(c3);
-
-        return c;
-    }
-    */
 }
