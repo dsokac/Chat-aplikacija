@@ -36,4 +36,6 @@
 
     <string name="conversation_send">Send</string>
     <string name="conversation_picture">Picture</string>
+    <string name="change_image">Change image</string>
+    <string name="save_image">Save image</string>
 </resources>

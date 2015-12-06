@@ -1,14 +1,15 @@
 package hr.foi.air.t18.chatup;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 
 import hr.foi.air.t18.core.User;
@@ -19,11 +20,26 @@ import hr.foi.air.t18.core.User;
  */
 public class HomePageFragment extends Fragment {
 
+    private ImageView profilePicture;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //return inflater.inflate(R.layout.tab_fragment_main, container, false);
+
+        setRetainInstance(true);
+
         View root = inflater.inflate(R.layout.tab_fragment_main, container, false);
         ArrayList<User> friends = new ArrayList<User>();
+
+        profilePicture = (ImageView)root.findViewById(R.id.profilePicture);
+        profilePicture.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent i = new Intent(getActivity(), ImagePickerActivity.class);
+                startActivity(i);
+                return true;
+            }
+        });
 
         /***
          * Temporary added list items
