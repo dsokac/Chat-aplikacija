@@ -36,6 +36,13 @@ public class User
         this.dateOfBirth = dateOfBirth;
     }
 
+    public User(String email, String username, String status)
+    {
+        this.email = email;
+        this.username = username;
+        this.status = status;
+    }
+
     /**
      * Gets user's email.
      * @return User's email

@@ -66,8 +66,8 @@ public class UserListAdapter extends BaseAdapter {
 
         String status = friends.get(position).getStatus();
 
-        if(status == "online") li.imgStatus.setImageResource(R.drawable.online);
-        else li.imgStatus.setImageResource(R.drawable.offline);
+        if(status.equals("offline")) li.imgStatus.setImageResource(R.drawable.offline);
+        else li.imgStatus.setImageResource(R.drawable.online);
 
         return convertView;
     }
