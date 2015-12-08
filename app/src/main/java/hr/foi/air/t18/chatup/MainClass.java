@@ -168,6 +168,8 @@ public class MainClass extends AppCompatActivity {
             case R.id.action_home:
                 break;
             case R.id.action_about_us:
+                AboutUsDialog aud = new AboutUsDialog(this);
+                aud.show();
                 break;
             case R.id.action_logout:
                 break;

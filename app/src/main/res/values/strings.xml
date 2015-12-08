@@ -38,4 +38,17 @@
     <string name="conversation_picture">Picture</string>
     <string name="change_image">Change image</string>
     <string name="save_image">Save image</string>
+
+    <string name="about_us_dialog_title">About us</string>
+    <string name="about_us_dialog_text">Informations</string>
+    <string name="about_us_sub1_text">App name: ChatUp</string>
+    <string name="about_us_sub2_text">App version: 1.0.0. </string>
+    <string name="about_us_sub3_text">Date released: 15.1.2016</string>
+    <string name="about_us_sub4_text">Team name: T18</string>
+    <string name="about_us_sub5_text">Developers: Goran Drmencic, Danijel Filipovic, Matija Jurman, Danije Sokac</string>
+    <string name="about_us_sub6_text">Menthor: Ivan Svogor</string>
+    <string name="about_us_sub7_text">All rights reserved</string>
+    <string name="about_us_btnClose">Close</string>
+
+
 </resources>
