@@ -1,6 +1,8 @@
 package hr.foi.air.t18.chatup;
 
+import android.app.SharedElementCallback;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -17,13 +19,35 @@ import android.view.MenuItem;
 import java.util.HashMap;
 import hr.foi.air.t18.core.HttpGET;
 import hr.foi.air.t18.core.HttpPOST;
+import hr.foi.air.t18.core.MiddleMan;
+import hr.foi.air.t18.core.User;
 
 public class MainClass extends AppCompatActivity {
 
+    private SharedPreferences sharedPref;
+    public String loggedIn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        User user = (User)MiddleMan.getObject();
+        loggedIn = user.getEmail();
+
+        this.sharedPref = this.getPreferences(this.MODE_PRIVATE);
+        if(!this.sharedPref.contains("id") || (this.sharedPref.contains("id") && !this.sharedPref.getString("id","unknown").equals(loggedIn)) )
+        {
+
+            SharedPreferences.Editor editor = this.sharedPref.edit();
+            editor.putString("id",this.loggedIn);
+            editor.commit();
+        }
+        else
+        {
+            loggedIn = sharedPref.getString("id","unknown");
+        }
+
+        Toast.makeText(this,loggedIn,Toast.LENGTH_LONG).show();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

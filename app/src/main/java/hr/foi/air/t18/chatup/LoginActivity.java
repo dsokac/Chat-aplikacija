@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.LoginAsync;
@@ -51,6 +52,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), MainClass.class);
+                User user = new User();
+                user.setEmail("dsokac@foi.hr");
+                MiddleMan.setObject(user);
                 startActivity(i);
             }
         });
@@ -117,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
      * @param password - user's password
      * @param currentClass - current active activity class
      */
-    private void Login(String email, String password, final LoginActivity currentClass)
+    private void Login(final String email, String password, final LoginActivity currentClass)
     {
         LoginAsync loginAsync = new LoginAsync(email, password, new IListener<Void>() {
             /***
@@ -146,6 +150,9 @@ public class LoginActivity extends AppCompatActivity {
                 {
                     finish();
                     Intent intent = new Intent(currentClass, MainClass.class);
+                    User user = new User();
+                    user.setEmail(email);
+                    MiddleMan.setObject(user);
                     startActivity(intent);
                 }
                 else

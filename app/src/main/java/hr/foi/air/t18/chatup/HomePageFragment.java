@@ -1,6 +1,8 @@
 package hr.foi.air.t18.chatup;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -29,12 +31,17 @@ import hr.foi.air.t18.webservice.WebServiceResult;
 public class HomePageFragment extends Fragment {
 
     private ImageView profilePicture;
+    private SharedPreferences sharedPref;
+    private String loggedIn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //return inflater.inflate(R.layout.tab_fragment_main, container, false);
 
         setRetainInstance(true);
+
+        this.sharedPref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
+        this.loggedIn = sharedPref.getString("id","unknown");
 
         View root = inflater.inflate(R.layout.tab_fragment_main, container, false);
         final ArrayList<User> friends = new ArrayList<User>();
@@ -49,10 +56,9 @@ public class HomePageFragment extends Fragment {
             }
         });
 
-        String email = "dsokac@foi.hr";
 
         final View final_root = root;
-        FriendsAsync getFriends = new FriendsAsync(email, new IListener<JSONArray>() {
+        FriendsAsync getFriends = new FriendsAsync(this.loggedIn, new IListener<JSONArray>() {
             @Override
             public void onBegin() {
 
