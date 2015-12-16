@@ -2,6 +2,7 @@ package hr.foi.air.t18.webservice;
 
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONObject;
 
@@ -11,16 +12,15 @@ import hr.foi.air.t18.core.HttpPOST;
 
 /**
  * Created by Goran on 1.11.2015..
+ * Updated by Jurman on 10.12.2015.
  */
 public class LogoutAsync extends AsyncTask<Void, Void, String> {
 
     private String email;
-    private String password;
     private IListener<Void> listener;
 
-    public LogoutAsync(String email, String password, IListener<Void> listener) {
+    public LogoutAsync(String email,  IListener<Void> listener) {
         this.email = email;
-        this.password = password;
         this.listener = listener;
     }
 
@@ -30,12 +30,13 @@ public class LogoutAsync extends AsyncTask<Void, Void, String> {
 
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("mail",this.email);
-        parameters.put("password",this.password);
+        //Log.d("mail", this.email);
         try
         {
-            HttpPOST connection = new HttpPOST("http://10.0.3.2:8080/logout");
+            HttpPOST connection = new HttpPOST("http://104.236.58.50:8080/logout");
             connection.sendRequest(parameters);
             response = connection.getResponse();
+            //Log.d("response", response);
         }
         catch (Exception e)
         {

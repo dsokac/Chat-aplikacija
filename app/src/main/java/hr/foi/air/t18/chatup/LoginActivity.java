@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
      * @param currentClass - current active activity class
      */
     private void Login(final String email, String password, final LoginActivity currentClass)
-    {
+        {
         LoginAsync loginAsync = new LoginAsync(email, password, new IListener<Void>() {
             /***
              * Overridden onBegin event of LoginAsync task defines what is happening when async task starts to execute.
@@ -138,8 +138,8 @@ public class LoginActivity extends AppCompatActivity {
              * Overridden onFinish event of LoginAsync task defines what happens when async task finish execution.
              * The event closes progress dialog and displays message returned by web service.
              * If everything is corrent it opens MainClass activity, otherwise it empties text inputs.
-             * @param status - status integer returned by web service
-             * @param message - message string returned by web service
+             * @param //status - status integer returned by web service
+             * @param //message - message string returned by web service
              */
             @Override
             public void onFinish(WebServiceResult<Void> wsResult) {

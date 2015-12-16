@@ -1,5 +1,6 @@
 package hr.foi.air.t18.chatup;
 
+import android.app.ProgressDialog;
 import android.app.SharedElementCallback;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,18 +22,25 @@ import hr.foi.air.t18.core.HttpGET;
 import hr.foi.air.t18.core.HttpPOST;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.User;
+import hr.foi.air.t18.webservice.IListener;
+import hr.foi.air.t18.webservice.LoginAsync;
+import hr.foi.air.t18.webservice.LogoutAsync;
+import hr.foi.air.t18.webservice.WebServiceResult;
 
 public class MainClass extends AppCompatActivity {
 
     private SharedPreferences sharedPref;
     public String loggedIn;
+    private ProgressDialog progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         User user = (User)MiddleMan.getObject();
         loggedIn = user.getEmail();
+        this.progress = new ProgressDialog(this);
 
         this.sharedPref = this.getPreferences(this.MODE_PRIVATE);
         if(!this.sharedPref.contains("id") || (this.sharedPref.contains("id") && !this.sharedPref.getString("id","unknown").equals(loggedIn)) )
@@ -176,6 +184,36 @@ public class MainClass extends AppCompatActivity {
 //        }
     }
     //menu
+
+    private void Logout()
+    {
+        LogoutAsync logoutAsync = new LogoutAsync(loggedIn, new IListener<Void>() {
+            /***
+             * Overridden onBegin event of LoginAsync task defines what is happening when async task starts to execute.
+             * It displays message 'Signing in...'.
+             */
+            @Override
+            public void onBegin() {
+                progress.setMessage("Signing out...");
+                progress.show();
+            }
+
+            @Override
+            public void onFinish(WebServiceResult<Void> wsResult) {
+                if(progress.isShowing()) progress.dismiss();
+
+                Toast.makeText(getApplicationContext(), wsResult.message, Toast.LENGTH_LONG).show();
+                if(wsResult.status == 0)
+                {
+                    finish();
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        logoutAsync.execute();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -196,6 +234,7 @@ public class MainClass extends AppCompatActivity {
                 aud.show();
                 break;
             case R.id.action_logout:
+                Logout();
                 break;
             case R.id.action_close_app:
                 break;
