@@ -50,5 +50,8 @@
     <string name="about_us_sub7_text">All rights reserved</string>
     <string name="about_us_btnClose">Close</string>
 
+    <string name="btnEditPicture">Upload new</string>
+    <string name="btnEditSave">Save changes</string>
+    <string name="EditInstructions">Edit your profile </string>
 
 </resources>

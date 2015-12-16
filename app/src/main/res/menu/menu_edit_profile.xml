@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context="hr.foi.air.discountlocator.MainActivity">
+
+        <item
+            android:id="@+id/action_home"
+            android:orderInCategory="97"
+            app:showAsAction="never"
+            android:title="@string/action_home"/>
+    </menu>

@@ -228,6 +228,8 @@ public class MainClass extends AppCompatActivity {
         switch (id)
         {
             case R.id.action_edit_profile:
+                Intent i = new Intent(getApplicationContext(), EditProfile.class);
+                startActivity(i);
                 break;
             case R.id.action_home:
                 viewPager.setCurrentItem(0);
