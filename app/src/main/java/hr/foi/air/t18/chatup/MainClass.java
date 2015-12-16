@@ -32,6 +32,8 @@ public class MainClass extends AppCompatActivity {
     private SharedPreferences sharedPref;
     public String loggedIn;
     private ProgressDialog progress;
+    private ViewPager viewPager;
+    private PagerAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +68,8 @@ public class MainClass extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Messages"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final PagerAdapter adapter = new PagerAdapter
+        viewPager = (ViewPager) findViewById(R.id.pager);
+        adapter = new PagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount());
 
         // Here is ViewPager attached with an adapter
@@ -228,6 +230,7 @@ public class MainClass extends AppCompatActivity {
             case R.id.action_edit_profile:
                 break;
             case R.id.action_home:
+                viewPager.setCurrentItem(0);
                 break;
             case R.id.action_about_us:
                 AboutUsDialog aud = new AboutUsDialog(this);
