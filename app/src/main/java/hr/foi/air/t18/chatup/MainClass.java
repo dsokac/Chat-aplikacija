@@ -242,6 +242,11 @@ public class MainClass extends AppCompatActivity {
                 Logout();
                 break;
             case R.id.action_close_app:
+                this.finish();
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 break;
         }
         return true;
