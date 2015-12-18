@@ -40,9 +40,11 @@ public class MainClass extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        User user = (User)MiddleMan.getObject();
-        loggedIn = user.getEmail();
-        this.progress = new ProgressDialog(this);
+        if(MiddleMan.getObject() != null) {
+            User user = (User)MiddleMan.getObject();
+            loggedIn = user.getEmail();
+            this.progress = new ProgressDialog(this);
+        }
 
         this.sharedPref = this.getPreferences(this.MODE_PRIVATE);
         if(!this.sharedPref.contains("id") || (this.sharedPref.contains("id") && !this.sharedPref.getString("id","unknown").equals(loggedIn)) )

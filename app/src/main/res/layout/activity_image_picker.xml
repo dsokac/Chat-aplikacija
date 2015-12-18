@@ -10,8 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:maxHeight="120dp"
-        android:layout_margin="10dp"
+        android:maxHeight="80px"
+        android:layout_margin="20dp"
         android:src="@drawable/default_avatar" />
 
     <LinearLayout
