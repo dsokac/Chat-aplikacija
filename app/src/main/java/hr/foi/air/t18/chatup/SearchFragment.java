@@ -1,8 +1,11 @@
 package hr.foi.air.t18.chatup;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -17,18 +20,24 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import hr.foi.air.t18.core.User;
+import hr.foi.air.t18.webservice.AddFriendAsync;
 import hr.foi.air.t18.webservice.IListener;
+import hr.foi.air.t18.webservice.LogoutAsync;
 import hr.foi.air.t18.webservice.SearchAsync;
 import hr.foi.air.t18.webservice.WebServiceResult;
 
 /**
  * Created by Laptop on 9.11.2015..
+ * Updated 18.12.2015.
  */
 public class SearchFragment extends Fragment {
 
     private SharedPreferences sharedPref;
     private String loggedIn;
     ListView lv;
+    private String selected_friend="";
+    long position_in_list;
+    final ArrayList<User> users = new ArrayList<User>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,7 +47,6 @@ public class SearchFragment extends Fragment {
         this.loggedIn = sharedPref.getString("id","unknown");
 
         View root = inflater.inflate(R.layout.tab_fragment_search, container, false);
-        final ArrayList<User> users = new ArrayList<User>();
 
         final View final_root = root;
         SearchAsync registeredUsers = new SearchAsync(this.loggedIn, new IListener<JSONArray>() {
@@ -56,6 +64,7 @@ public class SearchFragment extends Fragment {
                             users.add(new User(currentUser.getString("id"), currentUser.getString("id"), currentUser.getString("status")));
                         }
                         lv = (ListView) final_root.findViewById(R.id.searchListview);
+                        lv.setLongClickable(true);
                         lv.setAdapter(new UserListAdapter(getActivity(), users));
                         registerForContextMenu(lv);
                     } catch (Exception e) {
@@ -65,11 +74,29 @@ public class SearchFragment extends Fragment {
                     Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_LONG).show();
                 }
             }
-
         });
-
         registeredUsers.execute();
         return root;
+    }
+
+
+    private void AddFriend()
+    {
+        AddFriendAsync addFriendAsync = new AddFriendAsync(loggedIn,selected_friend, new IListener<Void>() {
+
+            @Override
+            public void onBegin() {
+            }
+
+            @Override
+            public void onFinish(WebServiceResult<Void> wsResult) {
+
+                if(wsResult.status == 0)
+                {
+                }
+            }
+        });
+        addFriendAsync.execute();
     }
 
     @Override
@@ -78,14 +105,23 @@ public class SearchFragment extends Fragment {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getActivity().getMenuInflater();
         inflater.inflate(R.menu.add_friends_menu, menu);
+        position_in_list=((AdapterView.AdapterContextMenuInfo)menuInfo).position;
+        selected_friend=toString();
+    }
+
+    //Returns selected user on long click
+    @Override
+    public String toString() {
+        return (users.get((int)position_in_list).getEmail());
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        // AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
             case R.id.add_friend_add:
-                Toast.makeText(getActivity().getApplicationContext(), "Add", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), "moj id:"+loggedIn+"\nselektirani:"+selected_friend, Toast.LENGTH_SHORT).show();
+                AddFriend();
                 return true;
             case R.id.add_friend_cancel:
                 Toast.makeText(getActivity().getApplicationContext(), "Cancel", Toast.LENGTH_SHORT).show();
@@ -94,6 +130,4 @@ public class SearchFragment extends Fragment {
                 return super.onContextItemSelected(item);
         }
     }
-
-
 }
