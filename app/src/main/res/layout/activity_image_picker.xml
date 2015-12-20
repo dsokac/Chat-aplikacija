@@ -7,10 +7,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
-        android:maxHeight="80px"
+        android:maxHeight="150px"
         android:layout_margin="20dp"
         android:src="@drawable/default_avatar" />
 

@@ -33,7 +33,6 @@ public class ImagePickerActivity extends Activity {
     private ImageView imageView;
     private Bitmap selectedImage;
     private final int SELECT_PHOTO = 1;
-    private User user = (User) MiddleMan.getObject();
     AlertDialog progress;
 
     @Override
@@ -51,7 +50,7 @@ public class ImagePickerActivity extends Activity {
             @Override
             public void onClick(View view) {
             Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-            photoPickerIntent.setType("image/*");
+            photoPickerIntent.setType("image/jpeg");
             startActivityForResult(photoPickerIntent, SELECT_PHOTO);
             }
         });
@@ -65,7 +64,6 @@ public class ImagePickerActivity extends Activity {
             public void onClick(View v) {
             String base64String = encodeToBase64(selectedImage);
             saveProfilePicture(base64String);
-            user.setProfilePicture(selectedImage);
             }
         });
     }
@@ -82,10 +80,10 @@ public class ImagePickerActivity extends Activity {
                         final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                         selectedImage = BitmapFactory.decodeStream(imageStream);
                         imageView.setImageBitmap(selectedImage);
+                        imageView.setMaxHeight(150);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-
                 }
         }
     }
@@ -94,7 +92,7 @@ public class ImagePickerActivity extends Activity {
     public String encodeToBase64(Bitmap i) {
         Bitmap image = i;
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        image.compress(Bitmap.CompressFormat.JPEG, 90, byteArrayOutputStream);
         byte[] b = byteArrayOutputStream.toByteArray();
         String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
 

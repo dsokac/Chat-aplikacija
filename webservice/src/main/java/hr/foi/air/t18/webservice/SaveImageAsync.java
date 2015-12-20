@@ -2,6 +2,7 @@ package hr.foi.air.t18.webservice;
 
 import android.os.AsyncTask;
 import android.util.Base64;
+import android.util.Log;
 
 import java.util.HashMap;
 
@@ -41,13 +42,14 @@ public class SaveImageAsync extends AsyncTask<Void, Void, String> {
 
         HashMap<String, String> parameters = new HashMap<String, String>();
 
-        parameters.put("mail", mail);
-        parameters.put("picture", imageEncoded);
+        parameters.put("mail", this.mail);
+        parameters.put("picture", this.imageEncoded);
 
         try {
             HttpPOST connection = new HttpPOST("http://104.236.58.50:8080/saveProfilePic");
             connection.sendRequest(parameters);
             response = connection.getResponse();
+            Log.d("response", response);
         } catch(Exception e) {
             response = e.getMessage();
         }
