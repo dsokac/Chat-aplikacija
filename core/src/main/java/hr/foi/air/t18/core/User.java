@@ -45,7 +45,11 @@ public class User
         this.username = username;
         this.status = status;
     }
-
+    public User(String email, String username)
+    {
+        this.email = email;
+        this.username = username;
+    }
     /**
      * Gets user's email.
      * @return User's email
