@@ -5,14 +5,14 @@ import java.util.Comparator;
 /**
  * Created by Danijel on 25.11.2015..
  */
-public class MessageText implements IMessage
+public class Message implements IMessage
 {
     private String content;
     private String sender;
     private String timeSend;
     private String location;
 
-    public MessageText(String content, String sender, String timeSend, String location)
+    public Message(String content, String sender, String timeSend, String location)
     {
         this.content = content;
         this.sender = sender;
