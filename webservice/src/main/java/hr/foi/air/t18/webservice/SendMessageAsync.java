@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 import hr.foi.air.t18.core.Conversation;
 import hr.foi.air.t18.core.HttpPOST;
-import hr.foi.air.t18.core.IMessage;
+import hr.foi.air.t18.core.Message;
 
 /**
  * Created by Danijel on 6.12.2015..
@@ -16,11 +16,11 @@ import hr.foi.air.t18.core.IMessage;
 public class SendMessageAsync extends AsyncTask<Void, Void, String>
 {
     private Conversation conversation;
-    private IMessage message;
+    private Message message;
 
     private IListener<Void> listener;
 
-    public SendMessageAsync(Conversation conversation, IMessage message, IListener<Void> listener)
+    public SendMessageAsync(Conversation conversation, Message message, IListener<Void> listener)
     {
         this.conversation = conversation;
         this.message = message;

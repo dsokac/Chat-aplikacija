@@ -5,10 +5,10 @@ import java.util.Comparator;
 /**
  * Created by Danijel on 5.12.2015..
  */
-public class MessageComparator implements Comparator<IMessage>
+public class MessageComparator implements Comparator<Message>
 {
     @Override
-    public int compare(IMessage msg1, IMessage msg2)
+    public int compare(Message msg1, Message msg2)
     {
         String timeSend1 = msg1.getTimeSend();
         String timeSend2 = msg2.getTimeSend();

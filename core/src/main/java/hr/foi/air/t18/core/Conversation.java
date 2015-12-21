@@ -8,13 +8,13 @@ import java.util.ArrayList;
 public class Conversation
 {
     private ArrayList<User> participants;
-    private ArrayList<IMessage> messages;
+    private ArrayList<Message> messages;
     private String id;
 
     public Conversation()
     {
         participants = new ArrayList<User>();
-        messages = new ArrayList<IMessage>();
+        messages = new ArrayList<Message>();
     }
 
     public ArrayList<User> getParticipants()
@@ -22,7 +22,7 @@ public class Conversation
         return participants;
     }
 
-    public ArrayList<IMessage> getMessages()
+    public ArrayList<Message> getMessages()
     {
         return messages;
     }
@@ -32,7 +32,7 @@ public class Conversation
         participants.add(participant);
     }
 
-    public void addMessage(IMessage message)
+    public void addMessage(Message message)
     {
         messages.add(message);
     }

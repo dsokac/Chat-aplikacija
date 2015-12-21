@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import hr.foi.air.t18.core.IMessage;
+import hr.foi.air.t18.core.Message;
 
 
 /**
@@ -22,10 +22,10 @@ import hr.foi.air.t18.core.IMessage;
  */
 public class MessagesListAdapter extends BaseAdapter
 {
-    private ArrayList<IMessage> messages;
+    private ArrayList<Message> messages;
     private Activity activity;
 
-    public MessagesListAdapter(ArrayList<IMessage> messages, Activity activity)
+    public MessagesListAdapter(ArrayList<Message> messages, Activity activity)
     {
         this.messages = messages;
         this.activity = activity;
@@ -57,14 +57,14 @@ public class MessagesListAdapter extends BaseAdapter
         if (view == null)
         {
             LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.message_list_item_layout, null);
+            view = inflater.inflate(R.layout.message_list_item_layout_2, null);
         }
 
         TextView msgUsername = (TextView) view.findViewById(R.id.msgUsername);
         TextView msgTimeSent = (TextView) view.findViewById(R.id.msgTimeSent);
         TextView msgContent = (TextView) view.findViewById(R.id.msgContent);
 
-        IMessage message = messages.get(position);
+        Message message = messages.get(position);
         msgUsername.setText(message.getSender());
         msgContent.setText((String) message.getContent());
 

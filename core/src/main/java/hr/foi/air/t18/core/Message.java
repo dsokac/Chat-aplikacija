@@ -5,7 +5,7 @@ import java.util.Comparator;
 /**
  * Created by Danijel on 25.11.2015..
  */
-public class Message implements IMessage
+public class Message
 {
     private String content;
     private String sender;
@@ -20,25 +20,21 @@ public class Message implements IMessage
         this.location = location;
     }
 
-    @Override
     public String getContent()
     {
         return content;
     }
 
-    @Override
     public String getSender()
     {
         return sender;
     }
 
-    @Override
     public String getTimeSend()
     {
         return timeSend;
     }
 
-    @Override
     public String getLocation()
     {
         return location;

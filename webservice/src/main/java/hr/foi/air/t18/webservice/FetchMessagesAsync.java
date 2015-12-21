@@ -6,16 +6,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 
 import hr.foi.air.t18.core.Conversation;
 import hr.foi.air.t18.core.HttpPOST;
-import hr.foi.air.t18.core.IMessage;
-import hr.foi.air.t18.core.MessageText;
+import hr.foi.air.t18.core.Message;
 import hr.foi.air.t18.core.User;
 
 /**
@@ -102,7 +97,7 @@ public class FetchMessagesAsync extends AsyncTask<Void, Void, String>
             JSONObject jsonMessageObject = new JSONObject(jsonArray.getString(i));
 
 
-            IMessage message = new MessageText(
+            Message message = new Message(
                     jsonMessageObject.getString("text"),
                     jsonMessageObject.getString("sender"),
                     jsonMessageObject.getString("timeSend"),
