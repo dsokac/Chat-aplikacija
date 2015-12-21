@@ -1,5 +1,7 @@
 package hr.foi.air.t18.core;
 
+import android.graphics.Bitmap;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,6 +16,7 @@ public class User
     private char gender;
     private String dateOfBirth;
     private String status;
+    private Bitmap profilePicture;
 
     /**
      * Default constructor.
@@ -113,6 +116,22 @@ public class User
     public void setDateOfBirth(String dateOfBirth)
     {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    /**
+     * Gets user's profile picture
+     * @return User's profile picture
+     */
+    public Bitmap getProfilePicture() {
+        return profilePicture;
+    }
+
+    /**
+     * Sets user's profile picture
+     * @param profilePicture
+     */
+    public void setProfilePicture(Bitmap profilePicture) {
+        this.profilePicture = profilePicture;
     }
 
     /**

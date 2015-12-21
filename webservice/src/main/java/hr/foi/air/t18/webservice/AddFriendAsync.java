@@ -1,26 +1,23 @@
 package hr.foi.air.t18.webservice;
 
-
 import android.os.AsyncTask;
 import android.util.Log;
-
 import org.json.JSONObject;
-
 import java.util.HashMap;
-
 import hr.foi.air.t18.core.HttpPOST;
 
 /**
- * Created by Goran on 1.11.2015..
- * Updated by Jurman on 10.12.2015.
+ * Created by Jurman_Lap on 18.12.2015.
  */
-public class LogoutAsync extends AsyncTask<Void, Void, String> {
+public class AddFriendAsync extends AsyncTask<Void, Void, String> {
 
-    private String email;
+    private String email_prij;
+    private String email_odab;
     private IListener<Void> listener;
 
-    public LogoutAsync(String email,  IListener<Void> listener) {
-        this.email = email;
+    public AddFriendAsync(String email_prij,String email_odab, IListener<Void> listener) {
+        this.email_prij = email_prij;
+        this.email_odab = email_odab;
         this.listener = listener;
     }
 
@@ -29,14 +26,18 @@ public class LogoutAsync extends AsyncTask<Void, Void, String> {
         String response;
 
         HashMap<String, String> parameters = new HashMap<>();
-        parameters.put("mail",this.email);
-        //Log.d("mail", this.email);
+        parameters.put("mail1",this.email_prij);
+        parameters.put("mail2",this.email_odab);
+
+        Log.d("mail prij", this.email_prij);
+        Log.d("mail odabrani", this.email_odab);
+
         try
         {
-            HttpPOST connection = new HttpPOST("http://104.236.58.50:8080/logout");
+            HttpPOST connection = new HttpPOST("http://104.236.58.50:8080/addFriends");
             connection.sendRequest(parameters);
             response = connection.getResponse();
-            //Log.d("response", response);
+            Log.d("response", response);
         }
         catch (Exception e)
         {
