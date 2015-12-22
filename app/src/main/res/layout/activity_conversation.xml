@@ -1,55 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    >
+    android:layout_width="match_parent">
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:columnCount="1"
-    android:rowCount="2"
+    android:rowCount="6"
     tools:context="hr.foi.air.t18.chatup.ConversationActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_column="0"
+        android:layout_row="0"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:elevation="6dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <ListView
         android:id="@+id/convMessages"
         android:layout_column="0"
-        android:layout_row="0"
-        android:layout_height="440dp"
-        android:layout_width="match_parent"
+        android:layout_row="1"
+        android:layout_rowSpan="4"
+        android:layout_height="0dp"
+        android:layout_gravity="fill_vertical"
         android:background="@color/colorWhite"/>
 
-    <RelativeLayout
+    <GridLayout
         android:layout_column="0"
-        android:layout_row="1"
+        android:layout_row="5"
         android:background="#DFDFDF"
-        android:layout_width="match_parent"
-        android:layout_height="125dp"
-        android:padding="10dp">
-        <EditText
-            android:id="@+id/convTextBox"
-            android:layout_width="280dp"
-            android:layout_height="match_parent"
-            android:background="@color/colorWhite"
-            android:singleLine="false"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            />
+        android:padding="10dp"
+        android:rowCount="2"
+        android:columnCount="3"
+        android:layout_width="match_parent">
+        <LinearLayout
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_rowSpan="2"
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp">
+            <EditText
+                android:id="@+id/convTextBox"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:background="@color/colorWhite"
+                android:singleLine="false"/>
+        </LinearLayout>
         <Button
             android:id="@+id/convSendButton"
-            android:layout_width="75dp"
-            android:layout_height="35dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
+            android:layout_row="0"
+            android:layout_column="2"
             android:background="@color/colorPrimary"
             android:textColor="@color/colorWhite"
             android:text="@string/conversation_send"
             />
         <Button
             android:id="@+id/convPictureButton"
-            android:layout_width="75dp"
-            android:layout_height="35dp"
+            android:layout_row="1"
+            android:layout_column="2"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_below="@id/convSendButton"
@@ -58,7 +76,7 @@
             android:textColor="@color/colorWhite"
             android:text="@string/conversation_picture"
             />
-    </RelativeLayout>
+    </GridLayout>
 
 </GridLayout>
 </RelativeLayout>

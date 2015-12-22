@@ -2,6 +2,7 @@ package hr.foi.air.t18.webservice;
 
 import android.os.AsyncTask;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -18,9 +19,9 @@ public class SendMessageAsync extends AsyncTask<Void, Void, String>
     private Conversation conversation;
     private Message message;
 
-    private IListener<Void> listener;
+    private IListener<Message> listener;
 
-    public SendMessageAsync(Conversation conversation, Message message, IListener<Void> listener)
+    public SendMessageAsync(Conversation conversation, Message message, IListener<Message> listener)
     {
         this.conversation = conversation;
         this.message = message;
@@ -55,21 +56,37 @@ public class SendMessageAsync extends AsyncTask<Void, Void, String>
     {
         int status;
         String message;
+        Message data;
 
         try {
             JSONObject json = new JSONObject(result);
             message = json.getString("message");
             status = json.getInt("status");
+            data = ConvertMessageFromJson(json.getString("data"));
         } catch (Exception e) {
             message = "Error parsing JSON. Either JSON is invalid or server is down.";
             status = -1;
+            data = null;
         }
 
-        WebServiceResult<Void> wsResults = new WebServiceResult<>();
+        WebServiceResult<Message> wsResults = new WebServiceResult<>();
         wsResults.status = status;
         wsResults.message = message;
-        wsResults.data = null;
+        wsResults.data = data;
 
         listener.onFinish(wsResults);
+    }
+
+    private Message ConvertMessageFromJson(String data) throws JSONException
+    {
+        JSONObject jsonMessageObject = new JSONObject(data);
+        Message message = new Message(
+                jsonMessageObject.getString("text"),
+                jsonMessageObject.getString("sender"),
+                jsonMessageObject.getString("timeSend"),
+                jsonMessageObject.getString("location")
+        );
+
+        return message;
     }
 }

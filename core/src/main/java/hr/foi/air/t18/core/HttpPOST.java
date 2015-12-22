@@ -70,7 +70,7 @@ public class HttpPOST extends HttpMethod
 
             int responseCode = this.connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                BufferedReader input = new BufferedReader(new InputStreamReader(this.connection.getInputStream()));
+                BufferedReader input = new BufferedReader(new InputStreamReader(this.connection.getInputStream(), "UTF-8"));
                 String line;
                 while ((line = input.readLine()) != null) {
                     this.response.append(line);
