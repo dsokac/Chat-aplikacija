@@ -6,9 +6,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -33,6 +36,7 @@ public class HomePageFragment extends Fragment {
     private ImageView profilePicture;
     private SharedPreferences sharedPref;
     private String loggedIn;
+    private ArrayList<User> friends;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,7 +48,7 @@ public class HomePageFragment extends Fragment {
         this.loggedIn = sharedPref.getString("id","unknown");
 
         View root = inflater.inflate(R.layout.tab_fragment_main, container, false);
-        final ArrayList<User> friends = new ArrayList<User>();
+        friends = new ArrayList<>();
 
         profilePicture = (ImageView) root.findViewById(R.id.profilePicture);
         profilePicture.setOnLongClickListener(new View.OnLongClickListener() {
@@ -77,6 +81,8 @@ public class HomePageFragment extends Fragment {
                         //generates list items for friend list view
                         ListView lv = (ListView) final_root.findViewById(R.id.friendListView);
                         lv.setAdapter(new UserListAdapter(getActivity(), friends));
+
+                        registerForContextMenu(lv);
                     } catch (Exception e) {
                         Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                     }
@@ -90,5 +96,40 @@ public class HomePageFragment extends Fragment {
         getFriends.execute();
 
         return root;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle(R.string.friend_menu);
+        menu.add(0, v.getId(), 0, R.string.conv_start);
+        menu.add(0, v.getId(), 0, R.string.add_friend_cancel);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item)
+    {
+        boolean returnValue = true;
+        AdapterView.AdapterContextMenuInfo info =
+                (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        if (item.getTitle().equals(getString(R.string.conv_start)))
+        {
+            createNewConversation(info.position);
+        }
+        else
+            returnValue = false;
+
+        return returnValue;
+    }
+
+    private void createNewConversation(int id)
+    {
+        Toast.makeText(
+                getActivity().getApplicationContext(),
+                Integer.toString(id),
+                Toast.LENGTH_LONG
+        ).show();
     }
 }

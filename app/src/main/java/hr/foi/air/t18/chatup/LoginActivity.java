@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.User;
+import hr.foi.air.t18.webservice.FetchUserDataAsync;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.LoginAsync;
 import hr.foi.air.t18.webservice.RegisterAsync;
@@ -153,6 +154,9 @@ public class LoginActivity extends AppCompatActivity {
                     User user = new User();
                     user.setEmail(email);
                     MiddleMan.setObject(user);
+
+                    fetchLoggedUserData(email);
+
                     startActivity(intent);
                 }
                 else
@@ -166,4 +170,19 @@ public class LoginActivity extends AppCompatActivity {
         loginAsync.execute();
     }
 
+    private void fetchLoggedUserData(String email)
+    {
+        FetchUserDataAsync fud = new FetchUserDataAsync(email, new IListener<User>()
+        {
+            @Override
+            public void onBegin() {}
+
+            @Override
+            public void onFinish(WebServiceResult<User> result)
+            {
+
+            }
+        });
+        fud.execute();
+    }
 }

@@ -1,6 +1,7 @@
 package hr.foi.air.t18.webservice;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,8 +37,9 @@ public class SendMessageAsync extends AsyncTask<Void, Void, String>
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("id", conversation.getID());
         parameters.put("sender", message.getSender());
-        parameters.put("message", (String) message.getContent());
+        parameters.put("message", message.getContent());
         parameters.put("location", message.getLocation());
+        parameters.put("type", message.getType());
 
         try {
             HttpPOST connection = new HttpPOST("http://104.236.58.50:8080/sendMessage");
@@ -84,7 +86,8 @@ public class SendMessageAsync extends AsyncTask<Void, Void, String>
                 jsonMessageObject.getString("text"),
                 jsonMessageObject.getString("sender"),
                 jsonMessageObject.getString("timeSend"),
-                jsonMessageObject.getString("location")
+                jsonMessageObject.getString("location"),
+                jsonMessageObject.getString("type")
         );
 
         return message;

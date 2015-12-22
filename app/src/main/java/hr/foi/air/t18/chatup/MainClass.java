@@ -40,26 +40,23 @@ public class MainClass extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        if(MiddleMan.getObject() != null) {
-            User user = (User)MiddleMan.getObject();
+        if (MiddleMan.getObject() != null) {
+            User user = (User) MiddleMan.getObject();
             loggedIn = user.getEmail();
             this.progress = new ProgressDialog(this);
         }
 
         this.sharedPref = this.getPreferences(this.MODE_PRIVATE);
-        if(!this.sharedPref.contains("id") || (this.sharedPref.contains("id") && !this.sharedPref.getString("id","unknown").equals(loggedIn)) )
-        {
+        if (!this.sharedPref.contains("id") || (this.sharedPref.contains("id") && !this.sharedPref.getString("id", "unknown").equals(loggedIn))) {
 
             SharedPreferences.Editor editor = this.sharedPref.edit();
-            editor.putString("id",this.loggedIn);
+            editor.putString("id", this.loggedIn);
             editor.commit();
-        }
-        else
-        {
-            loggedIn = sharedPref.getString("id","unknown");
+        } else {
+            loggedIn = sharedPref.getString("id", "unknown");
         }
 
-        Toast.makeText(this,loggedIn,Toast.LENGTH_LONG).show();
+        Toast.makeText(this, loggedIn, Toast.LENGTH_LONG).show();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -96,98 +93,7 @@ public class MainClass extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
-
-//        //Find reference to btn_register and subscribe to onClick event.
-//        Button btnRegister = (Button)findViewById(R.id.btn_register);
-//        btnRegister.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
-//                startActivity(i);
-//            }
-//        });
-//
-//        Button btnLogin = (Button) findViewById(R.id.btn_login);
-//        btnLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-//                startActivity(i);
-//            }
-//        });
-//
-//        Button bthHttpGET = (Button) findViewById(R.id.btn_HttpGET);
-//        bthHttpGET.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                new HttpGETAsyncTest().execute();
-//            }
-//        });
-//
-//        Button btnHttpPOST = (Button) findViewById(R.id.btn_HttpPOST);
-//        btnHttpPOST.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                new HttpPOSTAsyncTest().execute();
-//            }
-//        });
-//    }
-//
-//    private class HttpGETAsyncTest extends AsyncTask<Void, Void, String>
-//    {
-//        @Override
-//        protected String doInBackground(Void... params)
-//        {
-//            String response;
-//            HashMap<String, String> testMap = new HashMap<String, String>();
-//            testMap.put("Test1", "Danijel");
-//            testMap.put("Test2", "Filipovic");
-//            try {
-//                HttpGET connection = new HttpGET("http://10.0.3.2:8080/Test");
-//                connection.sendRequest(testMap);
-//                response = connection.getResponse();
-//            } catch(Exception e) {
-//                response = e.getMessage();
-//            }
-//            return response;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String result)
-//        {
-//            super.onPostExecute(result);
-//            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
-//        }
-//    }
-//
-//    private class HttpPOSTAsyncTest extends AsyncTask<Void, Void, String>
-//    {
-//
-//        @Override
-//        protected String doInBackground(Void... params)
-//        {
-//            String response;
-//            HashMap<String, String> testMap = new HashMap<String, String>();
-//            testMap.put("var1", "Danijel");
-//            testMap.put("var2", "Filipovic");
-//            try {
-//                HttpPOST connection = new HttpPOST("http://10.0.3.2:8080/Test");
-//                connection.sendRequest(testMap);
-//                response = connection.getResponse();
-//            } catch (Exception e) {
-//                response = e.getMessage();
-//            }
-//            return response;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String result)
-//        {
-//            super.onPostExecute(result);
-//            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
-//        }
     }
-    //menu
 
     private void Logout()
     {

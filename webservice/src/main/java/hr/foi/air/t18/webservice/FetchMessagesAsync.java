@@ -101,7 +101,8 @@ public class FetchMessagesAsync extends AsyncTask<Void, Void, String>
                     jsonMessageObject.getString("text"),
                     jsonMessageObject.getString("sender"),
                     jsonMessageObject.getString("timeSend"),
-                    jsonMessageObject.getString("location")
+                    jsonMessageObject.getString("location"),
+                    jsonMessageObject.getString("type")
             );
 
             conversation.addMessage(message);
