@@ -11,7 +11,7 @@ import java.util.HashMap;
 import hr.foi.air.t18.core.HttpPOST;
 
 /**
- * Created by Goran on 1.11.2015..
+ * Created by Laptop on 1.11.2015..
  * Updated by Jurman on 10.12.2015.
  */
 public class LogoutAsync extends AsyncTask<Void, Void, String> {
