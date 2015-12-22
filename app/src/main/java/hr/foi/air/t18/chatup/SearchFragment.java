@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.AddFriendAsync;
 import hr.foi.air.t18.webservice.IListener;
-import hr.foi.air.t18.webservice.LogoutAsync;
 import hr.foi.air.t18.webservice.SearchAsync;
 import hr.foi.air.t18.webservice.WebServiceResult;
 
@@ -37,7 +36,7 @@ public class SearchFragment extends Fragment {
     ListView lv;
     private String selected_friend="";
     long position_in_list;
-    final ArrayList<User> users = new ArrayList<User>();
+    final ArrayList<User> reg_users = new ArrayList<User>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,11 +60,11 @@ public class SearchFragment extends Fragment {
                         JSONArray json = result.data;
                         for (int i = 0; i < json.length(); i++) {
                             JSONObject currentUser = json.getJSONObject(i);
-                            users.add(new User(currentUser.getString("id"), currentUser.getString("id"), currentUser.getString("status")));
+                            reg_users.add(new User(currentUser.getString("id"), currentUser.getString("id")));
                         }
                         lv = (ListView) final_root.findViewById(R.id.searchListview);
                         lv.setLongClickable(true);
-                        lv.setAdapter(new UserListAdapter(getActivity(), users));
+                        lv.setAdapter(new RegisteredUsersListAdapter(getActivity(), reg_users));
                         registerForContextMenu(lv);
                     } catch (Exception e) {
                         Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
@@ -112,7 +111,7 @@ public class SearchFragment extends Fragment {
     //Returns selected user on long click
     @Override
     public String toString() {
-        return (users.get((int)position_in_list).getEmail());
+        return (reg_users.get((int)position_in_list).getEmail());
     }
 
     @Override
