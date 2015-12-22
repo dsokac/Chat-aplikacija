@@ -11,13 +11,18 @@ public class Message
     private String sender;
     private String timeSend;
     private String location;
+    private String type;
 
-    public Message(String content, String sender, String timeSend, String location)
+    public static final String TEXT = "text";
+    public static final String IMAGE = "image";
+
+    public Message(String content, String sender, String timeSend, String location, String type)
     {
         this.content = content;
         this.sender = sender;
         this.timeSend = timeSend;
         this.location = location;
+        this.type = type;
     }
 
     public String getContent()
@@ -38,5 +43,10 @@ public class Message
     public String getLocation()
     {
         return location;
+    }
+
+    public String getType()
+    {
+        return type;
     }
 }

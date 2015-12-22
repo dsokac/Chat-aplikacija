@@ -52,7 +52,7 @@ public class ConversationActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 final View view = v;
-                Message message = new Message(txtMessage.getText().toString(), "mirko", "", "");
+                Message message = new Message(txtMessage.getText().toString(), "mirko", "", "", Message.TEXT);
                 SendMessageAsync sm = new SendMessageAsync(conversation, message, new IListener<Message>() {
                     @Override
                     public void onBegin() {}
