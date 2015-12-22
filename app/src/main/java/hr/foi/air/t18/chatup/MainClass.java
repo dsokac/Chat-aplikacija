@@ -21,6 +21,7 @@ import java.util.HashMap;
 import hr.foi.air.t18.core.HttpGET;
 import hr.foi.air.t18.core.HttpPOST;
 import hr.foi.air.t18.core.MiddleMan;
+import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.LoginAsync;
