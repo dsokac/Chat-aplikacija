@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 import org.json.JSONArray;
@@ -37,6 +39,8 @@ public class SearchFragment extends Fragment {
     private String selected_friend="";
     long position_in_list;
     final ArrayList<User> reg_users = new ArrayList<User>();
+    final ArrayList<User> search = new ArrayList<User>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,8 +50,28 @@ public class SearchFragment extends Fragment {
         this.loggedIn = sharedPref.getString("id","unknown");
 
         View root = inflater.inflate(R.layout.tab_fragment_search, container, false);
-
         final View final_root = root;
+        Button search_button = (Button) root.findViewById(R.id.searchButton);
+        final EditText search_text = (EditText) root.findViewById(R.id.searchUser);
+
+        search_button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                reg_users.clear();
+                 lv = (ListView) final_root.findViewById(R.id.searchListview);
+                for (int i = 0; i < search.size(); i++) {
+                    if(search.get(i).getEmail().contains(search_text.getText().toString())){
+                        reg_users.add(search.get(i));
+                    }
+
+                }
+                lv.setAdapter(new RegisteredUsersListAdapter(getActivity(), reg_users));
+            }
+        });
+
+
         SearchAsync registeredUsers = new SearchAsync(this.loggedIn, new IListener<JSONArray>() {
             @Override
             public void onBegin() {
@@ -60,7 +84,7 @@ public class SearchFragment extends Fragment {
                         JSONArray json = result.data;
                         for (int i = 0; i < json.length(); i++) {
                             JSONObject currentUser = json.getJSONObject(i);
-                            reg_users.add(new User(currentUser.getString("id"), currentUser.getString("id")));
+                            search.add(new User(currentUser.getString("id"), currentUser.getString("id")));
                         }
                         lv = (ListView) final_root.findViewById(R.id.searchListview);
                         lv.setLongClickable(true);
@@ -120,6 +144,10 @@ public class SearchFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.add_friend_add:
                 Toast.makeText(getActivity().getApplicationContext(), "moj id:"+loggedIn+"\nselektirani:"+selected_friend, Toast.LENGTH_SHORT).show();
+                //Moram implementirati jos unique:
+                    // dohvatiti sve svoje prijatelje
+                    //if u listi postoji selektirani
+                    //else dodaj
                 AddFriend();
                 return true;
             case R.id.add_friend_cancel:
@@ -129,4 +157,6 @@ public class SearchFragment extends Fragment {
                 return super.onContextItemSelected(item);
         }
     }
+
+
 }

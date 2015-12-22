@@ -37,7 +37,7 @@ public class HomePageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //return inflater.inflate(R.layout.tab_fragment_main, container, false);
-
+        //Log.d("Test refresha,"Refreshano");
         setRetainInstance(true);
 
         this.sharedPref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
@@ -91,4 +91,7 @@ public class HomePageFragment extends Fragment {
 
         return root;
     }
+
+
+
 }
