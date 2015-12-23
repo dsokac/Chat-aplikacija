@@ -15,6 +15,7 @@ import hr.foi.air.t18.core.Conversation;
 import hr.foi.air.t18.core.MessageComparator;
 import hr.foi.air.t18.core.Message;
 import hr.foi.air.t18.core.MiddleMan;
+import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.SendMessageAsync;
 import hr.foi.air.t18.webservice.WebServiceResult;
@@ -52,7 +53,14 @@ public class ConversationActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 final View view = v;
-                Message message = new Message(txtMessage.getText().toString(), "mirko", "", "", Message.TEXT);
+
+                Message message = new Message(
+                        txtMessage.getText().toString(),
+                        SharedPreferencesClass.getDefaults("UserUsername", getApplicationContext()),
+                        "",
+                        "",
+                        Message.TEXT
+                );
                 SendMessageAsync sm = new SendMessageAsync(conversation, message, new IListener<Message>() {
                     @Override
                     public void onBegin() {}

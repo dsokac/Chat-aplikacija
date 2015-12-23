@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import hr.foi.air.t18.core.Conversation;
 import hr.foi.air.t18.core.MiddleMan;
+import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.FetchMessagesAsync;
 import hr.foi.air.t18.webservice.IListener;
@@ -38,24 +39,21 @@ public class MessagesFragment extends Fragment
         conversations = new ArrayList<>();
         lv = (ListView) root.findViewById(R.id.single_conversationListView);
 
-        User user1 = new User();
-        User user2 = new User();
-        user1.setEmail("darko@mail.hr");
-        user1.setUsername("darko");
-        user2.setEmail("mirko@mail.hr");
-        user2.setUsername("mirko");
+        User user = new User();
+        user.setEmail(SharedPreferencesClass.getDefaults("UserEmail", getActivity().getApplicationContext()));
+        user.setUsername(SharedPreferencesClass.getDefaults("UserUsername", getActivity().getApplicationContext()));
 
-        FetchMessagesAsync fm = new FetchMessagesAsync(user1, user2, new IListener<Conversation>()
+        FetchMessagesAsync fm = new FetchMessagesAsync(user, new IListener<ArrayList<Conversation>>()
         {
             @Override
             public void onBegin() {}
 
             @Override
-            public void onFinish(WebServiceResult<Conversation> result)
+            public void onFinish(WebServiceResult<ArrayList<Conversation>> result)
             {
                 if (result.status == 0)
                 {
-                    conversations.add(result.data);
+                    conversations = result.data;
                     loadConversationsIntoListView();
                 }
                 else

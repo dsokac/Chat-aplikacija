@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import hr.foi.air.t18.core.Conversation;
@@ -18,14 +19,12 @@ import hr.foi.air.t18.core.User;
  */
 public class FetchMessagesAsync extends AsyncTask<Void, Void, String>
 {
-    private User user1;
-    private User user2;
-    private IListener<Conversation> listener;
+    private User user;
+    private IListener<ArrayList<Conversation>> listener;
 
-    public FetchMessagesAsync(User user1, User user2, IListener<Conversation> listener)
+    public FetchMessagesAsync(User user, IListener<ArrayList<Conversation>> listener)
     {
-        this.user1 = user1;
-        this.user2 = user2;
+        this.user = user;
         this.listener = listener;
     }
 
@@ -41,8 +40,7 @@ public class FetchMessagesAsync extends AsyncTask<Void, Void, String>
         String response;
 
         HashMap<String, String> parameters = new HashMap<>();
-        parameters.put("email1", user1.getEmail());
-        parameters.put("email2", user2.getEmail());
+        parameters.put("email", user.getEmail());
 
         try {
             HttpPOST connection = new HttpPOST("http://104.236.58.50:8080/getMessages");
@@ -61,7 +59,7 @@ public class FetchMessagesAsync extends AsyncTask<Void, Void, String>
     {
         int status;
         String message;
-        Conversation data;
+        ArrayList<Conversation> data;
 
         try {
             JSONObject json = new JSONObject(result);
@@ -74,7 +72,7 @@ public class FetchMessagesAsync extends AsyncTask<Void, Void, String>
             data = null;
         }
 
-        WebServiceResult<Conversation> wsResults = new WebServiceResult<>();
+        WebServiceResult<ArrayList<Conversation>> wsResults = new WebServiceResult<>();
         wsResults.status = status;
         wsResults.message = message;
         wsResults.data = data;
@@ -82,27 +80,58 @@ public class FetchMessagesAsync extends AsyncTask<Void, Void, String>
         listener.onFinish(wsResults);
     }
 
-    private Conversation ConvertConversationsFromJSON(String data) throws JSONException
+    private ArrayList<Conversation> ConvertConversationsFromJSON(String data) throws JSONException
     {
-        Conversation conversation = new Conversation();
-        JSONObject jsonObject = new JSONObject(data);
-        JSONArray jsonArray = new JSONArray(jsonObject.getString("messages"));
-
-        conversation.addParticipant(user1);
-        conversation.addParticipant(user2);
-        conversation.setID(jsonObject.getString("id"));
+        ArrayList<Conversation> conversations= new ArrayList<>();
+        JSONArray jsonArray = new JSONArray(data);
 
         for (int i = 0; i < jsonArray.length(); i++)
         {
-            JSONObject jsonMessageObject = new JSONObject(jsonArray.getString(i));
+            Conversation conversation = new Conversation();
+            JSONObject jsonObject = new JSONObject(jsonArray.getString(i));
 
+            conversation.setID(jsonObject.getString("id"));
+            conversation = addParticipantsToConversation(jsonObject.getString("participants"), conversation);
+            conversation = addMessagesToConversation(jsonObject.getString("chat"), conversation);
+
+            conversations.add(conversation);
+        }
+
+        return conversations;
+    }
+
+    private Conversation addParticipantsToConversation(String participants, Conversation conversation) throws JSONException
+    {
+        JSONArray jsonArray = new JSONArray(participants);
+
+        for (int i = 0; i < jsonArray.length(); i++)
+        {
+            JSONObject jsonObject = new JSONObject(jsonArray.getString(i));
+
+            User user = new User();
+            user.setEmail(jsonObject.getString("email"));
+            user.setUsername(jsonObject.getString("username"));
+
+            conversation.addParticipant(user);
+        }
+
+        return conversation;
+    }
+
+    private Conversation addMessagesToConversation(String chat, Conversation conversation) throws JSONException
+    {
+        JSONArray jsonArray = new JSONArray(chat);
+
+        for (int i = 0; i < jsonArray.length(); i++)
+        {
+            JSONObject jsonObject = new JSONObject(jsonArray.getString(i));
 
             Message message = new Message(
-                    jsonMessageObject.getString("text"),
-                    jsonMessageObject.getString("sender"),
-                    jsonMessageObject.getString("timeSend"),
-                    jsonMessageObject.getString("location"),
-                    jsonMessageObject.getString("type")
+                    jsonObject.getString("text"),
+                    jsonObject.getString("sender"),
+                    jsonObject.getString("timeSend"),
+                    jsonObject.getString("location"),
+                    jsonObject.getString("type")
             );
 
             conversation.addMessage(message);

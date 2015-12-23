@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import hr.foi.air.t18.core.MiddleMan;
+import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.FetchUserDataAsync;
 import hr.foi.air.t18.webservice.IListener;
@@ -180,7 +181,16 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFinish(WebServiceResult<User> result)
             {
-
+                SharedPreferencesClass.setDefaults(
+                        "UserEmail",
+                        result.data.getEmail(),
+                        getApplicationContext()
+                );
+                SharedPreferencesClass.setDefaults(
+                        "UserUsername",
+                        result.data.getUsername(),
+                        getApplicationContext()
+                );
             }
         });
         fud.execute();

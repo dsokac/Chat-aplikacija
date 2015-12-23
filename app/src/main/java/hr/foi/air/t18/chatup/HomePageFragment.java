@@ -126,10 +126,6 @@ public class HomePageFragment extends Fragment {
 
     private void createNewConversation(int id)
     {
-        Toast.makeText(
-                getActivity().getApplicationContext(),
-                Integer.toString(id),
-                Toast.LENGTH_LONG
-        ).show();
+        // TODO: Create new conversation
     }
 }
