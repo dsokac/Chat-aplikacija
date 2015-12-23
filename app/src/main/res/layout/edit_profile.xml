@@ -49,113 +49,109 @@
             android:layout_marginTop="15dp"
             />
     -->
-        <EditText
-            android:id="@+id/EditUsername"
+    <EditText
+        android:id="@+id/EditUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnEditPicture"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:inputType="textPersonName" />
+    <!--
+        <CheckBox
+            android:id="@+id/checkboxEditUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btnEditPicture"
-            android:layout_centerHorizontal="true"
-            android:ems="10"
-            android:hint="New username"
-            android:inputType="textPersonName" />
-        <!--
+            android:layout_below="@id/btnEditPicture"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            />
+    -->
+    <EditText
+        android:id="@+id/EditMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EditUsername"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:inputType="textPassword" />
+    <!--
             <CheckBox
-                android:id="@+id/checkboxEditUsername"
+                android:id="@+id/checkboxEditMail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/btnEditPicture"
+                android:layout_below="@id/EditUsername"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="15dp"
                 />
-        -->
-            <EditText
-                android:id="@+id/EditMail"
+    -->
+    <RadioGroup
+        android:id="@+id/EditGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EditMail"
+        android:layout_centerHorizontal="true" >
+
+        <RadioButton
+            android:id="@+id/radioMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/reg_male" />
+
+        <RadioButton
+            android:id="@+id/radioFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reg_female" />
+    </RadioGroup>
+    <!--
+            <CheckBox
+                android:id="@+id/checkboxEditGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/EditUsername"
-                android:layout_centerHorizontal="true"
-                android:ems="10"
-                android:hint="New e-mail"
-                android:inputType="textPassword" />
-        <!--
-                <CheckBox
-                    android:id="@+id/checkboxEditMail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/EditUsername"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="15dp"
-                    />
-        -->
-                <RadioGroup
-                    android:id="@+id/EditGender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/EditMail"
-                    android:layout_centerHorizontal="true" >
+                android:layout_below="@id/EditMail"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                />
+    -->
+    <EditText
+        android:id="@+id/EditPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EditGender"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:inputType="textPassword" />
+    <!--
+            <CheckBox
+                android:id="@+id/checkboxEditPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/EditGender"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                />
+    -->
+    <EditText
+        android:id="@+id/EditPassword2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EditPassword"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:inputType="textPassword" />
 
-                    <RadioButton
-                        android:id="@+id/radioMale"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="@string/reg_male" />
-
-                    <RadioButton
-                        android:id="@+id/radioFemale"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/reg_female" />
-                </RadioGroup>
-        <!--
-                <CheckBox
-                    android:id="@+id/checkboxEditGender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/EditMail"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="15dp"
-                    />
-        -->
-                <EditText
-                    android:id="@+id/EditPassword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/EditGender"
-                    android:layout_centerHorizontal="true"
-                    android:ems="10"
-                    android:hint="New password"
-                    android:inputType="textPassword" />
-        <!--
-                <CheckBox
-                    android:id="@+id/checkboxEditPassword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/EditGender"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="15dp"
-                    />
-        -->
-                <EditText
-                    android:id="@+id/EditPassword2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/EditPassword"
-                    android:layout_centerHorizontal="true"
-                    android:ems="10"
-                    android:hint="Confirm new pass"
-                    android:inputType="textPassword" />
-
-                <Button
-                    android:id="@+id/btnEditSave"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/EditPassword2"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/btnEditSave" />
-            </RelativeLayout>
+    <Button
+        android:id="@+id/btnEditSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/EditPassword2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="@string/btnEditSave" />
+</RelativeLayout>
