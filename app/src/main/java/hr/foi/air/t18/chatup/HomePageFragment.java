@@ -22,7 +22,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.User;
+import hr.foi.air.t18.webservice.CreateConversationAsync;
 import hr.foi.air.t18.webservice.FriendsAsync;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.WebServiceResult;
@@ -124,8 +126,27 @@ public class HomePageFragment extends Fragment {
         return returnValue;
     }
 
-    private void createNewConversation(int id)
+    private void createNewConversation(int index)
     {
-        // TODO: Create new conversation
+        String email1 = SharedPreferencesClass.getDefaults("UserEmail", getActivity().getApplicationContext());
+        String email2 = friends.get(index).getEmail();
+
+        CreateConversationAsync cc = new CreateConversationAsync(email1, email2, new IListener<Void>()
+        {
+            @Override
+            public void onBegin() {}
+
+            @Override
+            public void onFinish(WebServiceResult<Void> result)
+            {
+                Toast.makeText(
+                    getActivity().getApplicationContext(),
+                    result.message,
+                    Toast.LENGTH_LONG
+                ).show();
+            }
+        });
+
+        cc.execute();
     }
 }
