@@ -40,9 +40,10 @@ public class EditProfile extends AppCompatActivity {
     private String editGender="undefined";
     private String selectedGender="undefined";
     private String editPassword="undefined";
-    public String change_username="undefined_change";
-    public String change_gender="undefined_change";
-    public String change_password="undefined_change";
+    private String change_username="undefined_change";
+    private String change_gender="undefined_change";
+    private String change_password="undefined_change";
+    private String change_password2="undefined_change";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +103,6 @@ public class EditProfile extends AppCompatActivity {
                             }
                             editTextEditUsername.setTypeface(Typeface.SERIF);
                             textViewGenderText.setTypeface(Typeface.SERIF);
-                            //editTextEditEmail.setTypeface(Typeface.SERIF);
                             editTextEditPassword.setTypeface(Typeface.SERIF);
                             editTextEditPassword2.setTypeface(Typeface.SERIF);
                         }
@@ -119,7 +119,11 @@ public class EditProfile extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                change_username=editTextEditUsername.getText().toString();
+
+                change_username = editTextEditUsername.getText().toString();
+                if(change_username.matches("")){
+                    change_username=editUsername;
+                }
                 selectedGender=String.valueOf(genderRadioGroup.getCheckedRadioButtonId());
                 if (selectedGender.equals("2131493004")){
 
@@ -132,25 +136,38 @@ public class EditProfile extends AppCompatActivity {
                     change_gender=editGender;
                 }
                 change_password=editTextEditPassword.getText().toString();
-                EditProfileAsync editProfileAsync = new EditProfileAsync(loggedIn2,change_username,change_gender,change_password, new IListener<Void>() {
+                if(change_password.matches("")){
+                    change_password=editPassword;
+                }
+                change_password2=editTextEditPassword2.getText().toString();
+                if(change_password2.matches("")){
+                    change_password2=editPassword;
+                }
+                    if (change_password.equals(change_password2)){
+                    EditProfileAsync editProfileAsync = new EditProfileAsync(loggedIn2,change_username,change_gender,change_password, new IListener<Void>() {
 
-                    @Override
-                    public void onBegin() {
-                    }
-
-                    @Override
-                    public void onFinish(WebServiceResult<Void> wsResult) {
-                        if(wsResult.status == 0)
-                        {
+                        @Override
+                        public void onBegin() {
                         }
+
+                        @Override
+                        public void onFinish(WebServiceResult<Void> wsResult) {
+                            if(wsResult.status == 0)
+                            {
+                            }
+                        }
+                    });
+
+                    editProfileAsync.execute();
+                    editTextEditUsername.setText("");
+                    editTextEditPassword.setText("");
+                    editTextEditPassword2.setText("");
+                        Toast.makeText(getApplicationContext(), "Update profile successfully.", Toast.LENGTH_SHORT).show();
+
                     }
-                });
-                editProfileAsync.execute();
-                editTextEditUsername.setText("");
-                editTextEditPassword.setText("");
-                Log.d(change_username, change_username);
-                Log.d(change_gender,change_gender);
-                Log.d(change_password,change_password);
+                else{
+                    Toast.makeText(getApplicationContext(), "Password don't match", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
