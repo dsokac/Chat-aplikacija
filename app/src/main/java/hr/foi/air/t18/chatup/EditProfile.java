@@ -13,6 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -35,8 +38,11 @@ public class EditProfile extends AppCompatActivity {
     private String editEmail="undefined";
     private String editUsername="undefined";
     private String editGender="undefined";
+    private String selectedGender="undefined";
     private String editPassword="undefined";
     public String change_username="undefined_change";
+    public String change_gender="undefined_change";
+    public String change_password="undefined_change";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +55,12 @@ public class EditProfile extends AppCompatActivity {
         }
 
         final EditText editTextEditUsername = (EditText) findViewById(R.id.EditUsername);
-        final EditText editTextEditEmail = (EditText) findViewById(R.id.EditMail);
+        final TextView editTextEditEmail = (TextView) findViewById(R.id.YourEmail);
         final EditText editTextEditPassword = (EditText) findViewById(R.id.EditPassword);
         final EditText editTextEditPassword2 = (EditText) findViewById(R.id.EditPassword2);
+        final TextView textViewGenderText=(TextView)findViewById(R.id.GenderText);
+        final RadioGroup genderRadioGroup = (RadioGroup) findViewById(R.id.EditGender);
+
         Button btnSave = (Button) findViewById(R.id.btnEditSave);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -70,7 +79,6 @@ public class EditProfile extends AppCompatActivity {
                         for (int i = 0; i < json.length(); i++) {
                             JSONObject currentUser = json.getJSONObject(i);
                             search.add(new User(currentUser.getString("id"), currentUser.getString("username"), currentUser.getString("gender"), currentUser.getString("dateOfBirth"),currentUser.getString(("password"))));
-
                         }
 
                         for (int i = 0; i < search.size(); i++) {
@@ -81,11 +89,20 @@ public class EditProfile extends AppCompatActivity {
                                 editPassword=search.get(i).getPassword();
                             }
                             editTextEditUsername.setHint("user:'"+editUsername+"'");
-                            editTextEditEmail.setHint("mail:'"+editEmail+"'");
-                            editTextEditPassword.setHint("pass:'"+editPassword+"'");
+                            editTextEditEmail.setText(editEmail);
+                            editTextEditPassword.setHint("pass:'" + editPassword + "'");
                             editTextEditPassword2.setHint("Confirm new password");
+                            if(editGender.equals("M")){
+
+                                textViewGenderText.setText("Male");
+                            }
+                            else
+                            {
+                                textViewGenderText.setText("Female");
+                            }
                             editTextEditUsername.setTypeface(Typeface.SERIF);
-                            editTextEditEmail.setTypeface(Typeface.SERIF);
+                            textViewGenderText.setTypeface(Typeface.SERIF);
+                            //editTextEditEmail.setTypeface(Typeface.SERIF);
                             editTextEditPassword.setTypeface(Typeface.SERIF);
                             editTextEditPassword2.setTypeface(Typeface.SERIF);
                         }
@@ -103,7 +120,19 @@ public class EditProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 change_username=editTextEditUsername.getText().toString();
-                EditProfileAsync editProfileAsync = new EditProfileAsync(loggedIn2,change_username, new IListener<Void>() {
+                selectedGender=String.valueOf(genderRadioGroup.getCheckedRadioButtonId());
+                if (selectedGender.equals("2131493004")){
+
+                    change_gender="M";
+                }
+                else if (selectedGender.equals("2131493005")){
+                    change_gender="Z";
+                }
+                else {
+                    change_gender=editGender;
+                }
+                change_password=editTextEditPassword.getText().toString();
+                EditProfileAsync editProfileAsync = new EditProfileAsync(loggedIn2,change_username,change_gender,change_password, new IListener<Void>() {
 
                     @Override
                     public void onBegin() {
@@ -118,6 +147,10 @@ public class EditProfile extends AppCompatActivity {
                 });
                 editProfileAsync.execute();
                 editTextEditUsername.setText("");
+                editTextEditPassword.setText("");
+                Log.d(change_username, change_username);
+                Log.d(change_gender,change_gender);
+                Log.d(change_password,change_password);
             }
         });
     }

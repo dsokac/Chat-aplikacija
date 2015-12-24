@@ -14,11 +14,15 @@ public class EditProfileAsync extends AsyncTask<Void, Void, String> {
 
     private String email;
     private String username;
+    private String gender;
+    private String password;
     private IListener<Void> listener;
 
-    public EditProfileAsync(String email,String username,  IListener<Void> listener) {
+    public EditProfileAsync(String email,String username,String gender, String password,  IListener<Void> listener) {
         this.email = email;
         this.username = username;
+        this.gender = gender;
+        this.password = password;
         this.listener = listener;
     }
 
@@ -29,7 +33,9 @@ public class EditProfileAsync extends AsyncTask<Void, Void, String> {
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("mail", this.email);
         parameters.put("mail2",this.username);
-        //Log.d("mail", this.email);
+        parameters.put("mail3",this.gender);
+        parameters.put("mail4",this.password);
+
         try
         {
             HttpPOST connection = new HttpPOST("http://104.236.58.50:8080/editProfile");
