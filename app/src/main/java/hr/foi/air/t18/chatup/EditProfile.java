@@ -9,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -20,18 +22,21 @@ import java.util.ArrayList;
 
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.User;
+import hr.foi.air.t18.webservice.EditProfileAsync;
 import hr.foi.air.t18.webservice.GetDataEditProfileAsync;
 import hr.foi.air.t18.webservice.IListener;
+import hr.foi.air.t18.webservice.LogoutAsync;
 import hr.foi.air.t18.webservice.SearchAsync;
 import hr.foi.air.t18.webservice.WebServiceResult;
 
 public class EditProfile extends AppCompatActivity {
     final ArrayList<User> search = new ArrayList<User>();
-    private String loggedIn2;
-    private String editEmail;
-    private String editUsername;
-    private String editGender;
-    private String editPassword;
+    private String loggedIn2="undefined";
+    private String editEmail="undefined";
+    private String editUsername="undefined";
+    private String editGender="undefined";
+    private String editPassword="undefined";
+    public String change_username="undefined_change";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,7 @@ public class EditProfile extends AppCompatActivity {
         final EditText editTextEditEmail = (EditText) findViewById(R.id.EditMail);
         final EditText editTextEditPassword = (EditText) findViewById(R.id.EditPassword);
         final EditText editTextEditPassword2 = (EditText) findViewById(R.id.EditPassword2);
+        Button btnSave = (Button) findViewById(R.id.btnEditSave);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -74,7 +80,6 @@ public class EditProfile extends AppCompatActivity {
                                 editGender=search.get(i).getGender();
                                 editPassword=search.get(i).getPassword();
                             }
-                            
                             editTextEditUsername.setHint("user:'"+editUsername+"'");
                             editTextEditEmail.setHint("mail:'"+editEmail+"'");
                             editTextEditPassword.setHint("pass:'"+editPassword+"'");
@@ -83,7 +88,6 @@ public class EditProfile extends AppCompatActivity {
                             editTextEditEmail.setTypeface(Typeface.SERIF);
                             editTextEditPassword.setTypeface(Typeface.SERIF);
                             editTextEditPassword2.setTypeface(Typeface.SERIF);
-
                         }
 
                     } catch (Exception e) {
@@ -95,6 +99,27 @@ public class EditProfile extends AppCompatActivity {
             }
         });
         getDataEditProfileAsync.execute();
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                change_username=editTextEditUsername.getText().toString();
+                EditProfileAsync editProfileAsync = new EditProfileAsync(loggedIn2,change_username, new IListener<Void>() {
+
+                    @Override
+                    public void onBegin() {
+                    }
+
+                    @Override
+                    public void onFinish(WebServiceResult<Void> wsResult) {
+                        if(wsResult.status == 0)
+                        {
+                        }
+                    }
+                });
+                editProfileAsync.execute();
+                editTextEditUsername.setText("");
+            }
+        });
     }
 
     @Override
