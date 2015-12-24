@@ -140,27 +140,30 @@ public class ConversationActivity extends AppCompatActivity
     private void CallRefreshConversationAsyncTask()
     {
         int numberOfMessages = conversation.getMessages().size();
-        String lastTimestamp = conversation.getMessages().get(numberOfMessages - 1).getTimeSend();
-        RefreshConversationAsync rc = new RefreshConversationAsync(
-                conversation.getID(),
-                lastTimestamp,
-                new IListener<ArrayList<Message>>()
-                {
-                    @Override
-                    public void onBegin() {}
-
-                    @Override
-                    public void onFinish(WebServiceResult<ArrayList<Message>> result)
+        if (numberOfMessages > 0)
+        {
+            String lastTimestamp = conversation.getMessages().get(numberOfMessages - 1).getTimeSend();
+            RefreshConversationAsync rc = new RefreshConversationAsync(
+                    conversation.getID(),
+                    lastTimestamp,
+                    new IListener<ArrayList<Message>>()
                     {
-                        if (result.status == 0 && result.data.size() > 0)
+                        @Override
+                        public void onBegin() {}
+
+                        @Override
+                        public void onFinish(WebServiceResult<ArrayList<Message>> result)
                         {
-                            for (int i = 0; i < result.data.size(); i++)
-                                conversation.addMessage(result.data.get(i));
-                            SortAndLoadMessagesIntoListView();
+                            if (result.status == 0 && result.data.size() > 0)
+                            {
+                                for (int i = 0; i < result.data.size(); i++)
+                                    conversation.addMessage(result.data.get(i));
+                                SortAndLoadMessagesIntoListView();
+                            }
                         }
                     }
-                }
-        );
-        rc.execute();
+            );
+            rc.execute();
+        }
     }
 }
