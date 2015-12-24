@@ -13,9 +13,10 @@ public class User
 {
     private String email;
     private String username;
-    private char gender;
+    private String gender;
     private String dateOfBirth;
     private String status;
+    private String password;
     private Bitmap profilePicture;
 
     /**
@@ -31,7 +32,15 @@ public class User
      * @param gender User's gender
      * @param dateOfBirth User's date of birth
      */
-    public User(String email, String username, char gender, String dateOfBirth)
+    public User(String email, String username, String gender, String dateOfBirth, String password)
+    {
+        this.email = email;
+        this.username = username;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
+        this.password=password;
+    }
+    public User(String email, String username, String gender, String dateOfBirth)
     {
         this.email = email;
         this.username = username;
@@ -72,7 +81,7 @@ public class User
      * Gets user's gender.
      * @return User's gender as a <b>char</b>
      */
-    public char getGender()
+    public String getGender()
     {
         return this.gender;
     }
@@ -87,9 +96,19 @@ public class User
     }
 
     /**
+     * Gets user's password.
+     * @return User's password
+     */
+    public String getPassword()
+    {
+        return this.password;
+    }
+
+    /**
      * Sets user's email
      * @param email User's email
      */
+
     public void setEmail(String email)
     {
         this.email = email;
@@ -108,11 +127,19 @@ public class User
      * Sets user's gender.
      * @param gender User's gender as a <b>char</b>.
      */
-    public void setGender(char gender)
+    public void setGender(String gender)
     {
         this.gender = gender;
     }
 
+    /**
+     * Sets user's password
+     * @param password User's password
+     */
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
     /**
      * Sets user's date of birth.
      * @param dateOfBirth User's date of birth

@@ -88,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity
                 + Integer.toString(dpDateOfBirth.getMonth()) + "-"
                 + Integer.toString(dpDateOfBirth.getDayOfMonth());
 
-        User newUser = new User(email, username, gender, dateOfBirth);
+        User newUser = new User(email, username, String.valueOf(gender), dateOfBirth);
         return newUser;
     }
 
