@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -40,6 +41,7 @@ public class ImagePickerActivity extends Activity {
     private ImageView imageView;
     private Bitmap selectedImage;
     private final int SELECT_PHOTO = 1;
+    SharedPreferences sharedPref;
     AlertDialog progress;
 
     @Override
@@ -48,6 +50,14 @@ public class ImagePickerActivity extends Activity {
         setContentView(R.layout.activity_image_picker);
 
         imageView = (ImageView) findViewById(R.id.imageView);
+
+        if (!SharedPreferencesClass.getDefaults("UserProfilePictureBase64", getApplicationContext()).isEmpty()) {
+            String profilePictureInBase64 = SharedPreferencesClass.getDefaults("UserProfilePictureBase64", getApplicationContext());
+            byte[] decodedByte = Base64.decode(profilePictureInBase64, 0);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+            imageView.setImageBitmap(bitmap);
+        }
+
         this.progress = new ProgressDialog(this);
 
         // Button for picking a picture from phone gallery
@@ -57,7 +67,7 @@ public class ImagePickerActivity extends Activity {
             @Override
             public void onClick(View view) {
             Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-            photoPickerIntent.setType("image/jpeg");
+            photoPickerIntent.setType("image/jpg");
             startActivityForResult(photoPickerIntent, SELECT_PHOTO);
             }
         });
@@ -69,8 +79,10 @@ public class ImagePickerActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-            String base64String = encodeToBase64(selectedImage);
-            saveProfilePicture(base64String);
+                if (selectedImage != null) {
+                    String base64String = encodeToBase64(selectedImage);
+                    saveProfilePicture(base64String);
+                }
             }
         });
     }
@@ -87,7 +99,6 @@ public class ImagePickerActivity extends Activity {
                         final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                         selectedImage = BitmapFactory.decodeStream(imageStream);
                         imageView.setImageBitmap(selectedImage);
-                        imageView.setMaxHeight(150);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -134,32 +145,10 @@ public class ImagePickerActivity extends Activity {
                                 base64String,
                                 getApplicationContext()
                         );
-
-                        String path = Environment.getExternalStorageDirectory().toString();
-                        Log.w("PATH", path);
-                        OutputStream fOut = null;
-                        File file = new File(path, "ProfilePic_ChatUp.jpg"); // the File to save to
-                        try {
-                            fOut = new FileOutputStream(file);
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-
-                        // saving the Bitmap to a file compressed as a JPEG with 90% compression rate
-                        selectedImage.compress(Bitmap.CompressFormat.JPEG, 90, fOut);
-                        try {
-                            fOut.flush();
-                            fOut.close(); // do not forget to close the stream
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-                       // MediaStore.Images.Media.insertImage(getContentResolver(), file.getAbsolutePath(), file.getName(), file.getName());
                         finish();
                     }
                 }
             });
-
             process.execute();
         } else {
             Log.w("USER_MAIL", "User mail is null from Shared Preferences!");

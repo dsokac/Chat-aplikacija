@@ -71,6 +71,7 @@ public class SaveImageAsync extends AsyncTask<Void, Void, String> {
             status = json.getInt("status");
         } catch (Exception e) {
             message = "Error parsing JSON. Either JSON is invalid or server is down.";
+            e.printStackTrace();
             status = -1;
         }
 

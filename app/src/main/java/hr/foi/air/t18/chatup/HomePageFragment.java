@@ -1,11 +1,12 @@
 package hr.foi.air.t18.chatup;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.util.Base64;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -20,6 +21,8 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import hr.foi.air.t18.core.SharedPreferencesClass;
@@ -53,6 +56,8 @@ public class HomePageFragment extends Fragment {
         friends = new ArrayList<>();
 
         profilePicture = (ImageView) root.findViewById(R.id.profilePicture);
+        setProfilePicture();
+
         profilePicture.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -98,6 +103,21 @@ public class HomePageFragment extends Fragment {
         getFriends.execute();
 
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setProfilePicture();
+    }
+
+    private void setProfilePicture() {
+        if (!sharedPref.contains("UserProfilePictureBase64")) {
+            String profilePictureInBase64 = SharedPreferencesClass.getDefaults("UserProfilePictureBase64", getActivity().getApplicationContext());
+            byte[] decodedByte = Base64.decode(profilePictureInBase64, 0);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+            profilePicture.setImageBitmap(bitmap);
+        }
     }
 
     @Override
