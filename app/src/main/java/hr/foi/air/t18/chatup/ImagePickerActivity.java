@@ -8,6 +8,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -16,10 +18,15 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import hr.foi.air.t18.core.MiddleMan;
+import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.SaveImageAsync;
@@ -97,31 +104,65 @@ public class ImagePickerActivity extends Activity {
         String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
 
         // print in log base64 string for bitmap
-        Log.e("LOOK", imageEncoded);
+        Log.e("BASE64", imageEncoded);
 
         return imageEncoded;
     }
 
-    public void saveProfilePicture(String base64String) {
-        SaveImageAsync process = new SaveImageAsync("goran@mail.com", base64String, new IListener<Void>() {
+    public void saveProfilePicture(final String base64String) {
 
-            @Override
-            public void onBegin() {
-                progress.setMessage("Saving picture...");
-                progress.show();
-            }
+        String userMail = SharedPreferencesClass.getDefaults("UserEmail", getApplicationContext());
 
-            @Override
-            public void onFinish(WebServiceResult<Void> result) {
-                if (progress.isShowing()) {
-                    progress.dismiss();
+        if (userMail != null) {
+            SaveImageAsync process = new SaveImageAsync(userMail, base64String, new IListener<Void>() {
+
+                @Override
+                public void onBegin() {
+                    progress.setMessage("Saving picture...");
+                    progress.show();
                 }
-                Toast.makeText(getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
-                if (result.status == 0) {
-                    finish();
+
+                @Override
+                public void onFinish(WebServiceResult<Void> result) {
+                    if (progress.isShowing()) {
+                        progress.dismiss();
+                    }
+                    Toast.makeText(getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
+                    if (result.status == 0) {
+                        SharedPreferencesClass.setDefaults(
+                                "UserProfilePictureBase64",
+                                base64String,
+                                getApplicationContext()
+                        );
+
+                        String path = Environment.getExternalStorageDirectory().toString();
+                        Log.w("PATH", path);
+                        OutputStream fOut = null;
+                        File file = new File(path, "ProfilePic_ChatUp.jpg"); // the File to save to
+                        try {
+                            fOut = new FileOutputStream(file);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+                        // saving the Bitmap to a file compressed as a JPEG with 90% compression rate
+                        selectedImage.compress(Bitmap.CompressFormat.JPEG, 90, fOut);
+                        try {
+                            fOut.flush();
+                            fOut.close(); // do not forget to close the stream
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                       // MediaStore.Images.Media.insertImage(getContentResolver(), file.getAbsolutePath(), file.getName(), file.getName());
+                        finish();
+                    }
                 }
-            }
-        });
-        process.execute();
+            });
+
+            process.execute();
+        } else {
+            Log.w("USER_MAIL", "User mail is null from Shared Preferences!");
+        }
     }
 }
