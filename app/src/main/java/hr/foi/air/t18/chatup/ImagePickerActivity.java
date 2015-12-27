@@ -1,16 +1,14 @@
 package hr.foi.air.t18.chatup;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
+import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -18,17 +16,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.sw926.imagefileselector.ImageCropper;
+import com.sw926.imagefileselector.ImageFileSelector;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 
-import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.SharedPreferencesClass;
-import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.SaveImageAsync;
 import hr.foi.air.t18.webservice.WebServiceResult;
@@ -36,18 +32,31 @@ import hr.foi.air.t18.webservice.WebServiceResult;
 /**
  * Created by Laptop on 6.12.2015..
  */
-public class ImagePickerActivity extends Activity {
+public class ImagePickerActivity extends AppCompatActivity implements View.OnClickListener {
 
+    Button fromCamera, fromSdCard, saveImage;
+    private ImageFileSelector mImageFileSelector;
+    private ImageCropper mImageCropper;
     private ImageView imageView;
     private Bitmap selectedImage;
-    private final int SELECT_PHOTO = 1;
-    SharedPreferences sharedPref;
+    File mCurrentSelectFile;
     AlertDialog progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_picker);
+
+        fromCamera = (Button) findViewById(R.id.btn_crop);
+        fromCamera.setOnClickListener(this);
+
+        fromSdCard = (Button) findViewById(R.id.btn_pick);
+        fromSdCard.setOnClickListener(this);
+
+        saveImage = (Button) findViewById(R.id.btn_save);
+        saveImage.setOnClickListener(this);
+
+        ImageFileSelector.setDebug(true);
 
         imageView = (ImageView) findViewById(R.id.imageView);
 
@@ -60,49 +69,116 @@ public class ImagePickerActivity extends Activity {
 
         this.progress = new ProgressDialog(this);
 
-        // Button for picking a picture from phone gallery
-        Button pickImage = (Button) findViewById(R.id.btn_pick);
-        pickImage.setOnClickListener(new View.OnClickListener() {
+        mImageFileSelector = new ImageFileSelector(this);
+        mImageFileSelector.setCallback(new ImageFileSelector.Callback() {
+            @Override
+            public void onSuccess(final String file) {
+                if (!TextUtils.isEmpty(file)) {
+                    loadImage(file);
+                    mCurrentSelectFile = new File(file);
+                } else {
+                    Toast.makeText(getApplicationContext(), "select image file error", Toast.LENGTH_LONG).show();
+                }
+            }
 
             @Override
-            public void onClick(View view) {
-            Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-            photoPickerIntent.setType("image/jpg");
-            startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+            public void onError() {
+                Toast.makeText(getApplicationContext(), "select image file error", Toast.LENGTH_LONG).show();
             }
         });
 
-        // Button for saving picture
-        Button saveImage = (Button) findViewById(R.id.btn_save);
-
-        saveImage.setOnClickListener(new View.OnClickListener() {
-
+        mImageCropper = new ImageCropper(this);
+        mImageCropper.setCallback(new ImageCropper.ImageCropperCallback() {
             @Override
-            public void onClick(View v) {
-                if (selectedImage != null) {
-                    String base64String = encodeToBase64(selectedImage);
-                    saveProfilePicture(base64String);
+            public void onCropperCallback(ImageCropper.CropperResult result, File srcFile, File outFile) {
+                mCurrentSelectFile = null;
+                if (result == ImageCropper.CropperResult.success) {
+                    loadImage(outFile.getPath());
+                } else if (result == ImageCropper.CropperResult.error_illegal_input_file) {
+                    Toast.makeText(getApplicationContext(), "input file error", Toast.LENGTH_LONG).show();
+                } else if (result == ImageCropper.CropperResult.error_illegal_out_file) {
+                    Toast.makeText(getApplicationContext(), "output file error", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
-        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
-
-        switch(requestCode) {
-            case SELECT_PHOTO:
-                if(resultCode == RESULT_OK){
-                    try {
-                        final Uri imageUri = imageReturnedIntent.getData();
-                        final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                        selectedImage = BitmapFactory.decodeStream(imageStream);
-                        imageView.setImageBitmap(selectedImage);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+    private void loadImage(final String file) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final Bitmap bitmap = BitmapFactory.decodeFile(file);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        imageView.setImageBitmap(bitmap);
                     }
+                });
+            }
+        }).start();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mImageFileSelector.onActivityResult(requestCode, resultCode, data);
+        mImageCropper.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK){
+            try {
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                selectedImage = BitmapFactory.decodeStream(imageStream);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mImageFileSelector.onSaveInstanceState(outState);
+        mImageCropper.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mImageFileSelector.onRestoreInstanceState(savedInstanceState);
+        mImageCropper.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @SuppressWarnings("NullableProblems")
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        mImageFileSelector.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_pick: {
+                //mImageFileSelector.setOutPutImageSize(150, 150);
+                mImageFileSelector.selectImage(this);
+                break;
+            }
+            case R.id.btn_save: {
+                if (selectedImage != null) {
+                    String base64String = encodeToBase64(selectedImage);
+                    saveProfilePicture(base64String);
                 }
+                break;
+            }
+            case R.id.btn_crop: {
+                if (mCurrentSelectFile != null) {
+                    mImageCropper.setOutPut(150, 150);
+                    mImageCropper.setOutPutAspect(1, 1);
+                    mImageCropper.cropImage(mCurrentSelectFile);
+                }
+                break;
+            }
         }
     }
 

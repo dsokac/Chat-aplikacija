@@ -43,6 +43,7 @@
     <Button
         android:layout_width="135dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_shape"
         android:text="@string/btn_login"
         android:id="@+id/loginLoginButton"
         android:layout_below="@+id/loginPassword"
@@ -55,6 +56,7 @@
         android:layout_height="wrap_content"
         android:text="@string/reg_btnRegister"
         android:id="@+id/loginRegisterButton"
+        android:background="@drawable/button_shape"
         android:layout_alignTop="@+id/loginLoginButton"
         android:layout_alignRight="@+id/loginPassword"
         android:layout_alignEnd="@+id/loginPassword" />
@@ -74,6 +76,7 @@
     <Button
         android:layout_width="135dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_shape"
         android:text="@string/btn_login_admin_login"
         android:id="@+id/loginAdminLoginButton"
         android:layout_below="@+id/loginRegisterButton"

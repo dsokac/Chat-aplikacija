@@ -59,4 +59,6 @@
 
     <string name="friend_menu">Friend menu</string>
     <string name="conv_start">Start conversation</string>
+    <string name="crop_image">Crop image</string>
+    <string name="pick_a_photo_hint">Choose image to display</string>
 </resources>

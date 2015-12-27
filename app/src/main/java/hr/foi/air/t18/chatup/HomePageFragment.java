@@ -21,8 +21,6 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import hr.foi.air.t18.core.SharedPreferencesClass;
@@ -61,12 +59,11 @@ public class HomePageFragment extends Fragment {
         profilePicture.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Intent i = new Intent(getActivity(), ImagePickerActivity.class);
-                startActivity(i);
-                return true;
+            Intent i = new Intent(getActivity(), ImagePickerActivity.class);
+            startActivity(i);
+            return true;
             }
         });
-
 
         final View final_root = root;
         FriendsAsync getFriends = new FriendsAsync(this.loggedIn, new IListener<JSONArray>() {
