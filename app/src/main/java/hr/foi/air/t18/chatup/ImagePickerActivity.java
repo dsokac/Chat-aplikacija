@@ -32,7 +32,7 @@ import hr.foi.air.t18.webservice.WebServiceResult;
 /**
  * Created by Laptop on 6.12.2015..
  */
-public class ImagePickerActivity extends AppCompatActivity implements View.OnClickListener {
+public class ImagePickerActivity extends AppCompatActivity implements View.OnClickListener, SaveAttachments {
 
     Button fromCamera, fromSdCard, saveImage;
     private ImageFileSelector mImageFileSelector;
@@ -160,14 +160,13 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_pick: {
-                //mImageFileSelector.setOutPutImageSize(150, 150);
                 mImageFileSelector.selectImage(this);
                 break;
             }
             case R.id.btn_save: {
                 if (selectedImage != null) {
                     String base64String = encodeToBase64(selectedImage);
-                    saveProfilePicture(base64String);
+                    savePicture(base64String);
                 }
                 break;
             }
@@ -196,7 +195,8 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
         return imageEncoded;
     }
 
-    public void saveProfilePicture(final String base64String) {
+    @Override
+    public void savePicture(final String base64String) {
 
         String userMail = SharedPreferencesClass.getDefaults("UserEmail", getApplicationContext());
 
@@ -229,5 +229,10 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
         } else {
             Log.w("USER_MAIL", "User mail is null from Shared Preferences!");
         }
+    }
+
+    @Override
+    public void saveTextDocument(String base64String) {
+
     }
 }

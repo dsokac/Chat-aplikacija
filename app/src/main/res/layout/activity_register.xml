@@ -184,6 +184,7 @@
             android:layout_below="@id/regDatePicker"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
+            android:background="@drawable/button_shape"
             android:text="@string/reg_btnRegister" />
     </RelativeLayout>
 </ScrollView>

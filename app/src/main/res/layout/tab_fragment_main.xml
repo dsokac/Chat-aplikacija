@@ -22,19 +22,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Username"
         android:id="@+id/profileUsername"
-        android:layout_alignBottom="@+id/profilePicture"
-        android:layout_centerHorizontal="true"
-        android:textSize="30dp"
-        android:layout_marginLeft="10dp"
-        android:paddingLeft="10dp" />
+        android:paddingLeft="10dp"
+        android:layout_above="@+id/profileYourFriends"
+        android:layout_toRightOf="@+id/profilePicture"
+        android:layout_toEndOf="@+id/profilePicture" />
 
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/profileOnlineStatus"
-        android:layout_alignBottom="@+id/profileUsername"
+        android:layout_alignBottom="@+id/profilePicture"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="20dp"

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -37,6 +38,7 @@ import hr.foi.air.t18.webservice.WebServiceResult;
 public class HomePageFragment extends Fragment {
 
     private ImageView profilePicture;
+    private TextView usernameText;
     private SharedPreferences sharedPref;
     private String loggedIn;
     private ArrayList<User> friends;
@@ -53,8 +55,10 @@ public class HomePageFragment extends Fragment {
         View root = inflater.inflate(R.layout.tab_fragment_main, container, false);
         friends = new ArrayList<>();
 
+        usernameText = (TextView) root.findViewById(R.id.profileUsername);
         profilePicture = (ImageView) root.findViewById(R.id.profilePicture);
         setProfilePicture();
+        getSharedPreferencesData();
 
         profilePicture.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -100,6 +104,12 @@ public class HomePageFragment extends Fragment {
         getFriends.execute();
 
         return root;
+    }
+
+    private void getSharedPreferencesData() {
+        if (!SharedPreferencesClass.getDefaults("UserUsername", getActivity().getApplicationContext()).isEmpty()) {
+            usernameText.setText(SharedPreferencesClass.getDefaults("UserUsername", getActivity().getApplicationContext()));
+        }
     }
 
     @Override
