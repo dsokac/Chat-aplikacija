@@ -35,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         getControls();
+        emailText.setText("mjurman@foi.hr");
+        passwordText.setText("test");
         this.progress = new ProgressDialog(this);
         setEvents();
 
@@ -48,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        /*
         //Find reference to loginAdminLoginButton and subscribe to onClick event
         Button btnloginAdminLoginButton = (Button)findViewById(R.id.loginAdminLoginButton);
         btnloginAdminLoginButton.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        */
     }
 
     /***

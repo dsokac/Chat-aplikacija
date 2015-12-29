@@ -5,10 +5,15 @@
 
         <item
             android:id="@+id/action_edit_profile"
-            android:orderInCategory="96"
+            android:orderInCategory="95"
             app:showAsAction="never"
             android:title="@string/action_edit_profile"/>
 
+        <item
+            android:id="@+id/action_settings"
+            android:orderInCategory="96"
+            app:showAsAction="never"
+            android:title="@string/action_settings"/>
         <item
             android:id="@+id/action_home"
             android:orderInCategory="97"

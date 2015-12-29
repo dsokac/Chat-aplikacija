@@ -72,14 +72,14 @@
         android:layout_alignEnd="@+id/loginPassword"
         android:layout_below="@+id/loginPassword"
         android:layout_marginTop="15dp"/>
-
-    <Button
-        android:layout_width="135dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_shape"
-        android:text="@string/btn_login_admin_login"
-        android:id="@+id/loginAdminLoginButton"
-        android:layout_below="@+id/loginRegisterButton"
-        android:layout_marginTop="15dp"/>
-
-</RelativeLayout>
+    <!--
+        <Button
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_shape"
+            android:text="@string/btn_login_admin_login"
+            android:id="@+id/loginAdminLoginButton"
+            android:layout_below="@+id/loginRegisterButton"
+            android:layout_marginTop="15dp"/>
+     -->
+    </RelativeLayout>

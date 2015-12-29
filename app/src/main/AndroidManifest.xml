@@ -37,6 +37,7 @@
         <activity android:name=".ImagePickerActivity" />
         <activity android:name=".AboutUsDialog" />
         <activity android:name=".EditProfile" android:noHistory="true"></activity>
+        <activity android:name=".Settings" android:noHistory="true"></activity>
     </application>
 
 </manifest>

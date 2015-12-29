@@ -49,6 +49,8 @@ public class EditProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_profile);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         if(MiddleMan.getObject() != null) {
             User user = (User)MiddleMan.getObject();
@@ -63,9 +65,6 @@ public class EditProfile extends AppCompatActivity {
         final RadioGroup genderRadioGroup = (RadioGroup) findViewById(R.id.EditGender);
 
         Button btnSave = (Button) findViewById(R.id.btnEditSave);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         GetDataEditProfileAsync getDataEditProfileAsync = new GetDataEditProfileAsync(loggedIn2, new IListener<JSONArray>() {
             @Override
@@ -125,11 +124,12 @@ public class EditProfile extends AppCompatActivity {
                     change_username=editUsername;
                 }
                 selectedGender=String.valueOf(genderRadioGroup.getCheckedRadioButtonId());
-                if (selectedGender.equals("2131493004")){
+
+                if (selectedGender.equals("2131493005")){
 
                     change_gender="M";
                 }
-                else if (selectedGender.equals("2131493005")){
+                else if (selectedGender.equals("2131493006")){
                     change_gender="Z";
                 }
                 else {
@@ -163,6 +163,7 @@ public class EditProfile extends AppCompatActivity {
                     editTextEditPassword.setText("");
                     editTextEditPassword2.setText("");
                         Toast.makeText(getApplicationContext(), "Update profile successfully.", Toast.LENGTH_SHORT).show();
+                        Log.d(selectedGender,selectedGender);
 
                     }
                 else{
@@ -170,24 +171,5 @@ public class EditProfile extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_edit_profile, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id)
-        {
-            case R.id.action_home:
-                Intent intent = new Intent(getApplicationContext(), MainClass.class);
-                startActivity(intent);
-                break;
-        }
-        return true;
     }
 }

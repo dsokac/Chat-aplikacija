@@ -38,17 +38,10 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/colorBlack"
         android:layout_centerHorizontal="true"
         android:text="@string/EditInstructions"/>
 
-    <Button
-        android:id="@+id/btnEditPicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/YourEmail"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:text="@string/btnEditPicture" />
     <!--
         <CheckBox
             android:id="@+id/checkboxbtnEditPicture"
@@ -64,7 +57,7 @@
         android:id="@+id/EditUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnEditPicture"
+        android:layout_below="@+id/YourEmail"
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:inputType="textPersonName" />
@@ -126,14 +119,14 @@
             android:checked = "true"/>
     </RadioGroup>
 
-            <TextView
-                android:id="@+id/checkboxEditGender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/EditUsername"
-                android:layout_toRightOf="@+id/EditGender"
-                android:layout_marginTop="15dp"
-                />
+    <TextView
+        android:id="@+id/checkboxEditGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/EditUsername"
+        android:layout_toRightOf="@+id/EditGender"
+        android:layout_marginTop="15dp"
+        />
 
     <EditText
         android:id="@+id/EditPassword"
