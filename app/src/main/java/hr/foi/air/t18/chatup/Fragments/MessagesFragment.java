@@ -1,4 +1,4 @@
-package hr.foi.air.t18.chatup;
+package hr.foi.air.t18.chatup.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,13 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import hr.foi.air.t18.chatup.Conversation.ConversationActivity;
+import hr.foi.air.t18.chatup.Conversation.ConversationListAdapter;
+import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.core.Conversation;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.SharedPreferencesClass;

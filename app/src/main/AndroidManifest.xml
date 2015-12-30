@@ -32,12 +32,12 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity
-            android:name=".ConversationActivity"
+            android:name=".Conversation.ConversationActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ImagePickerActivity" />
         <activity android:name=".AboutUsDialog" />
-        <activity android:name=".EditProfile" android:noHistory="true"></activity>
-        <activity android:name=".Settings" android:noHistory="true"></activity>
+        <activity android:name=".Menu.EditProfile" android:noHistory="true"></activity>
+        <activity android:name=".Menu.Settings" android:noHistory="true"></activity>
     </application>
 
 </manifest>

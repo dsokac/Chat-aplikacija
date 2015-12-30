@@ -12,6 +12,9 @@ import android.widget.Toast;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import hr.foi.air.t18.chatup.Menu.AboutUsDialog;
+import hr.foi.air.t18.chatup.Menu.EditProfile;
+import hr.foi.air.t18.chatup.Menu.Settings;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.IListener;

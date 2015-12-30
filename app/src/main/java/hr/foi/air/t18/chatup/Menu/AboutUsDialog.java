@@ -1,10 +1,12 @@
-package hr.foi.air.t18.chatup;
+package hr.foi.air.t18.chatup.Menu;
 
-import android.os.Bundle;
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import hr.foi.air.t18.chatup.R;
 
 /**
  * Public class AboutUsDialog implements logic of dialog "About us"

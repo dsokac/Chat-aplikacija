@@ -4,6 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import hr.foi.air.t18.chatup.Fragments.HomePageFragment;
+import hr.foi.air.t18.chatup.Fragments.MessagesFragment;
+import hr.foi.air.t18.chatup.Fragments.SearchFragment;
+
 /**
  * View pager adapter for the swipe tabs feature
  * Created by Laptop on 9.11.2015..

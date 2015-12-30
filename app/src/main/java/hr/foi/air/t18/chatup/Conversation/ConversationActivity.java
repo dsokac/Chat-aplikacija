@@ -1,4 +1,4 @@
-package hr.foi.air.t18.chatup;
+package hr.foi.air.t18.chatup.Conversation;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,9 +15,11 @@ import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import hr.foi.air.t18.chatup.MessagesListAdapter;
+import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.core.Conversation;
-import hr.foi.air.t18.core.MessageComparator;
 import hr.foi.air.t18.core.Message;
+import hr.foi.air.t18.core.MessageComparator;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.webservice.IListener;

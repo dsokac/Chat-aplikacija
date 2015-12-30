@@ -1,4 +1,4 @@
-package hr.foi.air.t18.chatup;
+package hr.foi.air.t18.chatup.Fragments;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,12 +18,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import hr.foi.air.t18.chatup.ImagePickerActivity;
+import hr.foi.air.t18.chatup.R;
+import hr.foi.air.t18.chatup.UserListAdapter;
 import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.CreateConversationAsync;
