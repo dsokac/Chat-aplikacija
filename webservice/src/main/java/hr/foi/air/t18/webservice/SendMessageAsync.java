@@ -1,7 +1,6 @@
 package hr.foi.air.t18.webservice;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,7 +8,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 import hr.foi.air.t18.core.Conversation;
-import hr.foi.air.t18.core.HttpPOST;
 import hr.foi.air.t18.core.Message;
 
 /**

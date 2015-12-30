@@ -1,4 +1,4 @@
-package hr.foi.air.t18.core;
+package hr.foi.air.t18.webservice;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

@@ -1,14 +1,11 @@
 package hr.foi.air.t18.webservice;
 
 import android.os.AsyncTask;
-import android.util.Base64;
 import android.util.Log;
 
 import org.json.JSONObject;
 
 import java.util.HashMap;
-
-import hr.foi.air.t18.core.HttpPOST;
 
 /**
  * Created by Laptop on 18.12.2015..

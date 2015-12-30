@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 import org.json.JSONObject;
 import java.util.HashMap;
-import hr.foi.air.t18.core.HttpPOST;
 
 /**
  * Created by Jurman_Lap on 18.12.2015.

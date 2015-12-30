@@ -1,30 +1,20 @@
 package hr.foi.air.t18.chatup;
 
 import android.app.ProgressDialog;
-import android.app.SharedElementCallback;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.HashMap;
-import hr.foi.air.t18.core.HttpGET;
-import hr.foi.air.t18.core.HttpPOST;
 import hr.foi.air.t18.core.MiddleMan;
-import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.IListener;
-import hr.foi.air.t18.webservice.LoginAsync;
 import hr.foi.air.t18.webservice.LogoutAsync;
 import hr.foi.air.t18.webservice.WebServiceResult;
 

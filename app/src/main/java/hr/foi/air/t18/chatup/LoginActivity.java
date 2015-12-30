@@ -69,9 +69,13 @@ public class LoginActivity extends AppCompatActivity {
      * Check if user mail exists in SharedPreferences data, if yes then update EditText emailText with user mail
      */
     private void getSharedPreferencesDataForLogin() {
-        if (!SharedPreferencesClass.getDefaults("UserEmail", getApplicationContext()).isEmpty()) {
-            emailText.setText(SharedPreferencesClass.getDefaults("UserEmail", getApplicationContext()));
-        }
+//        if (!SharedPreferencesClass.getDefaults("UserEmail", getApplicationContext()).isEmpty()) {
+//            emailText.setText(SharedPreferencesClass.getDefaults("UserEmail", getApplicationContext()));
+//        }
+
+        // hardcoded for Second projects evaluation purpose
+        emailText.setText("mjurman@foi.hr");
+        passwordText.setText("test");
     }
 
     /***

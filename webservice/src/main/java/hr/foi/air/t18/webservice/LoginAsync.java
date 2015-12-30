@@ -6,8 +6,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-import hr.foi.air.t18.core.HttpPOST;
-
 /**
  * This class is used to communicate with database through web service. The class purpose is to
  * log in the app user.

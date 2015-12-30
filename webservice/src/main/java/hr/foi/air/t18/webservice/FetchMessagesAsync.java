@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import hr.foi.air.t18.core.Conversation;
-import hr.foi.air.t18.core.HttpPOST;
 import hr.foi.air.t18.core.Message;
 import hr.foi.air.t18.core.User;
 
