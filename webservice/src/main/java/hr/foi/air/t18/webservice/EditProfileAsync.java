@@ -7,6 +7,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 /**
+ * This class is used to communicate with database through web service. The class purpose is to
+ * edit user profile (username, gender, and password).
+ * The class creates HTTP request with email, username, gender and password as parameters, it sends the request to
+ * the web service and waits for its response.
  * Created by Jurman_Lap on 23.12.2015..
  */
 public class EditProfileAsync extends AsyncTask<Void, Void, String> {
@@ -17,6 +21,9 @@ public class EditProfileAsync extends AsyncTask<Void, Void, String> {
     private String password;
     private IListener<Void> listener;
 
+    /**
+     * The class constructor assigns values to the class private variables.
+     */
     public EditProfileAsync(String email,String username,String gender, String password,  IListener<Void> listener) {
         this.email = email;
         this.username = username;
@@ -25,6 +32,12 @@ public class EditProfileAsync extends AsyncTask<Void, Void, String> {
         this.listener = listener;
     }
 
+    /***
+     * Async task's function which is running in background and it is used to create HTTP parameters
+     * and HTTP request. It sends request to the web service for log in and waits for response.
+     * @param params
+     * @return response - Web service's response
+     */
     @Override
     protected String doInBackground(Void... params) {
         String response;
@@ -50,6 +63,12 @@ public class EditProfileAsync extends AsyncTask<Void, Void, String> {
         return response;
     }
 
+    /***
+     * Overridden async task's function onPostExecute() runs after request sending and it gets
+     * web service's response as JSON object and parses the JSON to extract message and status
+     * returned by web service. The function runs onFinish event.
+     * @param result - JSON object containing message and status returned by web service
+     */
     @Override
     protected void onPostExecute(String result)
     {

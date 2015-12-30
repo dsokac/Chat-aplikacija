@@ -6,6 +6,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 /**
+ *  This class is used to communicate with database through web service. The class purpose is to
+ * fetch data of logged in user for using in edit profile activity.
+ * The class creates HTTP request with email as parameter, it sends the request to
+ * the web service and waits for its response.
  * Created by Jurman_Lap on 22.11.2015.
  */
 public class GetDataEditProfileAsync extends AsyncTask<Void, Void, String> {
@@ -13,6 +17,9 @@ public class GetDataEditProfileAsync extends AsyncTask<Void, Void, String> {
     private IListener listener;
     private String email;
 
+    /**
+     * The class constructor assigns values to the class private variables.
+     */
     public GetDataEditProfileAsync(String email,IListener listener)
     {
         this.listener = listener;
@@ -24,6 +31,12 @@ public class GetDataEditProfileAsync extends AsyncTask<Void, Void, String> {
         this.listener.onBegin();
     }
 
+    /***
+     * Async task's function which is running in background and it is used to create HTTP parameters
+     * and HTTP request. It sends request to the web service for log in and waits for response.
+     * @param params
+     * @return response - Web service's response
+     */
     @Override
     protected String doInBackground(Void... params) {
         String response;
@@ -44,6 +57,12 @@ public class GetDataEditProfileAsync extends AsyncTask<Void, Void, String> {
         return  response;
     }
 
+    /***
+     * Overridden async task's function onPostExecute() runs after request sending and it gets
+     * web service's response as JSON object and parses the JSON to extract message and status
+     * returned by web service. The function runs onFinish event.
+     * @param result - JSON object containing message and status returned by web service
+     */
     @Override
     protected void onPostExecute(String result) {
         WebServiceResult<JSONArray> response = new WebServiceResult<>();

@@ -8,6 +8,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 /**
+ *  This class is used to communicate with database through web service. The class purpose is to
+ * logout the app user
+ * The class creates HTTP request with email as parameter, it sends the request to
+ * the web service and waits for its response.
  * Created by Laptop on 1.11.2015..
  * Updated by Jurman on 10.12.2015.
  */
@@ -16,11 +20,20 @@ public class LogoutAsync extends AsyncTask<Void, Void, String> {
     private String email;
     private IListener<Void> listener;
 
+    /**
+     * The class constructor assigns values to the class private variables.
+     */
     public LogoutAsync(String email,  IListener<Void> listener) {
         this.email = email;
         this.listener = listener;
     }
 
+    /***
+     * Async task's function which is running in background and it is used to create HTTP parameters
+     * and HTTP request. It sends request to the web service for log in and waits for response.
+     * @param params
+     * @return response - Web service's response
+     */
     @Override
     protected String doInBackground(Void... params) {
         String response;
@@ -43,6 +56,12 @@ public class LogoutAsync extends AsyncTask<Void, Void, String> {
         return response;
     }
 
+    /***
+     * Overridden async task's function onPostExecute() runs after request sending and it gets
+     * web service's response as JSON object and parses the JSON to extract message and status
+     * returned by web service. The function runs onFinish event.
+     * @param result - JSON object containing message and status returned by web service
+     */
     @Override
     protected void onPostExecute(String result)
     {

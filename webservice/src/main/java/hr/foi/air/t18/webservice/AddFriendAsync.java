@@ -6,6 +6,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 /**
+ * This class is used to communicate with database through web service. The class purpose is to
+ * add friend to logged-in user and add friend to selected user.
+ * The class creates HTTP request with email_prij and email_odab as parameters, it sends the request to
+ * the web service and waits for its response.
  * Created by Jurman_Lap on 18.12.2015.
  */
 public class AddFriendAsync extends AsyncTask<Void, Void, String> {
@@ -14,12 +18,24 @@ public class AddFriendAsync extends AsyncTask<Void, Void, String> {
     private String email_odab;
     private IListener<Void> listener;
 
+    /**
+     * The class constructor assigns values to the class private variables.
+     * @param email_prij - logged in user
+     * @param email_odab - selected user
+     * @param listener - listener with implemented onBegin() and onFinish() events
+     */
     public AddFriendAsync(String email_prij,String email_odab, IListener<Void> listener) {
         this.email_prij = email_prij;
         this.email_odab = email_odab;
         this.listener = listener;
     }
 
+    /***
+     * Async task's function which is running in background and it is used to create HTTP parameters
+     * and HTTP request. It sends request to the web service for log in and waits for response.
+     * @param params
+     * @return response - Web service's response
+     */
     @Override
     protected String doInBackground(Void... params) {
         String response;
@@ -45,7 +61,12 @@ public class AddFriendAsync extends AsyncTask<Void, Void, String> {
 
         return response;
     }
-
+    /***
+     * Overridden async task's function onPost Execute() runs after request sending and it gets
+     * web service's response as JSON object and parses the JSON to extract message and status
+     * returned by web service. The function runs onFinish event.
+     * @param result - JSON object containing message and status returned by web service
+     */
     @Override
     protected void onPostExecute(String result)
     {
