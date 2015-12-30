@@ -11,6 +11,7 @@ import hr.foi.air.t18.core.Conversation;
 import hr.foi.air.t18.core.Message;
 
 /**
+ * An AsyncTask class that sends a message to be stored in a conversation.
  * Created by Danijel on 6.12.2015..
  */
 public class SendMessageAsync extends AsyncTask<Void, Void, String>
@@ -20,6 +21,12 @@ public class SendMessageAsync extends AsyncTask<Void, Void, String>
 
     private IListener<Message> listener;
 
+    /**
+     * Constructor for SendMessageAsync class.
+     * @param conversation Conversation object
+     * @param message Message object
+     * @param listener IListener object that has implemented onBegin() and onFinish() methods
+     */
     public SendMessageAsync(Conversation conversation, Message message, IListener<Message> listener)
     {
         this.conversation = conversation;
@@ -27,6 +34,12 @@ public class SendMessageAsync extends AsyncTask<Void, Void, String>
         this.listener = listener;
     }
 
+    /**
+     * Overriden doInBackground() which contacts the Web service for storing
+     * sent messages.
+     * @param params
+     * @return Web server response
+     */
     @Override
     protected String doInBackground(Void... params)
     {

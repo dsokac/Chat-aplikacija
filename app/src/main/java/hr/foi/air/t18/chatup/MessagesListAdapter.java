@@ -18,6 +18,8 @@ import hr.foi.air.t18.core.Message;
 
 
 /**
+ * An adapter that lists all available messages in one conversation.
+ *
  * Created by Danijel on 3.12.2015..
  */
 public class MessagesListAdapter extends BaseAdapter
@@ -25,6 +27,11 @@ public class MessagesListAdapter extends BaseAdapter
     private ArrayList<Message> messages;
     private Activity activity;
 
+    /**
+     * Constrictor for MessagesListAdapter class.
+     * @param messages List of Message objects
+     * @param activity Activity that calls this class
+     */
     public MessagesListAdapter(ArrayList<Message> messages, Activity activity)
     {
         this.messages = messages;

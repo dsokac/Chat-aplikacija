@@ -14,6 +14,9 @@ import hr.foi.air.t18.core.Message;
 import hr.foi.air.t18.core.User;
 
 /**
+ * An AsyncTask class that fetches all the conversation the user
+ * participates in.
+ *
  * Created by Danijel on 29.11.2015..
  */
 public class FetchMessagesAsync extends AsyncTask<Void, Void, String>
@@ -21,6 +24,11 @@ public class FetchMessagesAsync extends AsyncTask<Void, Void, String>
     private User user;
     private IListener<ArrayList<Conversation>> listener;
 
+    /**
+     * Constructor for FetchMessagesAsync class
+     * @param user User object
+     * @param listener IListener object that implement onBegin() and onFinish() methods
+     */
     public FetchMessagesAsync(User user, IListener<ArrayList<Conversation>> listener)
     {
         this.user = user;

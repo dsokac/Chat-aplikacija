@@ -12,6 +12,9 @@ import java.util.HashMap;
 import hr.foi.air.t18.core.Message;
 
 /**
+ * AsyncTask class that refreshes the active conversation by contacting
+ * the Web service for new messages.
+ *
  * Created by Danijel on 24.12.2015..
  */
 public class RefreshConversationAsync extends AsyncTask<Void, Void, String>
@@ -20,6 +23,12 @@ public class RefreshConversationAsync extends AsyncTask<Void, Void, String>
     String timestamp;
     IListener<ArrayList<Message>> listener;
 
+    /**
+     * Constructor for RefreshConversationAsync class.
+     * @param chatID ID of active conversation
+     * @param timestamp Timestamp of the latest message
+     * @param listener IListener object that implements onBegin() and onFinish() methods
+     */
     public RefreshConversationAsync(String chatID, String timestamp, IListener<ArrayList<Message>> listener)
     {
         this.chatID = chatID;

@@ -10,6 +10,8 @@ import java.util.HashMap;
 import hr.foi.air.t18.core.User;
 
 /**
+ * AsyncTask class that fetches required user data from the Web service.
+ *
  * Created by Danijel on 22.12.2015..
  */
 public class FetchUserDataAsync extends AsyncTask<Void, Void, String>
@@ -17,6 +19,11 @@ public class FetchUserDataAsync extends AsyncTask<Void, Void, String>
     private IListener<User> listener;
     private String email;
 
+    /**
+     * Constructor of FetchUserDataAsync class.
+     * @param email E-mail address of the user
+     * @param listener IListener object that implements onBegin() and onFinish() methods
+     */
     public FetchUserDataAsync(String email, IListener<User> listener)
     {
         this.email = email;

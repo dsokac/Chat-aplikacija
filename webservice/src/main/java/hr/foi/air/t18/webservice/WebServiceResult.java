@@ -1,7 +1,8 @@
 package hr.foi.air.t18.webservice;
 
 /**
- * Created by Danijel on 29.11.2015..
+ * Class that acts as a structure for data sent by a
+ * Web service.
  */
 public class WebServiceResult<T>
 {

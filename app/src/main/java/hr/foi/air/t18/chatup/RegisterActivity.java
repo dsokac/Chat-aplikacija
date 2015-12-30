@@ -15,6 +15,9 @@ import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.RegisterAsync;
 import hr.foi.air.t18.webservice.WebServiceResult;
 
+/**
+ * Class for registering new users.
+ */
 public class RegisterActivity extends AppCompatActivity
 {
     private EditText editEmail;

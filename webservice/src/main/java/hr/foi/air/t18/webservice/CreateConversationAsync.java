@@ -7,6 +7,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 /**
+ * An AsyncTask class that contacts the server and creates the conversation
+ * between two users.
+ *
  * Created by Danijel on 23.12.2015..
  */
 public class CreateConversationAsync extends AsyncTask<Void, Void, String>
@@ -15,6 +18,12 @@ public class CreateConversationAsync extends AsyncTask<Void, Void, String>
     private String email2;
     private IListener<Void> listener;
 
+    /**
+     * Constructor for CreateConversationAsync class.
+     * @param email1 E-mail address of one user
+     * @param email2 E-mail address of the second user
+     * @param listener IListener object that implements onBegin() and onFinish() methods
+     */
     public CreateConversationAsync(String email1, String email2, IListener<Void> listener)
     {
         this.email1 = email1;

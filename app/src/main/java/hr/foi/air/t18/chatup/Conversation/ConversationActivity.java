@@ -27,6 +27,9 @@ import hr.foi.air.t18.webservice.RefreshConversationAsync;
 import hr.foi.air.t18.webservice.SendMessageAsync;
 import hr.foi.air.t18.webservice.WebServiceResult;
 
+/**
+ * Activity where participants exchange messages.
+ */
 public class ConversationActivity extends AppCompatActivity
 {
     private Conversation conversation;
@@ -60,6 +63,9 @@ public class ConversationActivity extends AppCompatActivity
         refreshTimer.purge();
     }
 
+    /**
+     * Initializes controls used in the Activity.
+     */
     private void InitializeComponents()
     {
         conversation = (Conversation) MiddleMan.getObject();
@@ -68,18 +74,27 @@ public class ConversationActivity extends AppCompatActivity
         txtMessage = (EditText) findViewById(R.id.convTextBox);
     }
 
+    /**
+     * Registers events.
+     */
     private void AddEvents()
     {
         AddSendMessageEvent();
         AddRefreshEvent();
     }
 
+    /**
+     * Sorts the messages and displays them on screen.
+     */
     private void SortAndLoadMessagesIntoListView()
     {
         Collections.sort(conversation.getMessages(), new MessageComparator());
         lvMessages.setAdapter(new MessagesListAdapter(conversation.getMessages(), this));
     }
 
+    /**
+     * Adds an event that happens when the user presses the SEND button.
+     */
     private void AddSendMessageEvent()
     {
         btnSendMessage.setOnClickListener(new View.OnClickListener() {
@@ -115,6 +130,9 @@ public class ConversationActivity extends AppCompatActivity
         });
     }
 
+    /**
+     * Adds an event that refreshes the list of messages every 5 seconds.
+     */
     private void AddRefreshEvent()
     {
         refreshTimer = new Timer();
@@ -139,6 +157,9 @@ public class ConversationActivity extends AppCompatActivity
         refreshTimer.schedule(refreshEvent, 1000, 5000);
     }
 
+    /**
+     * Fetches the new messages. Used in refresh event.
+     */
     private void CallRefreshConversationAsyncTask()
     {
         int numberOfMessages = conversation.getMessages().size();

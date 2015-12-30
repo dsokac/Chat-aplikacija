@@ -14,6 +14,7 @@ import hr.foi.air.t18.core.Conversation;
 import hr.foi.air.t18.core.User;
 
 /**
+ * Adapter class used to list all available conversations.
  * Created by Danijel on 25.11.2015..
  */
 public class ConversationListAdapter extends BaseAdapter
@@ -21,6 +22,11 @@ public class ConversationListAdapter extends BaseAdapter
     private ArrayList<Conversation> conversations;
     private Activity activity;
 
+    /**
+     * Constructor for ConversationListAdapter class.
+     * @param conversations List of Conversation objects
+     * @param activity Activity that calls this class
+     */
     public ConversationListAdapter(ArrayList<Conversation> conversations, Activity activity)
     {
         this.conversations = conversations;
