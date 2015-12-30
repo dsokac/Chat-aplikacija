@@ -7,12 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-
 import hr.foi.air.t18.chatup.Mail.GMailSender;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.ForgotPasswordAsync;
@@ -20,9 +17,18 @@ import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.WebServiceResult;
 
 
+/**
+ * Public class ForgotPasswordActivity implements logic of Forgot Password Activity
+ */
 public class ForgotPasswordActivity extends AppCompatActivity {
+
+    //value of entered data
     private String forgot_entered;
+
+    //value of password which is forgotten
     private String forgot_password;
+
+    //all users and users informations
     final ArrayList<User> forgot_users = new ArrayList<User>();
 
     @Override
@@ -32,33 +38,42 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         final EditText forgotEmail = (EditText) findViewById(R.id.forgotUnos);
         final Button forgotSend = (Button) findViewById(R.id.forgotSendButton);
 
+        //logic when user click on button Send (OnClickListener)
         forgotSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 forgot_entered = forgotEmail.getText().toString();
-
                 ForgotPasswordAsync forgotPasswordAsync = new ForgotPasswordAsync(forgot_entered, new IListener<JSONArray>() {
+
+                    /***
+                     * Overridden onBegin event of ForgotPasswordAsync task defines what is happening when async task starts to execute.
+                     */
                     @Override
                     public void onBegin() {
                     }
-
+                    /***
+                     * Overridden onFinish event of ForgotPasswordAsync task defines what happens when async task finish execution.
+                     * @param //status - status integer returned by web service
+                     * @param //message - message string returned by web service
+                     * @param //data - data returned by web service
+                     */
                     @Override
                     public void onFinish(WebServiceResult<JSONArray> result) {
                         if (result.status == 0) {
                             try {
                                 JSONArray json = result.data;
+                                //adding json results in ArrayList<User> forgot_users
                                 for (int i = 0; i < json.length(); i++) {
                                     JSONObject currentUser = json.getJSONObject(i);
                                     forgot_users.add(new User(currentUser.getString("id"), currentUser.getString("username"), currentUser.getString("gender"), currentUser.getString("dateOfBirth"), currentUser.getString("password")));
                                 }
 
+                                //iterating through ArrayList forgot_users and compare entered value and mail value of current user
                                 for (int i = 0; i < forgot_users.size(); i++) {
                                     if (forgot_users.get(i).getEmail().equals(forgot_entered)) {
+                                        //get password for user
                                         forgot_password = forgot_users.get(i).getPassword();
-                                        //Log.d("procitano:"+forgot_users.get(i).getEmail()+" "+forgot_users.get(i).getPassword()," ;uneseno:" +forgot_entered);
-                                        //Toast.makeText(getApplicationContext(), forgot_password, Toast.LENGTH_SHORT).show();
-                                        //ovdje ide logika za slanje maila
-
+                                        //send mail
                                         new Thread(new Runnable() {
                                             @Override
                                             public void run() {

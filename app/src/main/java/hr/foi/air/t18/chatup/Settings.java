@@ -5,7 +5,7 @@ import android.support.v7.widget.Toolbar;
 
 
 /**
- * Created by JurmanLap on 28.12.2015..
+ * Public class Settings implements logic of Settings activity
  */
 public class Settings extends AppCompatActivity {
 

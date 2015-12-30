@@ -86,11 +86,15 @@ public class MainClass extends AppCompatActivity {
         });
     }
 
+    /**
+     *  Private function for Logout user
+     */
     private void Logout()
     {
         LogoutAsync logoutAsync = new LogoutAsync(loggedIn, new IListener<Void>() {
+
             /***
-             * Overridden onBegin event of LoginAsync task defines what is happening when async task starts to execute.
+             * Overridden onBegin event of LogoutAsync task defines what is happening when async task starts to execute.
              * It displays message 'Signing in...'.
              */
             @Override
@@ -99,6 +103,12 @@ public class MainClass extends AppCompatActivity {
                 progress.show();
             }
 
+
+            /***
+             * Overridden onFinish event of LogoutAsync task defines what happens when async task finish execution.
+             * @param //status - status integer returned by web service
+             * @param //message - message string returned by web service
+             */
             @Override
             public void onFinish(WebServiceResult<Void> wsResult) {
                 if(progress.isShowing()) progress.dismiss();
@@ -115,12 +125,14 @@ public class MainClass extends AppCompatActivity {
         logoutAsync.execute();
     }
 
+    //logic for creating menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
+    //logic for choosing some item in menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -154,5 +166,4 @@ public class MainClass extends AppCompatActivity {
         }
         return true;
     }
-    //menu end
 }
