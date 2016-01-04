@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="440dp"
         android:orientation="vertical"
-        android:background="@color/colorLightGrey" >
+        android:background="@drawable/login_background_blue">
 
         <TextView
             android:id="@+id/regNaslov"
@@ -179,8 +179,8 @@
 
         <Button
             android:id="@+id/btnRegOk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="45dp"
             android:layout_below="@id/regDatePicker"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"

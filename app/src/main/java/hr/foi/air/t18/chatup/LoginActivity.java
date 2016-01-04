@@ -2,6 +2,7 @@ package hr.foi.air.t18.chatup;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -87,6 +88,8 @@ public class LoginActivity extends AppCompatActivity {
          this.passwordText = (EditText) findViewById(R.id.loginPassword);
          this.btnRegister = (Button) findViewById(R.id.loginRegisterButton);
          this.btnLogin = (Button) findViewById(R.id.loginLoginButton);
+         this.emailText.setTypeface(Typeface.SANS_SERIF);
+         this.passwordText.setTypeface(Typeface.SANS_SERIF);
     }
 
 
