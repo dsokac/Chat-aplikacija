@@ -180,7 +180,7 @@
         <Button
             android:id="@+id/btnRegOk"
             android:layout_width="120dp"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:layout_below="@id/regDatePicker"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
