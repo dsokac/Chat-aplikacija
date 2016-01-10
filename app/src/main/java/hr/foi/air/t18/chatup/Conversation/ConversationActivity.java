@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.InterstitialAd;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Timer;
@@ -21,6 +23,7 @@ import java.util.TimerTask;
 
 import hr.foi.air.t18.chatup.MessagesListAdapter;
 import hr.foi.air.t18.chatup.R;
+import hr.foi.air.t18.chatup.ads.DlAdsListener;
 import hr.foi.air.t18.core.Conversation;
 import hr.foi.air.t18.core.Message;
 import hr.foi.air.t18.core.MessageComparator;
@@ -38,11 +41,13 @@ import hr.foi.air.t18.webservice.WebServiceResult;
  */
 public class ConversationActivity extends AppCompatActivity
 {
+    private InterstitialAd mInterstitial;
+    private static final String AD_UNIT_ID = "ca-app-pub-8639732656343372/9330745843";
     private Conversation conversation;
     private ListView lvMessages;
     private Button btnSendMessage;
     private EditText txtMessage;
-
+    private int adds_counter=0;
     private Timer refreshTimer;
     private Activity activity;
     private int requestCode = 0x01;
@@ -61,6 +66,9 @@ public class ConversationActivity extends AppCompatActivity
 
         SortAndLoadMessagesIntoListView();
         lvMessages.setSelection(lvMessages.getCount() - 1);
+
+        //za sad se poziva samo prilikom otvaranja poruke
+        Adds();
     }
 
     @Override
@@ -133,6 +141,8 @@ public class ConversationActivity extends AppCompatActivity
         txtMessage = (EditText) findViewById(R.id.convTextBox);
     }
 
+
+
     /**
      * Registers events.
      */
@@ -140,6 +150,7 @@ public class ConversationActivity extends AppCompatActivity
     {
         AddSendMessageEvent();
         AddRefreshEvent();
+
     }
 
     /**
@@ -214,6 +225,23 @@ public class ConversationActivity extends AppCompatActivity
         };
 
         refreshTimer.schedule(refreshEvent, 1000, 5000);
+    }
+
+    //Adds function for loading an fullscreen Add
+    private void Adds()
+    {
+        mInterstitial = new InterstitialAd(ConversationActivity.this);
+        mInterstitial.setAdUnitId(AD_UNIT_ID);
+        mInterstitial.setAdListener(new DlAdsListener(ConversationActivity.this) {
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                mInterstitial.show();
+            }
+        });
+
+        mInterstitial.loadAd(new com.google.android.gms.ads.AdRequest.Builder().build());
     }
 
     /**
