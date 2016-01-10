@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.core.MiddleMan;
+import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.EditProfileAsync;
 import hr.foi.air.t18.webservice.GetDataEditProfileAsync;
@@ -57,11 +58,9 @@ public class EditProfile extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //get mail of logged in user
-        if(MiddleMan.getObject() != null) {
-            User user = (User)MiddleMan.getObject();
-            loggedIn2 = user.getEmail();
-        }
-
+        loggedIn2=SharedPreferencesClass.getDefaults("UserEmail", getApplicationContext());
+        Log.d(loggedIn2,loggedIn2);
+        
         //finding references
         final EditText editTextEditUsername = (EditText) findViewById(R.id.EditUsername);
         final TextView editTextEditEmail = (TextView) findViewById(R.id.YourEmail);
@@ -146,16 +145,20 @@ public class EditProfile extends AppCompatActivity {
                 if(change_username.matches("")){
                     change_username=editUsername;
                 }
-                selectedGender=String.valueOf(genderRadioGroup.getCheckedRadioButtonId());
 
-                if (selectedGender.equals("2131493004")){
+                int radioButtonID = genderRadioGroup.getCheckedRadioButtonId();
+                View radioButton = genderRadioGroup.findViewById(radioButtonID);
+                int idx = genderRadioGroup.indexOfChild(radioButton);
+                selectedGender=Integer.toString(idx);
+                Log.d (Integer.toString(idx),"--<");
 
+                if (selectedGender.equals("0")){
                     change_gender="M";
                 }
-                else if (selectedGender.equals("2131493005")){
+                else if (selectedGender.equals("1")){
                     change_gender="Z";
                 }
-                else {
+                else if (selectedGender.equals("2")){
                     change_gender=editGender;
                 }
                 change_password=editTextEditPassword.getText().toString();
