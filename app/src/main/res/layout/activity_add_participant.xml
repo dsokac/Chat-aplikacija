@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:columnCount="1"
+    android:rowCount="6">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_column="0"
+        android:layout_row="0"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <ListView
+        android:id="@+id/convAddParticipantList"
+        android:layout_column="0"
+        android:layout_row="1"
+        android:layout_rowSpan="4"
+        android:layout_height="0dp"
+        android:layout_gravity="fill_vertical"
+        android:background="@color/colorWhite"
+        android:choiceMode="multipleChoice"/>
+
+    <LinearLayout
+        android:layout_row="5"
+        android:layout_column="0"
+        android:layout_gravity="fill_horizontal">
+        <Button
+            android:id="@+id/convAddParticipantOK"
+            android:text="@string/conversation_add_participant_OK"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="0.5"/>
+
+        <Button
+            android:id="@+id/convAddParticipantCancel"
+            android:text="@string/conversation_add_participant_Cancel"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="0.5"/>
+    </LinearLayout>
+</GridLayout>

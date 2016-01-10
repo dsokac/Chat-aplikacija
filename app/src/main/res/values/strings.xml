@@ -37,6 +37,9 @@
 
     <string name="conversation_send">Send</string>
     <string name="conversation_picture">Picture</string>
+    <string name="conversation_add_participant">Add participant</string>
+    <string name="conversation_add_participant_OK">OK</string>
+    <string name="conversation_add_participant_Cancel">Cancel</string>
     <string name="change_image">Change image</string>
     <string name="save_image">Save image</string>
 
@@ -63,4 +66,7 @@
     <string name="conv_start">Start conversation</string>
     <string name="crop_image">Crop image</string>
     <string name="pick_a_photo_hint">Choose image to display</string>
+
+    <string name="dialog_noselection_title">Empty selection</string>
+    <string name="dialog_noselection_participants">There are no selected users to add to the converation.</string>
 </resources>

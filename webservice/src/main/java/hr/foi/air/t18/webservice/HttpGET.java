@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -53,6 +54,23 @@ public class HttpGET extends HttpMethod
     public void sendRequest(Map<String, String> data) throws IOException
     {
         generateQuery(data);
+        mSendRequest();
+    }
+
+    /**
+     * Sends GET request with parameters.
+     * @param data GET parameters as a list of Pair objects
+     * @throws IOException
+     */
+    @Override
+    public void sendRequest(ArrayList<Pair<String, String>> data) throws IOException
+    {
+        generateQuery(data);
+        mSendRequest();
+    }
+
+    private void mSendRequest() throws IOException
+    {
         try {
             URL url = new URL(this.url + "?" + this.query);
             this.connection = (HttpURLConnection) url.openConnection();
@@ -80,6 +98,20 @@ public class HttpGET extends HttpMethod
         String query = "";
         for (String key : data.keySet()) {
             query += key + "=" + data.get(key) + "&";
+        }
+        this.query = query.substring(0, query.lastIndexOf("&"));
+    }
+
+    /**
+     * Morphs list of Pair queries into String query.
+     * @param data List of Pair queries
+     */
+    private void generateQuery(ArrayList<Pair<String, String>> data)
+    {
+        String query = "";
+        for (Pair<String, String> param : data)
+        {
+            query += param.getFirstValue() + "=" + param.getSecondValue() + "&";
         }
         this.query = query.substring(0, query.lastIndexOf("&"));
     }

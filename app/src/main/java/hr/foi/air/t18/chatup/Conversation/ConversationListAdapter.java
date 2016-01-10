@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.core.Conversation;
+import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.User;
 
 /**
@@ -64,13 +65,24 @@ public class ConversationListAdapter extends BaseAdapter
 
         TextView conversationItem = (TextView) view.findViewById(R.id.conversation_list_item);
         ArrayList<User> participants = conversations.get(position).getParticipants();
-        StringBuilder builder = new StringBuilder();
 
+        String currentUserUsername = SharedPreferencesClass.getDefaults("UserUsername", activity.getApplicationContext());
+        for (int i = 0; i < participants.size(); i++)
+        {
+            String username = participants.get(i).getUsername();
+            if(username.equals(currentUserUsername))
+            {
+                participants.remove(i);
+            }
+        }
+
+        StringBuilder builder = new StringBuilder();
         String delimiter = "";
         for (int i = 0; i < participants.size(); i++)
         {
             builder.append(delimiter);
-            builder.append(participants.get(i).getUsername());
+            String username = participants.get(i).getUsername();
+            builder.append(username);
             delimiter = ", ";
         }
         conversationItem.setText(builder.toString());

@@ -1,9 +1,13 @@
 package hr.foi.air.t18.chatup.Conversation;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +26,8 @@ import hr.foi.air.t18.core.Message;
 import hr.foi.air.t18.core.MessageComparator;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.SharedPreferencesClass;
+import hr.foi.air.t18.core.User;
+import hr.foi.air.t18.webservice.AddParticipantsToConversationAsyncTask;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.RefreshConversationAsync;
 import hr.foi.air.t18.webservice.SendMessageAsync;
@@ -38,6 +44,8 @@ public class ConversationActivity extends AppCompatActivity
     private EditText txtMessage;
 
     private Timer refreshTimer;
+    private Activity activity;
+    private int requestCode = 0x01;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -63,11 +71,62 @@ public class ConversationActivity extends AppCompatActivity
         refreshTimer.purge();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.conversation_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        int itemID = item.getItemId();
+        if (itemID == R.id.action_add_participant)
+        {
+            Intent i = new Intent(this, AddParticipantActivity.class);
+            MiddleMan.setObject(conversation.getParticipants());
+            startActivityForResult(i, requestCode);
+        }
+        return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (resultCode == RESULT_OK)
+        {
+            ArrayList<String> emailBuffer =
+                    (ArrayList<String>) MiddleMan.getObject();
+
+            AddParticipantsToConversationAsyncTask aptc =
+                    new AddParticipantsToConversationAsyncTask(conversation.getID(), emailBuffer, new IListener<ArrayList<String>>()
+                    {
+                        @Override
+                        public void onBegin()
+                        {}
+
+                        @Override
+                        public void onFinish(WebServiceResult<ArrayList<String>> result)
+                        {
+                            if (result.status != 0)
+                            {
+                                Toast.makeText(activity, result.message, Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+
+            aptc.execute();
+        }
+    }
+
     /**
      * Initializes controls used in the Activity.
      */
     private void InitializeComponents()
     {
+        activity = this;
+
         conversation = (Conversation) MiddleMan.getObject();
         lvMessages = (ListView) findViewById(R.id.convMessages);
         btnSendMessage = (Button) findViewById(R.id.convSendButton);

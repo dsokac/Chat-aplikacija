@@ -2,6 +2,7 @@ package hr.foi.air.t18.webservice;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -55,4 +56,6 @@ public abstract class HttpMethod
      * @throws IOException
      */
     public abstract void sendRequest(Map<String, String> data) throws IOException;
+
+    public abstract void sendRequest(ArrayList<Pair<String, String>> data) throws IOException;
 }
