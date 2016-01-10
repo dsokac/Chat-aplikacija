@@ -28,6 +28,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.android.support:design:22.2.0'
     compile 'com.sw926.imagefileselector:library:1.0.1'
+    compile 'com.jayway.android.robotium:robotium-solo:5.5.3'
     compile project(':webservice')
     compile project(':core')
 }
