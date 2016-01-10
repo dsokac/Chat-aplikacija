@@ -25,7 +25,8 @@
         android:layout_height="0dp"
         android:layout_gravity="fill_vertical"
         android:background="@color/colorWhite"
-        android:choiceMode="multipleChoice"/>
+        android:choiceMode="multipleChoice"
+        />
 
     <LinearLayout
         android:layout_row="5"

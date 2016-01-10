@@ -2,11 +2,16 @@ package hr.foi.air.t18.chatup.Conversation;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.SparseBooleanArray;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -37,6 +42,7 @@ public class AddParticipantActivity extends AppCompatActivity
 
     private View.OnClickListener listenerOK;
     private View.OnClickListener listenerCancel;
+    private AdapterView.OnItemClickListener listenerFriends;
 
     private ArrayList<User> currentParticipants;
     private ArrayList<User> friends;
@@ -48,6 +54,9 @@ public class AddParticipantActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_participant);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         initializeComponents();
         initializeEvents();
@@ -109,12 +118,29 @@ public class AddParticipantActivity extends AppCompatActivity
                 finish();
             }
         };
+
+        listenerFriends = new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                SparseBooleanArray boolArray = lvFriends.getCheckedItemPositions();
+
+                if (boolArray.get(position))
+                    lvFriends.getChildAt(position)
+                            .setBackgroundColor(Color.rgb(133, 211, 239));
+                else
+                    lvFriends.getChildAt(position)
+                            .setBackgroundColor(Color.TRANSPARENT);
+            }
+        };
     }
 
     private void bindEvents()
     {
         buttonOK.setOnClickListener(listenerOK);
         buttonCancel.setOnClickListener(listenerCancel);
+        lvFriends.setOnItemClickListener(listenerFriends);
     }
 
     private void loadCandidates()

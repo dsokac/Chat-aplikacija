@@ -40,6 +40,15 @@ public class MessagesFragment extends Fragment
         conversations = new ArrayList<>();
         lv = (ListView) root.findViewById(R.id.single_conversationListView);
 
+        addEvents();
+        return root;
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
         User user = new User();
         user.setEmail(SharedPreferencesClass.getDefaults("UserEmail", getActivity().getApplicationContext()));
         user.setUsername(SharedPreferencesClass.getDefaults("UserUsername", getActivity().getApplicationContext()));
@@ -64,9 +73,6 @@ public class MessagesFragment extends Fragment
             }
         });
         fm.execute();
-
-        addEvents();
-        return root;
     }
 
     private void loadConversationsIntoListView()
