@@ -21,7 +21,6 @@ import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import hr.foi.air.t18.chatup.MessagesListAdapter;
 import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.chatup.ads.DlAdsListener;
 import hr.foi.air.t18.core.Conversation;
@@ -29,7 +28,6 @@ import hr.foi.air.t18.core.Message;
 import hr.foi.air.t18.core.MessageComparator;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.SharedPreferencesClass;
-import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.AddParticipantsToConversationAsyncTask;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.RefreshConversationAsync;

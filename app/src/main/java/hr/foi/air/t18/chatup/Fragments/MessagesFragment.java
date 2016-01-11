@@ -7,12 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import hr.foi.air.t18.chatup.Conversation.ConversationActivity;
+import hr.foi.air.t18.chatup.Conversation.ConversationExpandableAdapter;
 import hr.foi.air.t18.chatup.Conversation.ConversationListAdapter;
 import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.core.Conversation;
@@ -30,7 +33,8 @@ import hr.foi.air.t18.webservice.WebServiceResult;
 public class MessagesFragment extends Fragment
 {
     private ArrayList<Conversation> conversations;
-    private ListView lv;
+    private HashMap<String, ArrayList<Conversation>> conversationMap;
+    private ExpandableListView elv;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -38,7 +42,8 @@ public class MessagesFragment extends Fragment
         View root = inflater.inflate(R.layout.tab_fragment_messages, container, false);
 
         conversations = new ArrayList<>();
-        lv = (ListView) root.findViewById(R.id.single_conversationListView);
+        conversationMap = new HashMap<>();
+        elv = (ExpandableListView) root.findViewById(R.id.conversation_expandable);
 
         addEvents();
         return root;
@@ -77,19 +82,39 @@ public class MessagesFragment extends Fragment
 
     private void loadConversationsIntoListView()
     {
-        lv.setAdapter(new ConversationListAdapter(conversations, getActivity()));
+        ArrayList<Conversation> singleConversations = new ArrayList<>();
+        ArrayList<Conversation> groupConversations = new ArrayList<>();
+
+        for (int i = 0; i < conversations.size(); i++)
+        {
+            int participantCount = conversations.get(i).getParticipants().size();
+            if (participantCount > 2)
+                groupConversations.add(conversations.get(i));
+            else
+                singleConversations.add(conversations.get(i));
+        }
+
+        conversationMap.put("Single conversations", singleConversations);
+        conversationMap.put("Group conversations", groupConversations);
+        elv.setAdapter(new ConversationExpandableAdapter(conversationMap, getActivity()));
+        elv.expandGroup(1);
     }
 
     private void addEvents()
     {
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        elv.setOnChildClickListener(new ExpandableListView.OnChildClickListener()
         {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
             {
+                String key = (String) conversationMap.keySet().toArray()[groupPosition];
+                Conversation conversation = conversationMap.get(key).get(childPosition);
+
+                MiddleMan.setObject(conversation);
+
                 Intent intent = new Intent(getActivity(), ConversationActivity.class);
-                MiddleMan.setObject(conversations.get(position));
                 startActivity(intent);
+                return true;
             }
         });
     }

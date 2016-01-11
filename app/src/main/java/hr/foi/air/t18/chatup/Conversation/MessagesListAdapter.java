@@ -1,4 +1,4 @@
-package hr.foi.air.t18.chatup;
+package hr.foi.air.t18.chatup.Conversation;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.core.Message;
 
 
@@ -73,7 +74,7 @@ public class MessagesListAdapter extends BaseAdapter
 
         Message message = messages.get(position);
         msgUsername.setText(message.getSender());
-        msgContent.setText((String) message.getContent());
+        msgContent.setText(message.getContent());
 
         Date date = new Date(Long.parseLong(message.getTimeSend()));
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm, dd.MM.yyyy.");
