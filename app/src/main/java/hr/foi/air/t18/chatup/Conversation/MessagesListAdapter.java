@@ -68,11 +68,11 @@ public class MessagesListAdapter extends BaseAdapter
             view = inflater.inflate(R.layout.message_list_item_layout_2, null);
         }
 
+        Message message = messages.get(position);
         TextView msgUsername = (TextView) view.findViewById(R.id.msgUsername);
         TextView msgTimeSent = (TextView) view.findViewById(R.id.msgTimeSent);
         TextView msgContent = (TextView) view.findViewById(R.id.msgContent);
 
-        Message message = messages.get(position);
         msgUsername.setText(message.getSender());
         msgContent.setText(message.getContent());
 

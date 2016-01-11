@@ -41,11 +41,13 @@ public class ConversationActivity extends AppCompatActivity
 {
     private InterstitialAd mInterstitial;
     private static final String AD_UNIT_ID = "ca-app-pub-8639732656343372/9330745843";
+    private int adds_counter=0;
+
     private Conversation conversation;
     private ListView lvMessages;
     private Button btnSendMessage;
     private EditText txtMessage;
-    private int adds_counter=0;
+
     private Timer refreshTimer;
     private Activity activity;
     private int requestCode = 0x01;
