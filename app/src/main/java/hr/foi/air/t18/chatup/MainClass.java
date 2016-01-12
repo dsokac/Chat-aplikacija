@@ -1,6 +1,7 @@
 package hr.foi.air.t18.chatup;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
@@ -37,10 +38,14 @@ public class MainClass extends AppCompatActivity {
     private ViewPager viewPager;
     private PagerAdapter adapter;
 
+    private boolean isServiceRunning = false;
+    private ConnectToService mConnection = new ConnectToService();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        startService();
         setContentView(R.layout.activity_main);
 
         if (MiddleMan.getObject() != null) {
@@ -109,6 +114,7 @@ public class MainClass extends AppCompatActivity {
             }
         });
         logoutAsync.execute();
+        stopService();
     }
 
     //logic for creating menu
@@ -197,5 +203,33 @@ public class MainClass extends AppCompatActivity {
             {
             }
         });
+        CheckIfServiceIsRunning();
     }
+
+    public void startService()
+    {
+        startService(new Intent(this, BackgroundService.class));
+        this.isServiceRunning = true;
+        Toast.makeText(this, "Service running",Toast.LENGTH_LONG).show();
+    }
+
+    public void stopService()
+    {
+        //unbindService(mConnection);
+        stopService(new Intent(this, BackgroundService.class));
+        Toast.makeText(this,"Service destroyed",Toast.LENGTH_LONG).show();
+    }
+
+
+    public void CheckIfServiceIsRunning()
+    {
+        if(isServiceRunning)
+        {
+            Intent i = new Intent(this,BackgroundService.class);
+            this.bindService(i, mConnection, Context.BIND_AUTO_CREATE);
+            MiddleMan.setObject(mConnection);
+        }
+    }
+
+
 }

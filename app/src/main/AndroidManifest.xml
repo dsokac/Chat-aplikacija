@@ -39,6 +39,8 @@
         <activity android:name=".AboutUsDialog" />
         <activity android:name=".Menu.EditProfile" android:noHistory="true"></activity>
         <activity android:name=".Menu.Settings" android:noHistory="true"></activity>
+
+        <service android:name=".BackgroundService"/>
     </application>
 
 </manifest>

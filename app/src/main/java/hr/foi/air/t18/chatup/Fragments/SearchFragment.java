@@ -20,8 +20,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import hr.foi.air.t18.chatup.BackgroundService;
+import hr.foi.air.t18.chatup.ConnectToService;
 import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.chatup.RegisteredUsersListAdapter;
+import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.AddFriendAsync;
 import hr.foi.air.t18.webservice.IListener;
@@ -48,6 +51,9 @@ public class SearchFragment extends Fragment {
     public static Button search_button2;
     private String current="";
 
+    private BackgroundService mService;
+    private ConnectToService mConnection;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -62,6 +68,8 @@ public class SearchFragment extends Fragment {
         search_button = (Button) root.findViewById(R.id.searchButton);
         search_button2 = (Button) root.findViewById(R.id.searchButton2);
         final EditText search_text = (EditText) root.findViewById(R.id.searchUser);
+
+        mConnection  = (ConnectToService) MiddleMan.getObject();
 
         //logic when user click on search button
         search_button.setOnClickListener(new View.OnClickListener()
@@ -171,6 +179,7 @@ public class SearchFragment extends Fragment {
             }
         });
         addFriendAsync.execute();
+        mConnection.connectedService().useSocket().NotifyFriendRequest(this.loggedIn, selected_friend);
     }
 
     //onCreateContextMenu logic
