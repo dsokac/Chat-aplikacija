@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import hr.foi.air.t18.chatup.Fragments.FragmentBuffer;
 import hr.foi.air.t18.chatup.Fragments.HomePageFragment;
 import hr.foi.air.t18.chatup.Fragments.MessagesFragment;
 import hr.foi.air.t18.chatup.Fragments.SearchFragment;
@@ -12,17 +13,19 @@ import hr.foi.air.t18.chatup.Fragments.SearchFragment;
  * View pager adapter for the swipe tabs feature
  * Created by Laptop on 9.11.2015..
  */
-public class PagerAdapter extends FragmentStatePagerAdapter {
-    int mNumOfTabs;
+public class PagerAdapter extends FragmentStatePagerAdapter
+{
+    private FragmentBuffer buffer;
 
     /**
      * Constructor
      * @param fm
-     * @param NumOfTabs
+     * @param buffer
      */
-    public PagerAdapter(FragmentManager fm, int NumOfTabs) {
+    public PagerAdapter(FragmentManager fm, FragmentBuffer buffer)
+    {
         super(fm);
-        this.mNumOfTabs = NumOfTabs;
+        this.buffer = buffer;
     }
 
     /**
@@ -31,25 +34,15 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
      * @return
      */
     @Override
-    public Fragment getItem(int position) {
+    public Fragment getItem(int position)
+    {
 
-        switch (position) {
-            case 0:
-                HomePageFragment tab1 = new HomePageFragment();
-                return tab1;
-            case 1:
-                SearchFragment tab2 = new SearchFragment();
-                return tab2;
-            case 2:
-                MessagesFragment tab3 = new MessagesFragment();
-                return tab3;
-            default:
-                return null;
-        }
+        return buffer.getFragment(position);
     }
 
     @Override
-    public int getCount() {
-        return mNumOfTabs;
+    public int getCount()
+    {
+        return buffer.count();
     }
 }

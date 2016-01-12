@@ -12,6 +12,10 @@ import android.widget.Toast;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import hr.foi.air.t18.chatup.Fragments.FragmentBuffer;
+import hr.foi.air.t18.chatup.Fragments.HomePageFragment;
+import hr.foi.air.t18.chatup.Fragments.MessagesFragment;
+import hr.foi.air.t18.chatup.Fragments.SearchFragment;
 import hr.foi.air.t18.chatup.Menu.AboutUsDialog;
 import hr.foi.air.t18.chatup.Menu.EditProfile;
 import hr.foi.air.t18.chatup.Menu.Settings;
@@ -32,6 +36,7 @@ public class MainClass extends AppCompatActivity {
     private ProgressDialog progress;
     private ViewPager viewPager;
     private PagerAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,38 +69,7 @@ public class MainClass extends AppCompatActivity {
         viewpager_stgs = (ViewPager) this.findViewById(R.id.pager);
         tablayout_stgs = (TabLayout) this.findViewById(R.id.tab_layout);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Home Page"));
-        tabLayout.addTab(tabLayout.newTab().setText("Search"));
-        tabLayout.addTab(tabLayout.newTab().setText("Messages"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        adapter = new PagerAdapter
-                (getSupportFragmentManager(), tabLayout.getTabCount());
-
-        // Here is ViewPager attached with an adapter
-        viewPager.setAdapter(adapter);
-
-        // Here is Android ViewPager attached to a page change listener of TabLayout
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
-        // Further the Android TabLayout is attached to a tab selected listener
-        // here ViewPager’s page is set when a tab is selected
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
+        createTabs();
     }
 
     /**
@@ -177,5 +151,51 @@ public class MainClass extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    private void createTabs()
+    {
+        FragmentBuffer fragmentBuffer = new FragmentBuffer();
+        fragmentBuffer.add(new HomePageFragment(), "Home Page");
+        fragmentBuffer.add(new SearchFragment(), "Search");
+        fragmentBuffer.add(new MessagesFragment(), "Message");
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        for (int i = 0; i < fragmentBuffer.count(); i++)
+        {
+            String tag = fragmentBuffer.getTag(i);
+            tabLayout.addTab(tabLayout.newTab().setText(tag));
+        }
+
+        viewPager = (ViewPager) findViewById(R.id.pager);
+        adapter = new PagerAdapter(getSupportFragmentManager(), fragmentBuffer);
+
+        // Here is ViewPager attached with an adapter
+        viewPager.setAdapter(adapter);
+
+        // Here is Android ViewPager attached to a page change listener of TabLayout
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        // Further the Android TabLayout is attached to a tab selected listener
+        // here ViewPager’s page is set when a tab is selected
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
+        {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab)
+            {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab)
+            {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab)
+            {
+            }
+        });
     }
 }
