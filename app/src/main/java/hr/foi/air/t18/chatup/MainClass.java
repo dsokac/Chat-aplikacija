@@ -23,6 +23,10 @@ import hr.foi.air.t18.webservice.WebServiceResult;
 
 public class MainClass extends AppCompatActivity {
 
+    public static android.support.v7.widget.Toolbar toolbar_stgs;
+    public static android.support.design.widget.TabLayout tablayout_stgs;
+    public static android.support.v4.view.ViewPager viewpager_stgs;
+
     private SharedPreferences sharedPref;
     public String loggedIn;
     private ProgressDialog progress;
@@ -54,6 +58,11 @@ public class MainClass extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //for using in Settings
+        toolbar_stgs = (Toolbar) this.findViewById(R.id.toolbar);
+        viewpager_stgs = (ViewPager) this.findViewById(R.id.pager);
+        tablayout_stgs = (TabLayout) this.findViewById(R.id.tab_layout);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Home Page"));

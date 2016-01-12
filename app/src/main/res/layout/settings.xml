@@ -48,24 +48,24 @@
         android:layout_centerHorizontal="true">
 
         <RadioButton
-            android:id="@+id/radioBlue"
+            android:id="@+id/radioDesign1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Blue" />
+            android:text="Green" />
 
         <RadioButton
-            android:id="@+id/radioDark"
+            android:id="@+id/radioDesign2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dark" />
+            android:text="Black" />
 
         <RadioButton
-            android:id="@+id/radioWhite"
+            android:id="@+id/radioDesign3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="White"
-            android:checked = "true"/>
+            android:text="Blue(Default)" />
+
     </RadioGroup>
 
     <Button
