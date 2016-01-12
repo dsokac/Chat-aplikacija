@@ -41,8 +41,10 @@ public class SearchFragment extends Fragment {
     private String selected_friend="";
     long position_in_list;
     final ArrayList<User> reg_users = new ArrayList<User>();
+    final ArrayList<User> reg_users2 = new ArrayList<User>();
     final ArrayList<User> search = new ArrayList<User>();
-
+    public static Button search_button;
+    public static Button search_button2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,7 +57,8 @@ public class SearchFragment extends Fragment {
         //find references
         View root = inflater.inflate(R.layout.tab_fragment_search, container, false);
         final View final_root = root;
-        Button search_button = (Button) root.findViewById(R.id.searchButton);
+        search_button = (Button) root.findViewById(R.id.searchButton);
+        search_button2 = (Button) root.findViewById(R.id.searchButton2);
         final EditText search_text = (EditText) root.findViewById(R.id.searchUser);
 
         //logic when user click on search button
@@ -65,7 +68,7 @@ public class SearchFragment extends Fragment {
             public void onClick(View v)
             {
                 reg_users.clear();
-                 lv = (ListView) final_root.findViewById(R.id.searchListview);
+                lv = (ListView) final_root.findViewById(R.id.searchListview);
                 for (int i = 0; i < search.size(); i++) {
                     if(search.get(i).getEmail().contains(search_text.getText().toString())){
                         reg_users.add(search.get(i));
@@ -75,6 +78,21 @@ public class SearchFragment extends Fragment {
                 lv.setAdapter(new RegisteredUsersListAdapter(getActivity(), reg_users));
             }
         });
+
+        search_button2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                reg_users2.clear();
+                lv = (ListView) final_root.findViewById(R.id.searchListview);
+                for (int i = 0; i < search.size(); i++) {
+                        reg_users2.add(search.get(i));
+                }
+                lv.setAdapter(new RegisteredUsersListAdapter(getActivity(), reg_users2));
+            }
+        });
+
 
         //fetching all registered users
         SearchAsync registeredUsers = new SearchAsync(this.loggedIn, new IListener<JSONArray>() {

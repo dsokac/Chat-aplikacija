@@ -32,6 +32,8 @@ import hr.foi.air.t18.webservice.WebServiceResult;
  */
 public class EditProfile extends AppCompatActivity {
 
+    public static Toolbar toolbar_edit_profile;
+
     final ArrayList<User> search = new ArrayList<User>();
 
     //current values of logged in user
@@ -54,8 +56,8 @@ public class EditProfile extends AppCompatActivity {
         setContentView(R.layout.edit_profile);
 
         //setting toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        toolbar_edit_profile = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar_edit_profile);
 
         //get mail of logged in user
         loggedIn2=SharedPreferencesClass.getDefaults("UserEmail", getApplicationContext());

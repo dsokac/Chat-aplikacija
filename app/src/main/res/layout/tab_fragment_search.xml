@@ -13,21 +13,36 @@
         android:singleLine="true">
         <requestFocus />
     </EditText>
-    
-    <Button
-        android:id="@+id/searchButton"
-        android:text="@string/search"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/button_shape"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:layout_margin="10dp"
-        android:layout_below="@+id/searchUser"/>
-
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:id="@+id/ButtonLayout"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/searchUser"
+        android:layout_margin="10dp">
+        <Button
+            android:id="@+id/searchButton"
+            android:text="@string/search"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button_shape"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:layout_below="@+id/searchUser"/>
+        <Button
+            android:id="@+id/searchButton2"
+            android:text="ShowAll"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button_shape"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:layout_below="@+id/searchUser"/>
+    </LinearLayout>
     <ListView
         android:id="@+id/searchListview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/searchButton" />
+        android:layout_below="@+id/ButtonLayout" />
 
 </RelativeLayout>

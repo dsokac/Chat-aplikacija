@@ -5,6 +5,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import hr.foi.air.t18.core.State.Context;
@@ -19,13 +20,17 @@ import hr.foi.air.t18.chatup.States.Blue;
  */
 public class Settings extends AppCompatActivity {
     private String settings_id;
+    public static Toolbar toolbar_settings;
+    public static RelativeLayout relative_layout_stgs;
+    public static boolean created=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        created=true;
+        toolbar_settings = (Toolbar) findViewById(R.id.toolbar);
+        relative_layout_stgs = (RelativeLayout) findViewById(R.id.main_layout);
 
         Button btnSave = (Button) findViewById(R.id.btnSettingsSave);
         final RadioGroup settings_radiogroup = (RadioGroup) findViewById(R.id.SettingsColor);
