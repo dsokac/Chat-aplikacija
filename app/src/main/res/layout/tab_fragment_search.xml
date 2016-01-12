@@ -22,7 +22,7 @@
         android:layout_margin="10dp">
         <Button
             android:id="@+id/searchButton"
-            android:text="@string/search"
+            android:text="Find E-mail"
             android:layout_centerHorizontal="true"
             android:background="@drawable/button_shape"
             android:layout_width="120dp"
@@ -31,7 +31,7 @@
             android:layout_below="@+id/searchUser"/>
         <Button
             android:id="@+id/searchButton2"
-            android:text="ShowAll"
+            android:text="Find Username"
             android:layout_centerHorizontal="true"
             android:background="@drawable/button_shape"
             android:layout_width="120dp"

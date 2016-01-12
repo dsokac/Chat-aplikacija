@@ -43,8 +43,10 @@ public class SearchFragment extends Fragment {
     final ArrayList<User> reg_users = new ArrayList<User>();
     final ArrayList<User> reg_users2 = new ArrayList<User>();
     final ArrayList<User> search = new ArrayList<User>();
+    final ArrayList<User> search2 = new ArrayList<User>();
     public static Button search_button;
     public static Button search_button2;
+    private String current="";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,6 +78,7 @@ public class SearchFragment extends Fragment {
 
                 }
                 lv.setAdapter(new RegisteredUsersListAdapter(getActivity(), reg_users));
+                current="onClick1";
             }
         });
 
@@ -86,10 +89,14 @@ public class SearchFragment extends Fragment {
             {
                 reg_users2.clear();
                 lv = (ListView) final_root.findViewById(R.id.searchListview);
-                for (int i = 0; i < search.size(); i++) {
-                        reg_users2.add(search.get(i));
+                for (int i = 0; i < search2.size(); i++) {
+                    if(search2.get(i).getEmail().contains(search_text.getText().toString())){
+                        reg_users2.add(search2.get(i));
+                    }
+
                 }
                 lv.setAdapter(new RegisteredUsersListAdapter(getActivity(), reg_users2));
+                current="onClick2";
             }
         });
 
@@ -118,13 +125,14 @@ public class SearchFragment extends Fragment {
                         for (int i = 0; i < json.length(); i++) {
                             JSONObject currentUser = json.getJSONObject(i);
                             search.add(new User(currentUser.getString("id"), currentUser.getString("id")));
+                            search2.add(new User(currentUser.getString("id"), currentUser.getString("username")));
                         }
                         //register ListView for Context Menu
                         lv = (ListView) final_root.findViewById(R.id.searchListview);
                         lv.setLongClickable(true);
 
                         //setting values of ArrayList <User> search into ListView
-                        lv.setAdapter(new RegisteredUsersListAdapter(getActivity(), reg_users));
+
                         registerForContextMenu(lv);
                     } catch (Exception e) {
                         Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
@@ -172,15 +180,25 @@ public class SearchFragment extends Fragment {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getActivity().getMenuInflater();
         inflater.inflate(R.menu.add_friends_menu, menu);
-        position_in_list=((AdapterView.AdapterContextMenuInfo)menuInfo).position;
+        position_in_list = ((AdapterView.AdapterContextMenuInfo) menuInfo).position;
         //store value of selected frend into variable
-        selected_friend=toString();
+        if (current.equals("onClick1")) {
+            selected_friend = toString();
+        }
+       else if (current.equals("onClick2")) {
+            selected_friend = toString2();
+        }
+    }
+    //Returns selected user on long click
+
+    public String toString() {
+
+            return (reg_users.get((int)position_in_list).getEmail());
     }
 
-    //Returns selected user on long click
-    @Override
-    public String toString() {
-        return (reg_users.get((int)position_in_list).getEmail());
+    public String toString2() {
+
+        return (reg_users2.get((int)position_in_list).getEmail());
     }
 
     //onContextItemSelected logic
