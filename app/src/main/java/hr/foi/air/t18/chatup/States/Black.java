@@ -23,14 +23,8 @@ public class Black implements State {
         Log.d("Odabir crna", "");
 
         boja();
-
-
-
+        searchTab();
         context.setState(this);
-
-
-
-
     }
 
     private void boja (){
@@ -42,10 +36,15 @@ public class Black implements State {
         //settings
         Settings.toolbar_settings.setBackgroundResource(R.color.colorBlack);
         Settings.relative_layout_stgs.setBackgroundResource(R.color.colorLightWhite);
-        SearchFragment.search_button.setVisibility(Button.INVISIBLE);
-        SearchFragment.search_button2.setVisibility(Button.VISIBLE);
+        Settings.btnSettingsSave.setBackgroundResource(R.drawable.button_shape2);
 
     }
 
+    private void searchTab (){
+        SearchFragment.search_button.setVisibility(Button.INVISIBLE);
+        SearchFragment.search_button2.setVisibility(Button.VISIBLE);
+        SearchFragment.search_button2.setBackgroundResource(R.drawable.button_shape2);
+        SearchFragment.search_text.setHint("Search by username");
+    }
 }
 

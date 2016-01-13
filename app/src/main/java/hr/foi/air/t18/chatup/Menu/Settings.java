@@ -23,6 +23,7 @@ public class Settings extends AppCompatActivity {
     public static Toolbar toolbar_settings;
     public static RelativeLayout relative_layout_stgs;
     public static boolean created=false;
+    public static Button btnSettingsSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +31,15 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.settings);
         created=true;
         toolbar_settings = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar_settings);
         relative_layout_stgs = (RelativeLayout) findViewById(R.id.main_layout);
 
-        Button btnSave = (Button) findViewById(R.id.btnSettingsSave);
+        btnSettingsSave = (Button) findViewById(R.id.btnSettingsSave);
         final RadioGroup settings_radiogroup = (RadioGroup) findViewById(R.id.SettingsColor);
         final Context context = new Context();
 
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
+        btnSettingsSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int radioButtonID = settings_radiogroup.getCheckedRadioButtonId();

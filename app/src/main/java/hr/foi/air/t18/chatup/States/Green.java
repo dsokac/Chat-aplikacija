@@ -21,7 +21,7 @@ public class Green extends AppCompatActivity implements State {
         Log.d("Odabir zelena", "");
 
         boja();
-
+        searchTab();
         context.setState(this);
     }
 
@@ -34,9 +34,15 @@ public class Green extends AppCompatActivity implements State {
         //settings
         Settings.toolbar_settings.setBackgroundResource(R.color.colorGreen);
         Settings.relative_layout_stgs.setBackgroundResource(R.color.colorVeryLightGreen);
+        Settings.btnSettingsSave.setBackgroundResource(R.drawable.button_shape3);
+    }
+
+
+    private void searchTab (){
         SearchFragment.search_button.setVisibility(Button.VISIBLE);
         SearchFragment.search_button2.setVisibility(Button.INVISIBLE);
-
+        SearchFragment.search_button.setBackgroundResource(R.drawable.button_shape3);
+        SearchFragment.search_text.setHint("Search by email");
     }
 
 }

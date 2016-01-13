@@ -21,7 +21,7 @@ public class Blue implements State {
         Log.d("Odabir plava", "");
 
         boja();
-
+        searchTab();
         context.setState(this);
     }
 
@@ -35,9 +35,16 @@ public class Blue implements State {
         //settings
         Settings.toolbar_settings.setBackgroundResource(R.color.colorPrimary);
         Settings.relative_layout_stgs.setBackgroundResource(R.color.colorWhite);
+        Settings.btnSettingsSave.setBackgroundResource(R.drawable.button_shape);
+    }
 
+
+    private void searchTab (){
         SearchFragment.search_button.setVisibility(Button.VISIBLE);
         SearchFragment.search_button2.setVisibility(Button.VISIBLE);
+        SearchFragment.search_button.setBackgroundResource(R.drawable.button_shape);
+        SearchFragment.search_button2.setBackgroundResource(R.drawable.button_shape);
+        SearchFragment.search_text.setHint("Search by email or username");
     }
 }
 

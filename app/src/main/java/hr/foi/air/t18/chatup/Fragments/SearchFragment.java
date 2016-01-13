@@ -50,6 +50,7 @@ public class SearchFragment extends Fragment {
     public static Button search_button;
     public static Button search_button2;
     private String current="";
+    public static EditText search_text;
 
     private BackgroundService mService;
     private ConnectToService mConnection;
@@ -67,7 +68,7 @@ public class SearchFragment extends Fragment {
         final View final_root = root;
         search_button = (Button) root.findViewById(R.id.searchButton);
         search_button2 = (Button) root.findViewById(R.id.searchButton2);
-        final EditText search_text = (EditText) root.findViewById(R.id.searchUser);
+        search_text = (EditText) root.findViewById(R.id.searchUser);
 
         mConnection  = (ConnectToService) MiddleMan.getObject();
 
@@ -194,7 +195,7 @@ public class SearchFragment extends Fragment {
         if (current.equals("onClick1")) {
             selected_friend = toString();
         }
-       else if (current.equals("onClick2")) {
+        else if (current.equals("onClick2")) {
             selected_friend = toString2();
         }
     }
@@ -202,7 +203,7 @@ public class SearchFragment extends Fragment {
 
     public String toString() {
 
-            return (reg_users.get((int)position_in_list).getEmail());
+        return (reg_users.get((int)position_in_list).getEmail());
     }
 
     public String toString2() {
