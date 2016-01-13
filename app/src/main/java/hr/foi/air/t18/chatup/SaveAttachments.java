@@ -6,7 +6,6 @@ package hr.foi.air.t18.chatup;
  */
 public interface SaveAttachments {
 
-    void savePicture(String base64String);
+    void saveAttachment(String base64String);
 
-    void saveTextDocument(String base64String);
 }

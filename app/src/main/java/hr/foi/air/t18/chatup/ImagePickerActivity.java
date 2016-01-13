@@ -171,7 +171,7 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
             case R.id.btn_save: {
                 if (selectedImage != null) {
                     String base64String = encodeToBase64(selectedImage);
-                    savePicture(base64String);
+                    saveAttachment(base64String);
                 }
                 break;
             }
@@ -201,7 +201,7 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
-    public void savePicture(final String base64String) {
+    public void saveAttachment(final String base64String) {
 
         String userMail = SharedPreferencesClass.getDefaults("UserEmail", getApplicationContext());
 
@@ -234,10 +234,5 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
         } else {
             Log.w("USER_MAIL", "User mail is null from Shared Preferences!");
         }
-    }
-
-    @Override
-    public void saveTextDocument(String base64String) {
-
     }
 }
