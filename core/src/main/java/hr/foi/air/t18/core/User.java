@@ -17,7 +17,7 @@ public class User
     private String dateOfBirth;
     private String status;
     private String password;
-    private Bitmap profilePicture;
+    private String profilePicture;
 
     /**
      * Default constructor.
@@ -153,7 +153,7 @@ public class User
      * Gets user's profile picture
      * @return User's profile picture
      */
-    public Bitmap getProfilePicture() {
+    public String getProfilePicture() {
         return profilePicture;
     }
 
@@ -161,7 +161,7 @@ public class User
      * Sets user's profile picture
      * @param profilePicture
      */
-    public void setProfilePicture(Bitmap profilePicture) {
+    public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
     }
 

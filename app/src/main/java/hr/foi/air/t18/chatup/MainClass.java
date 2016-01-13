@@ -40,6 +40,7 @@ public class MainClass extends AppCompatActivity {
     private PagerAdapter adapter;
 
     private boolean isServiceRunning = false;
+    boolean isBound = false;
     private ConnectToService mConnection = new ConnectToService();
 
     @Override
@@ -55,7 +56,7 @@ public class MainClass extends AppCompatActivity {
             this.progress = new ProgressDialog(this);
         }
 
-        this.sharedPref = this.getPreferences(this.MODE_PRIVATE);
+        this.sharedPref = this.getPreferences(MODE_PRIVATE);
         if (!this.sharedPref.contains("id") || (this.sharedPref.contains("id") && !this.sharedPref.getString("id", "unknown").equals(loggedIn))) {
 
             SharedPreferences.Editor editor = this.sharedPref.edit();
@@ -218,6 +219,7 @@ public class MainClass extends AppCompatActivity {
     {
         //unbindService(mConnection);
         stopService(new Intent(this, BackgroundService.class));
+        isBound = false;
         Toast.makeText(this,"Service destroyed",Toast.LENGTH_LONG).show();
     }
 
@@ -227,10 +229,16 @@ public class MainClass extends AppCompatActivity {
         if(isServiceRunning)
         {
             Intent i = new Intent(this,BackgroundService.class);
-            this.bindService(i, mConnection, Context.BIND_AUTO_CREATE);
+            //this.bindService(i, mConnection, Context.BIND_AUTO_CREATE);
+            isBound = getApplicationContext().bindService( new Intent(getApplicationContext(), ConnectToService.class), mConnection, Context.BIND_AUTO_CREATE );
             MiddleMan.setObject(mConnection);
         }
     }
 
+    protected void onDestroy() {
+        super.onDestroy();
+        if (isBound)
+            getApplicationContext().unbindService(mConnection);
+    }
 
 }

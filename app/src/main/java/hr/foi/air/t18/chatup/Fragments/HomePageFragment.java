@@ -1,12 +1,15 @@
 package hr.foi.air.t18.chatup.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -52,7 +55,7 @@ public class HomePageFragment extends Fragment {
         setRetainInstance(true);
 
         this.sharedPref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
-        this.loggedIn = sharedPref.getString("id","unknown");
+        this.loggedIn = sharedPref.getString("id", "unknown");
 
         View root = inflater.inflate(R.layout.tab_fragment_main, container, false);
         friends = new ArrayList<>();

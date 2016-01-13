@@ -174,10 +174,10 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(currentClass, MainClass.class);
                     User user = new User();
                     user.setEmail(email);
+
+                    fetchLoggedUserData(email , user);
+
                     MiddleMan.setObject(user);
-
-                    fetchLoggedUserData(email);
-
                     startActivity(intent);
                 }
                 else
@@ -191,7 +191,7 @@ public class LoginActivity extends AppCompatActivity {
         loginAsync.execute();
     }
 
-    private void fetchLoggedUserData(String email)
+    private void fetchLoggedUserData(String email, User user)
     {
         FetchUserDataAsync fud = new FetchUserDataAsync(email, new IListener<User>()
         {
@@ -211,6 +211,14 @@ public class LoginActivity extends AppCompatActivity {
                         result.data.getUsername(),
                         getApplicationContext()
                 );
+
+                if (result.data.getProfilePicture() != null) {
+                    SharedPreferencesClass.setDefaults(
+                            "UserProfilePictureBase64",
+                            result.data.getProfilePicture(),
+                            getApplicationContext()
+                    );
+                }
             }
         });
         fud.execute();
