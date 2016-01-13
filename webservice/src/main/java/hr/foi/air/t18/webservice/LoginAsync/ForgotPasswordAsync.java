@@ -1,10 +1,14 @@
-package hr.foi.air.t18.webservice;
+package hr.foi.air.t18.webservice.LoginAsync;
 
 import android.os.AsyncTask;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.HashMap;
+
+import hr.foi.air.t18.webservice.HttpPOST;
+import hr.foi.air.t18.webservice.IListener;
+import hr.foi.air.t18.webservice.WebServiceResult;
 
 /**
  * Created by Jurman_Lap on 28.11.2015.

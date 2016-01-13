@@ -1,4 +1,4 @@
-package hr.foi.air.t18.chatup;
+package hr.foi.air.t18.chatup.Login;
 
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,9 +10,10 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.IListener;
-import hr.foi.air.t18.webservice.RegisterAsync;
+import hr.foi.air.t18.webservice.LoginAsync.RegisterAsync;
 import hr.foi.air.t18.webservice.WebServiceResult;
 
 /**

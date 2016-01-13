@@ -1,4 +1,4 @@
-package hr.foi.air.t18.chatup;
+package hr.foi.air.t18.chatup.Login;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -11,13 +11,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import hr.foi.air.t18.chatup.MainClass;
+import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.User;
-import hr.foi.air.t18.webservice.FetchUserDataAsync;
+import hr.foi.air.t18.webservice.MainAsync.FetchUserDataAsync;
 import hr.foi.air.t18.webservice.IListener;
-import hr.foi.air.t18.webservice.LoginAsync;
-import hr.foi.air.t18.webservice.RegisterAsync;
+import hr.foi.air.t18.webservice.LoginAsync.LoginAsync;
 import hr.foi.air.t18.webservice.WebServiceResult;
 
 public class LoginActivity extends AppCompatActivity {

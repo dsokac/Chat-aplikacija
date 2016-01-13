@@ -1,4 +1,4 @@
-package hr.foi.air.t18.webservice;
+package hr.foi.air.t18.webservice.ConversationAsync;
 
 import android.os.AsyncTask;
 
@@ -7,6 +7,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import hr.foi.air.t18.webservice.HttpPOST;
+import hr.foi.air.t18.webservice.IListener;
+import hr.foi.air.t18.webservice.Pair;
+import hr.foi.air.t18.webservice.WebServiceResult;
 
 /**
  * Created by Danijel on 10.1.2016..

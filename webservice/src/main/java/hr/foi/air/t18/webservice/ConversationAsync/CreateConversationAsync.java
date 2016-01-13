@@ -1,10 +1,14 @@
-package hr.foi.air.t18.webservice;
+package hr.foi.air.t18.webservice.ConversationAsync;
 
 import android.os.AsyncTask;
 
 import org.json.JSONObject;
 
 import java.util.HashMap;
+
+import hr.foi.air.t18.webservice.HttpPOST;
+import hr.foi.air.t18.webservice.IListener;
+import hr.foi.air.t18.webservice.WebServiceResult;
 
 /**
  * An AsyncTask class that contacts the server and creates the conversation

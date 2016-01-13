@@ -1,9 +1,13 @@
-package hr.foi.air.t18.webservice;
+package hr.foi.air.t18.webservice.MainAsync;
 
 import android.os.AsyncTask;
 import android.util.Log;
 import org.json.JSONObject;
 import java.util.HashMap;
+
+import hr.foi.air.t18.webservice.HttpPOST;
+import hr.foi.air.t18.webservice.IListener;
+import hr.foi.air.t18.webservice.WebServiceResult;
 
 /**
  * This class is used to communicate with database through web service. The class purpose is to

@@ -1,11 +1,8 @@
 package hr.foi.air.t18.chatup.Conversation;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,14 +17,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.chatup.UserListAdapter;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.User;
-import hr.foi.air.t18.webservice.FriendsAsync;
+import hr.foi.air.t18.webservice.MainAsync.FriendsAsync;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.WebServiceResult;
 

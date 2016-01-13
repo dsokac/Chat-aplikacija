@@ -1,4 +1,4 @@
-package hr.foi.air.t18.webservice;
+package hr.foi.air.t18.webservice.ConversationAsync;
 
 import android.os.AsyncTask;
 
@@ -12,6 +12,9 @@ import java.util.HashMap;
 import hr.foi.air.t18.core.Conversation;
 import hr.foi.air.t18.core.Message;
 import hr.foi.air.t18.core.User;
+import hr.foi.air.t18.webservice.HttpPOST;
+import hr.foi.air.t18.webservice.IListener;
+import hr.foi.air.t18.webservice.WebServiceResult;
 
 /**
  * An AsyncTask class that fetches all the conversation the user

@@ -1,4 +1,4 @@
-package hr.foi.air.t18.webservice;
+package hr.foi.air.t18.webservice.LoginAsync;
 
 import android.os.AsyncTask;
 
@@ -7,6 +7,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 import hr.foi.air.t18.core.User;
+import hr.foi.air.t18.webservice.HttpPOST;
+import hr.foi.air.t18.webservice.IListener;
+import hr.foi.air.t18.webservice.WebServiceResult;
 
 /**
  * This class is used to start an async task which will contact the

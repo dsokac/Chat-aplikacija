@@ -26,9 +26,9 @@ import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.chatup.RegisteredUsersListAdapter;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.User;
-import hr.foi.air.t18.webservice.AddFriendAsync;
+import hr.foi.air.t18.webservice.MainAsync.AddFriendAsync;
 import hr.foi.air.t18.webservice.IListener;
-import hr.foi.air.t18.webservice.SearchAsync;
+import hr.foi.air.t18.webservice.MainAsync.SearchAsync;
 import hr.foi.air.t18.webservice.WebServiceResult;
 
 /**

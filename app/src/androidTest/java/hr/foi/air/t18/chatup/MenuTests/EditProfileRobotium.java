@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.MediumTest;
 import com.robotium.solo.Solo;
-import hr.foi.air.t18.chatup.LoginActivity;
+import hr.foi.air.t18.chatup.Login.LoginActivity;
 
 
 /**

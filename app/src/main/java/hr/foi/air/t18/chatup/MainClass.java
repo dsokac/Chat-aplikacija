@@ -17,13 +17,14 @@ import hr.foi.air.t18.chatup.Fragments.FragmentBuffer;
 import hr.foi.air.t18.chatup.Fragments.HomePageFragment;
 import hr.foi.air.t18.chatup.Fragments.MessagesFragment;
 import hr.foi.air.t18.chatup.Fragments.SearchFragment;
+import hr.foi.air.t18.chatup.Login.LoginActivity;
 import hr.foi.air.t18.chatup.Menu.AboutUsDialog;
 import hr.foi.air.t18.chatup.Menu.EditProfile;
 import hr.foi.air.t18.chatup.Menu.Settings;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.IListener;
-import hr.foi.air.t18.webservice.LogoutAsync;
+import hr.foi.air.t18.webservice.MenuAsync.LogoutAsync;
 import hr.foi.air.t18.webservice.WebServiceResult;
 
 public class MainClass extends AppCompatActivity {

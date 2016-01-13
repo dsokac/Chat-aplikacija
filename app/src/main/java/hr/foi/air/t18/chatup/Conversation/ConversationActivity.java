@@ -28,10 +28,10 @@ import hr.foi.air.t18.core.Message;
 import hr.foi.air.t18.core.MessageComparator;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.SharedPreferencesClass;
-import hr.foi.air.t18.webservice.AddParticipantsToConversationAsyncTask;
+import hr.foi.air.t18.webservice.ConversationAsync.AddParticipantsToConversationAsyncTask;
 import hr.foi.air.t18.webservice.IListener;
-import hr.foi.air.t18.webservice.RefreshConversationAsync;
-import hr.foi.air.t18.webservice.SendMessageAsync;
+import hr.foi.air.t18.webservice.ConversationAsync.RefreshConversationAsync;
+import hr.foi.air.t18.webservice.ConversationAsync.SendMessageAsync;
 import hr.foi.air.t18.webservice.WebServiceResult;
 
 /**

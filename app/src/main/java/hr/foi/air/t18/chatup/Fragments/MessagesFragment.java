@@ -6,9 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -16,13 +14,12 @@ import java.util.HashMap;
 
 import hr.foi.air.t18.chatup.Conversation.ConversationActivity;
 import hr.foi.air.t18.chatup.Conversation.ConversationExpandableAdapter;
-import hr.foi.air.t18.chatup.Conversation.ConversationListAdapter;
 import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.core.Conversation;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.User;
-import hr.foi.air.t18.webservice.FetchMessagesAsync;
+import hr.foi.air.t18.webservice.ConversationAsync.FetchMessagesAsync;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.WebServiceResult;
 

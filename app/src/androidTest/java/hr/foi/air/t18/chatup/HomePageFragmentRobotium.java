@@ -1,15 +1,13 @@
 package hr.foi.air.t18.chatup;
 
 import android.app.Activity;
-import android.media.Image;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.MediumTest;
-import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.robotium.solo.Solo;
+
+import hr.foi.air.t18.chatup.Login.LoginActivity;
 
 /**
  * Created by JurmanLap on 9.1.2016..

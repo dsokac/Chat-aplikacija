@@ -19,11 +19,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import hr.foi.air.t18.chatup.R;
-import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.User;
-import hr.foi.air.t18.webservice.EditProfileAsync;
-import hr.foi.air.t18.webservice.GetDataEditProfileAsync;
+import hr.foi.air.t18.webservice.MenuAsync.EditProfileAsync;
+import hr.foi.air.t18.webservice.MenuAsync.GetDataEditProfileAsync;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.WebServiceResult;
 

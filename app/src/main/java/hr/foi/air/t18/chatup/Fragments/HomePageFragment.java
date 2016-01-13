@@ -28,8 +28,8 @@ import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.chatup.UserListAdapter;
 import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.User;
-import hr.foi.air.t18.webservice.CreateConversationAsync;
-import hr.foi.air.t18.webservice.FriendsAsync;
+import hr.foi.air.t18.webservice.ConversationAsync.CreateConversationAsync;
+import hr.foi.air.t18.webservice.MainAsync.FriendsAsync;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.WebServiceResult;
 

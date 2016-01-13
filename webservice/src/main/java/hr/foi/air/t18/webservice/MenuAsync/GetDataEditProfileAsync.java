@@ -1,31 +1,38 @@
-package hr.foi.air.t18.webservice;
-
+package hr.foi.air.t18.webservice.MenuAsync;
 
 import android.os.AsyncTask;
-
+import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.HashMap;
+
+import hr.foi.air.t18.webservice.HttpPOST;
+import hr.foi.air.t18.webservice.IListener;
+import hr.foi.air.t18.webservice.WebServiceResult;
 
 /**
  *  This class is used to communicate with database through web service. The class purpose is to
- * logout the app user
+ * fetch data of logged in user for using in edit profile activity.
  * The class creates HTTP request with email as parameter, it sends the request to
  * the web service and waits for its response.
- * Created by Laptop on 1.11.2015..
- * Updated by Jurman on 10.12.2015.
+ * Created by Jurman_Lap on 22.11.2015.
  */
-public class LogoutAsync extends AsyncTask<Void, Void, String> {
+public class GetDataEditProfileAsync extends AsyncTask<Void, Void, String> {
 
+    private IListener listener;
     private String email;
-    private IListener<Void> listener;
 
     /**
      * The class constructor assigns values to the class private variables.
      */
-    public LogoutAsync(String email,  IListener<Void> listener) {
-        this.email = email;
+    public GetDataEditProfileAsync(String email,IListener listener)
+    {
         this.listener = listener;
+        this.email = email;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        this.listener.onBegin();
     }
 
     /***
@@ -38,22 +45,20 @@ public class LogoutAsync extends AsyncTask<Void, Void, String> {
     protected String doInBackground(Void... params) {
         String response;
 
-        HashMap<String, String> parameters = new HashMap<>();
-        parameters.put("mail",this.email);
-        //Log.d("mail", this.email);
+        HashMap<String,String> parameters = new HashMap<>();
+        parameters.put("id",this.email);
+
         try
         {
-            HttpPOST connection = new HttpPOST("http://104.236.58.50:8080/logout");
+            HttpPOST connection = new HttpPOST("http://104.236.58.50:8080/getUserDataEditProfile");
             connection.sendRequest(parameters);
             response = connection.getResponse();
-            //Log.d("response", response);
         }
         catch (Exception e)
         {
             response = e.getMessage();
         }
-
-        return response;
+        return  response;
     }
 
     /***
@@ -63,25 +68,21 @@ public class LogoutAsync extends AsyncTask<Void, Void, String> {
      * @param result - JSON object containing message and status returned by web service
      */
     @Override
-    protected void onPostExecute(String result)
-    {
-        String message;
-        int status;
-
-        try {
+    protected void onPostExecute(String result) {
+        WebServiceResult<JSONArray> response = new WebServiceResult<>();
+        try
+        {
             JSONObject json = new JSONObject(result);
-            message = json.getString("message");
-            status = json.getInt("status");
-        } catch (Exception e) {
-            message = "Error parsing JSON. Either JSON is invalid or server is down.";
-            status = -1;
+            response.message = json.getString("message");
+            response.status = json.getInt("status");
+            response.data = json.getJSONArray("data");
+        }
+        catch (Exception e)
+        {
+            response.message = "Error parsing JSON. Either JSON is invalid or server is down.";
+            response.status = -1;
         }
 
-        WebServiceResult<Void> wsResult = new WebServiceResult<Void>();
-        wsResult.status = status;
-        wsResult.message = message;
-        wsResult.data = null;
-
-        this.listener.onFinish(wsResult);
+        this.listener.onFinish(response);
     }
 }

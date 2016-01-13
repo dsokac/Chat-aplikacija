@@ -1,4 +1,4 @@
-package hr.foi.air.t18.chatup;
+package hr.foi.air.t18.chatup.Login;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,8 +11,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import hr.foi.air.t18.chatup.Mail.GMailSender;
+import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.core.User;
-import hr.foi.air.t18.webservice.ForgotPasswordAsync;
+import hr.foi.air.t18.webservice.LoginAsync.ForgotPasswordAsync;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.WebServiceResult;
 

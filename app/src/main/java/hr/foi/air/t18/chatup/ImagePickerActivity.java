@@ -27,7 +27,7 @@ import java.io.InputStream;
 
 import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.webservice.IListener;
-import hr.foi.air.t18.webservice.SaveImageAsync;
+import hr.foi.air.t18.webservice.MainAsync.SaveImageAsync;
 import hr.foi.air.t18.webservice.WebServiceResult;
 
 /**

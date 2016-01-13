@@ -4,6 +4,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+
 import hr.foi.air.t18.chatup.Fragments.SearchFragment;
 import hr.foi.air.t18.chatup.Menu.EditProfile;
 import hr.foi.air.t18.chatup.Menu.Settings;
@@ -22,7 +23,13 @@ public class Black implements State {
         Log.d("Odabir crna", "");
 
         boja();
+
+
+
         context.setState(this);
+
+
+
 
     }
 
@@ -37,6 +44,7 @@ public class Black implements State {
         Settings.relative_layout_stgs.setBackgroundResource(R.color.colorLightWhite);
         SearchFragment.search_button.setVisibility(Button.INVISIBLE);
         SearchFragment.search_button2.setVisibility(Button.VISIBLE);
+
     }
 
 }

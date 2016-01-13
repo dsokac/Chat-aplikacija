@@ -1,4 +1,4 @@
-package hr.foi.air.t18.webservice;
+package hr.foi.air.t18.webservice.ConversationAsync;
 
 import android.os.AsyncTask;
 
@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import hr.foi.air.t18.core.Message;
+import hr.foi.air.t18.webservice.HttpPOST;
+import hr.foi.air.t18.webservice.IListener;
+import hr.foi.air.t18.webservice.WebServiceResult;
 
 /**
  * AsyncTask class that refreshes the active conversation by contacting
