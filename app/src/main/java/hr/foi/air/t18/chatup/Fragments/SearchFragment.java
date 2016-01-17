@@ -3,6 +3,7 @@ package hr.foi.air.t18.chatup.Fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -24,6 +25,7 @@ import hr.foi.air.t18.chatup.SocketNotifications.BackgroundService;
 import hr.foi.air.t18.chatup.SocketNotifications.ConnectToService;
 import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.chatup.RegisteredUsersListAdapter;
+import hr.foi.air.t18.chatup.SocketNotifications.FriendRequestNotifsAsync;
 import hr.foi.air.t18.chatup.SocketNotifications.SocketNotificationsManager;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.User;
@@ -53,8 +55,6 @@ public class SearchFragment extends Fragment {
     private String current="";
     public static EditText search_text;
 
-    private BackgroundService mService;
-    private ConnectToService mConnection;
     private SocketNotificationsManager socketNotificationsManager;
 
     @Override
@@ -72,7 +72,7 @@ public class SearchFragment extends Fragment {
         search_button2 = (Button) root.findViewById(R.id.searchButton2);
         search_text = (EditText) root.findViewById(R.id.searchUser);
 
-        //socketNotificationsManager  = (SocketNotificationsManager) MiddleMan.getObject();
+        socketNotificationsManager  = (SocketNotificationsManager) MiddleMan.getObject();
 
         //logic when user click on search button
         search_button.setOnClickListener(new View.OnClickListener()
@@ -183,6 +183,20 @@ public class SearchFragment extends Fragment {
         });
         addFriendAsync.execute();
         //mConnection.connectedService().useSocket().NotifyFriendRequest(this.loggedIn, selected_friend);
+        JSONObject json = new JSONObject();
+        try
+        {
+            json.put("from",this.loggedIn);
+            json.put("to",this.selected_friend);
+        }catch(Exception ex)
+        {
+            Log.e("error", "onCreate: ", ex);
+        }
+
+        Object[] obj = new Object[1];
+        obj[0] = (Object)json;
+
+        this.socketNotificationsManager.attachAsyncTasks(new FriendRequestNotifsAsync(this.socketNotificationsManager), obj);
     }
 
     //onCreateContextMenu logic

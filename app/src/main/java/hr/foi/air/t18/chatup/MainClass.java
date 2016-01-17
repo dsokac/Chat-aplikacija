@@ -1,7 +1,7 @@
 package hr.foi.air.t18.chatup;
 
 import android.app.ProgressDialog;
-import android.content.Context;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
@@ -9,22 +9,24 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
+
 import android.widget.Toast;
 import android.view.Menu;
 import android.view.MenuItem;
+
 
 import hr.foi.air.t18.chatup.Fragments.FragmentBuffer;
 import hr.foi.air.t18.chatup.Fragments.HomePageFragment;
 import hr.foi.air.t18.chatup.Fragments.MessagesFragment;
 import hr.foi.air.t18.chatup.Fragments.SearchFragment;
 import hr.foi.air.t18.chatup.Login.LoginActivity;
+
 import hr.foi.air.t18.chatup.Menu.AboutUsDialog;
 import hr.foi.air.t18.chatup.Menu.EditProfile;
 import hr.foi.air.t18.chatup.Menu.Settings;
-import hr.foi.air.t18.chatup.SocketNotifications.BackgroundService;
-import hr.foi.air.t18.chatup.SocketNotifications.ConnectToService;
 import hr.foi.air.t18.chatup.SocketNotifications.CreateSocketConnectionAsync;
 import hr.foi.air.t18.chatup.SocketNotifications.SocketNotificationsManager;
+import hr.foi.air.t18.chatup.SocketNotifications.SocketServerListeners;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.IListener;
@@ -43,19 +45,18 @@ public class MainClass extends AppCompatActivity {
     private ViewPager viewPager;
     private PagerAdapter adapter;
 
-    private boolean isServiceRunning = false;
-    boolean isBound = false;
-    private ConnectToService mConnection = new ConnectToService();
-
     private SocketNotificationsManager snManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.snManager = new SocketNotificationsManager("http://192.168.1.39:3000/",getApplicationContext());
+        this.snManager = new SocketNotificationsManager("http://104.236.58.50:3000/",getApplicationContext());
 
-        this.snManager.attachAsyncTasks(new CreateSocketConnectionAsync(this.snManager));
+
+        this.snManager.attachAsyncTasks(new CreateSocketConnectionAsync(this.snManager), null);
+        SocketServerListeners listeners = new SocketServerListeners(this.snManager);
+        this.snManager.setSocket(listeners.refreshSocket());
 
         setContentView(R.layout.activity_main);
 

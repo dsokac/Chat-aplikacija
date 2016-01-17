@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 
 import com.github.nkzawa.socketio.client.Socket;
 
-import java.util.Objects;
 
 /**
  * Manager to manage notifications using socket.io package.
@@ -73,7 +72,7 @@ public class SocketNotificationsManager {
 
 
     /***
-     * -function which binds application context to service.
+     * Function which binds application context to service.
      */
     public void bindToService()
     {
@@ -84,23 +83,44 @@ public class SocketNotificationsManager {
         }
     }
 
-    public void attachAsyncTasks(AsyncTask<Void,Void,String> asyncTask)
+    /***
+     * Function to run async tasks which should send request to socket server
+     * @param asyncTask - async task you want to execute, anonymous object
+     * @param params - params for async tasks
+     */
+    public void attachAsyncTasks(AsyncTask<Object,Void,Object> asyncTask, Object... params)
     {
-         asyncTask.execute();
+         asyncTask.execute(params);
     }
 
+    /***
+     * Function to store updated socket
+     * @param socket - socket which updated
+     */
     public void setSocket(Socket socket) {
         this.socket = socket;
     }
 
+    /***
+     * Function to get stored socket server address
+     * @return socket server address
+     */
     public String getSocketAddr() {
         return socketAddr;
     }
 
+    /***
+     * Function to get stored application context
+     * @return application context
+     */
     public Context getContext() {
         return context;
     }
 
+    /***
+     * Function to get stored socket
+     * @return socket
+     */
     public Socket getSocket() {
         return socket;
     }
