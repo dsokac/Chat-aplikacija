@@ -21,6 +21,9 @@ import hr.foi.air.t18.chatup.Login.LoginActivity;
 import hr.foi.air.t18.chatup.Menu.AboutUsDialog;
 import hr.foi.air.t18.chatup.Menu.EditProfile;
 import hr.foi.air.t18.chatup.Menu.Settings;
+import hr.foi.air.t18.chatup.SocketNotifications.BackgroundService;
+import hr.foi.air.t18.chatup.SocketNotifications.ConnectToService;
+import hr.foi.air.t18.chatup.SocketNotifications.SocketNotificationsManager;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.IListener;
@@ -43,11 +46,14 @@ public class MainClass extends AppCompatActivity {
     boolean isBound = false;
     private ConnectToService mConnection = new ConnectToService();
 
+    private SocketNotificationsManager snManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        startService();
+        this.snManager = new SocketNotificationsManager("http://192.168.1.39:3000/",getApplicationContext());
+
         setContentView(R.layout.activity_main);
 
         if (MiddleMan.getObject() != null) {
@@ -116,7 +122,7 @@ public class MainClass extends AppCompatActivity {
             }
         });
         logoutAsync.execute();
-        stopService();
+        this.snManager.stopBackgroundService();
     }
 
     //logic for creating menu
@@ -205,40 +211,11 @@ public class MainClass extends AppCompatActivity {
             {
             }
         });
-        CheckIfServiceIsRunning();
-    }
-
-    public void startService()
-    {
-        startService(new Intent(this, BackgroundService.class));
-        this.isServiceRunning = true;
-        Toast.makeText(this, "Service running",Toast.LENGTH_LONG).show();
-    }
-
-    public void stopService()
-    {
-        //unbindService(mConnection);
-        stopService(new Intent(this, BackgroundService.class));
-        isBound = false;
-        Toast.makeText(this,"Service destroyed",Toast.LENGTH_LONG).show();
-    }
-
-
-    public void CheckIfServiceIsRunning()
-    {
-        if(isServiceRunning)
-        {
-            Intent i = new Intent(this,BackgroundService.class);
-            //this.bindService(i, mConnection, Context.BIND_AUTO_CREATE);
-            isBound = getApplicationContext().bindService( new Intent(getApplicationContext(), ConnectToService.class), mConnection, Context.BIND_AUTO_CREATE );
-            MiddleMan.setObject(mConnection);
-        }
+        this.snManager.bindToService();
     }
 
     protected void onDestroy() {
         super.onDestroy();
-        if (isBound)
-            getApplicationContext().unbindService(mConnection);
     }
 
 }

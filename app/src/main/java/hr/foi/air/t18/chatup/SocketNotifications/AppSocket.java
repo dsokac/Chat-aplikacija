@@ -1,8 +1,10 @@
-package hr.foi.air.t18.chatup;
+package hr.foi.air.t18.chatup.SocketNotifications;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 
@@ -10,20 +12,26 @@ import org.json.JSONObject;
 
 import hr.foi.air.t18.core.SharedPreferencesClass;
 
+import static com.google.android.gms.internal.zzip.runOnUiThread;
+
 /**
  * Created by Danijel on 12.1.2016..
  */
 public class AppSocket{
 
     private String remoteIP = "104.236.58.50";
-    private String localIP = "192.168.1.2";
+    private String localIP = "192.168.1.39";
     private Socket socket;
+    private Context ctx;
+    private BackgroundProcess bp;
 
-    public AppSocket()
+    public AppSocket(Context ctx, BackgroundProcess bp)
     {
         try
         {
             this.socket = IO.socket("http://" + this.localIP + ":3000/");
+            this.ctx = ctx;
+            this.bp = bp;
         }catch (Exception ex)
         {
             Log.e("error", "AppSocket: ", ex );
@@ -33,6 +41,19 @@ public class AppSocket{
 
     public Socket GetSocket()
     {
+        this.socket.on("friendRequest", new Emitter.Listener() {
+            @Override
+            public void call(final Object... args) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(ctx, args[0].toString(), Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                });
+
+            }
+        });
         return this.socket;
     }
 
@@ -81,19 +102,6 @@ public class AppSocket{
         this.socket.emit("friendRequest",json);
     }
 
-    public void NotifyNewMessage(String from, String to)
-    {
-        JSONObject json = new JSONObject();
-        try
-        {
-            json.put("from",from);
-            json.put("to",to);
-        }catch(Exception ex)
-        {
-            Log.e("error", "NotifyNewMessage: ", ex);
-        }
 
-        this.socket.emit("newMessage",json);
-    }
 }
 
