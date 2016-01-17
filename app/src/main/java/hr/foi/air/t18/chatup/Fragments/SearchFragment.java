@@ -24,6 +24,7 @@ import hr.foi.air.t18.chatup.SocketNotifications.BackgroundService;
 import hr.foi.air.t18.chatup.SocketNotifications.ConnectToService;
 import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.chatup.RegisteredUsersListAdapter;
+import hr.foi.air.t18.chatup.SocketNotifications.SocketNotificationsManager;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.MainAsync.AddFriendAsync;
@@ -54,6 +55,7 @@ public class SearchFragment extends Fragment {
 
     private BackgroundService mService;
     private ConnectToService mConnection;
+    private SocketNotificationsManager socketNotificationsManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,7 +72,7 @@ public class SearchFragment extends Fragment {
         search_button2 = (Button) root.findViewById(R.id.searchButton2);
         search_text = (EditText) root.findViewById(R.id.searchUser);
 
-//        mConnection  = (ConnectToService) MiddleMan.getObject();
+        //socketNotificationsManager  = (SocketNotificationsManager) MiddleMan.getObject();
 
         //logic when user click on search button
         search_button.setOnClickListener(new View.OnClickListener()

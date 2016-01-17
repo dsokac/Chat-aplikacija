@@ -23,6 +23,7 @@ import hr.foi.air.t18.chatup.Menu.EditProfile;
 import hr.foi.air.t18.chatup.Menu.Settings;
 import hr.foi.air.t18.chatup.SocketNotifications.BackgroundService;
 import hr.foi.air.t18.chatup.SocketNotifications.ConnectToService;
+import hr.foi.air.t18.chatup.SocketNotifications.CreateSocketConnectionAsync;
 import hr.foi.air.t18.chatup.SocketNotifications.SocketNotificationsManager;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.User;
@@ -54,6 +55,8 @@ public class MainClass extends AppCompatActivity {
 
         this.snManager = new SocketNotificationsManager("http://192.168.1.39:3000/",getApplicationContext());
 
+        this.snManager.attachAsyncTasks(new CreateSocketConnectionAsync(this.snManager));
+
         setContentView(R.layout.activity_main);
 
         if (MiddleMan.getObject() != null) {
@@ -83,6 +86,7 @@ public class MainClass extends AppCompatActivity {
         tablayout_stgs = (TabLayout) this.findViewById(R.id.tab_layout);
 
         createTabs();
+        MiddleMan.setObject(snManager);
     }
 
     /**

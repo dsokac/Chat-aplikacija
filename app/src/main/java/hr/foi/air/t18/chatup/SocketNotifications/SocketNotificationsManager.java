@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 
+import com.github.nkzawa.socketio.client.Socket;
+
 import java.util.Objects;
 
 /**
@@ -27,6 +29,8 @@ public class SocketNotificationsManager {
 
     //variable to check if someone is bound to this service
     private boolean isBound = false;
+
+    private Socket socket;
 
     private ConnectToService connection = new ConnectToService();
 
@@ -60,6 +64,8 @@ public class SocketNotificationsManager {
         if(this.isBound)
         {
             this.context.unbindService(this.connection);
+            this.socket.disconnect();
+            this.socket = null;
             this.isBound = false;
         }
         this.context.stopService(new Intent(this.context,BackgroundService.class));
@@ -78,11 +84,24 @@ public class SocketNotificationsManager {
         }
     }
 
-    public void attachAsyncTasks(AsyncTask asyncTask)
+    public void attachAsyncTasks(AsyncTask<Void,Void,String> asyncTask)
     {
          asyncTask.execute();
     }
 
+    public void setSocket(Socket socket) {
+        this.socket = socket;
+    }
 
+    public String getSocketAddr() {
+        return socketAddr;
+    }
 
+    public Context getContext() {
+        return context;
+    }
+
+    public Socket getSocket() {
+        return socket;
+    }
 }
