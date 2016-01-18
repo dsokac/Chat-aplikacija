@@ -3,19 +3,21 @@ package hr.foi.air.t18.chatup.MenuTests;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.MediumTest;
+
 import com.robotium.solo.Solo;
+
 import hr.foi.air.t18.chatup.Login.LoginActivity;
 
 
 /**
  * Created by JurmanLap on 9.1.2016..
  */
-public class EditProfileRobotium extends ActivityInstrumentationTestCase2<LoginActivity> {
+public class SettingsRobotium extends ActivityInstrumentationTestCase2<LoginActivity> {
     Activity activity;
     private Solo solo;
 
     //konstruktor
-    public EditProfileRobotium() {
+    public SettingsRobotium() {
         super (LoginActivity.class);
     }
 
@@ -43,20 +45,14 @@ public class EditProfileRobotium extends ActivityInstrumentationTestCase2<LoginA
         solo.typeText(1, "test");
         solo.clickOnButton(0);
         solo.waitForActivity(hr.foi.air.t18.chatup.MainClass.class, 100);
-        solo.clickOnMenuItem("Edit profile");
-        solo.waitForActivity(hr.foi.air.t18.chatup.Menu.EditProfile.class, 100);
-        solo.typeText(0, "usr_test");
-        solo.typeText(1, "test");
-        solo.typeText(2, "test1");
+        solo.clickOnMenuItem("Settings");
+        solo.waitForActivity(hr.foi.air.t18.chatup.Menu.Settings.class, 100);
+        solo.clickOnRadioButton(0);
         solo.clickOnButton("Save");
-        solo.clearEditText(0);
-        solo.clearEditText(1);
-        solo.clearEditText(2);
-        solo.typeText(0, "usr_test");
+        solo.clickOnRadioButton(1);
         solo.clickOnButton("Save");
-        solo.goBack();
-        solo.clickOnMenuItem("Edit profile");
-        solo.goBack();
+        solo.clickOnRadioButton(2);
+        solo.clickOnButton("Save");
         solo.sleep(5000);
         solo.goBack();
 

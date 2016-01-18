@@ -13,6 +13,7 @@ import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.chatup.States.Black;
 import hr.foi.air.t18.chatup.States.Green;
 import hr.foi.air.t18.chatup.States.Blue;
+import hr.foi.air.t18.core.State.State;
 
 
 /**
@@ -47,19 +48,18 @@ public class Settings extends AppCompatActivity {
                 int idx = settings_radiogroup.indexOfChild(radioButton);
                 settings_id = Integer.toString(idx);
 
+                State state = null;
+
                 if (settings_id.equals("0")) {
-                    Green green = new Green();
-                    green.doAction(context);
-                    Toast.makeText(getApplicationContext(), "Update successfully", Toast.LENGTH_SHORT).show();
+                    state = new Green();
                 } else if (settings_id.equals("1")) {
-                    Black black = new Black();
-                    black.doAction(context);
-                    Toast.makeText(getApplicationContext(), "Update successfully", Toast.LENGTH_SHORT).show();
+                    state = new Black();
                 } else if (settings_id.equals("2")) {
-                    Blue blue = new Blue();
-                    blue.doAction(context);
-                    Toast.makeText(getApplicationContext(), "Update successfully", Toast.LENGTH_SHORT).show();
+                    state = new Blue();
                 }
+
+                state.doAction(context);
+                Toast.makeText(getApplicationContext(), "Update successfully", Toast.LENGTH_SHORT).show();
             }
         });
     }

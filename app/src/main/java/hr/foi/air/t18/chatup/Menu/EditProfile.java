@@ -187,13 +187,17 @@ public class EditProfile extends AppCompatActivity {
                             }
                         }
                     });
-                    editProfileAsync.execute();
-                    //set values of EditText-s to null
-                    editTextEditUsername.setText("");
-                    editTextEditPassword.setText("");
-                    editTextEditPassword2.setText("");
+                        editProfileAsync.execute();
+                        //set values of EditText-s to null
+                        editTextEditUsername.setText("");
+                        editTextEditPassword.setText("");
+                        editTextEditPassword2.setText("");
                         Toast.makeText(getApplicationContext(), "Update profile successfully.", Toast.LENGTH_SHORT).show();
                         Log.d(selectedGender,selectedGender);
+                        finish();
+                        overridePendingTransition( 0, 0);
+                        startActivity(getIntent());
+                        overridePendingTransition( 0, 0);
                     }
                 else{
                     Toast.makeText(getApplicationContext(), "Password don't match", Toast.LENGTH_SHORT).show();

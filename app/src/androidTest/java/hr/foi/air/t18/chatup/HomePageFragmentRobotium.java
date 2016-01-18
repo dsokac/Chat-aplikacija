@@ -39,6 +39,10 @@ import hr.foi.air.t18.chatup.Login.LoginActivity;
         @MediumTest
         public void testWithRobotium(){
             //login
+            solo.clearEditText(0);
+            solo.clearEditText(1);
+            solo.typeText(0, "mjurman@foi.hr");
+            solo.typeText(1, "test");
             solo.clickOnButton(0);
             solo.waitForActivity(hr.foi.air.t18.chatup.MainClass.class, 100);
             //testing friend list

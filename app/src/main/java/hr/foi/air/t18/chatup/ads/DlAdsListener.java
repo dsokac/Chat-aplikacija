@@ -1,4 +1,4 @@
-package hr.foi.air.t18.chatup.ads;
+package hr.foi.air.t18.chatup.Ads;
 
 
 import android.content.Context;
