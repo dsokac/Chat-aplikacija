@@ -23,8 +23,7 @@ public class SocketServerListeners{
     /***
      * Initializes all private properties of this class. And here should be all listeners added.
      * FriendRequestListener is listener for friend requests.
-     *
-     * ### WRITE NEW LISTENERS ABOVE THIS LINE ###
+     * newMessageRequestListener is listener for new message.
      * @param socketNotificationsManager - connects its properties to this class (socket, context,...)
      */
     public SocketServerListeners(SocketNotificationsManager socketNotificationsManager)
@@ -45,11 +44,26 @@ public class SocketServerListeners{
         return this.socket;
     }
 
-    ///------ BELOW GO LISTENERS ------
-
+    /***
+     * Function attaches event listener to socket which waits for new message.
+     */
+    private void newMessageRequestListener() {
+        this.socket.on("newMessage", new Emitter.Listener() {
+            @Override
+            public void call(final Object... args) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(socketNotificationsManager.getContext(), args[0].toString(), Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                });
+            }
+        });
+    }
 
     /***
-     * Function attaches event listener to socket which wait for friend requests.
+     * Function attaches event listener to socket which waits for friend requests.
      */
     private void FriendRequestListener()
     {
