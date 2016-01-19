@@ -7,13 +7,14 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
+import java.util.HashMap;
+import hr.foi.air.t18.chatup.MainClass;
 import hr.foi.air.t18.core.State.Context;
 import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.chatup.States.Black;
 import hr.foi.air.t18.chatup.States.Green;
 import hr.foi.air.t18.chatup.States.Blue;
-import hr.foi.air.t18.core.State.State;
+import hr.foi.air.t18.core.State.IState;
 
 
 /**
@@ -25,6 +26,7 @@ public class Settings extends AppCompatActivity {
     public static RelativeLayout relative_layout_stgs;
     public static boolean created=false;
     public static Button btnSettingsSave;
+    private HashMap<String,Object> hashElems = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,17 +50,28 @@ public class Settings extends AppCompatActivity {
                 int idx = settings_radiogroup.indexOfChild(radioButton);
                 settings_id = Integer.toString(idx);
 
-                State state = null;
+                hashElems.clear();
+                hashElems.put("toolbar_stgs", MainClass.toolbar_stgs);
+                hashElems.put("tablayout_stgs",MainClass.tablayout_stgs);
+                hashElems.put("viewpager_stgs",MainClass.viewpager_stgs);
+                hashElems.put("toolbar_settings",Settings.toolbar_settings);
+                hashElems.put("relative_layout_stgs",Settings.relative_layout_stgs);
+                hashElems.put("btnSettingsSave",Settings.btnSettingsSave);
+
+                IState state = null;
 
                 if (settings_id.equals("0")) {
-                    state = new Green();
-                } else if (settings_id.equals("1")) {
-                    state = new Black();
-                } else if (settings_id.equals("2")) {
-                    state = new Blue();
+                    state = new Green(hashElems);
                 }
 
-                state.doAction(context);
+                else if (settings_id.equals("1")) {
+                    state = new Black(hashElems);
+                }
+                else if (settings_id.equals("2")) {
+                    state = new Blue(hashElems);
+                }
+
+                state.paint(context);
                 Toast.makeText(getApplicationContext(), "Update successfully", Toast.LENGTH_SHORT).show();
             }
         });

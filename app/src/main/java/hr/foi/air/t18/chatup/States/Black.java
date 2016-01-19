@@ -1,50 +1,57 @@
 package hr.foi.air.t18.chatup.States;
 
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.Toast;
-
-
-import hr.foi.air.t18.chatup.Fragments.SearchFragment;
-import hr.foi.air.t18.chatup.Menu.EditProfile;
-import hr.foi.air.t18.chatup.Menu.Settings;
+import android.widget.RelativeLayout;
+import java.util.HashMap;
 import hr.foi.air.t18.chatup.R;
-import hr.foi.air.t18.chatup.MainClass;
 import hr.foi.air.t18.core.State.Context;
-import hr.foi.air.t18.core.State.State;
+import hr.foi.air.t18.core.State.IState;
 
 /**
  * Created by JurmanLap on 11.1.2016..
  */
-public class Black implements State {
+public class Black implements IState {
 
-    public void doAction(Context context) {
+    private HashMap<String,Object> elements;
 
-        Log.d("Odabir crna", "");
+    public Black(HashMap<String, Object> elements)
+    {
+        this.elements = elements;
+    }
 
-        boja();
-        searchTab();
+    @Override
+    public void paint(Context context) {
+
+        Log.d("Odabir plava", "");
+        setColor();
+        //searchTab();
         context.setState(this);
     }
 
-    private void boja (){
-        //fragments
-        MainClass.toolbar_stgs.setBackgroundResource(R.color.colorBlack);
-        MainClass.tablayout_stgs.setBackgroundResource(R.color.colorBlack);
-        MainClass.viewpager_stgs.setBackgroundResource(R.color.colorLightWhite);
+    @Override
+    public void setColor(){
 
-        //settings
-        Settings.toolbar_settings.setBackgroundResource(R.color.colorBlack);
-        Settings.relative_layout_stgs.setBackgroundResource(R.color.colorLightWhite);
-        Settings.btnSettingsSave.setBackgroundResource(R.drawable.button_shape2);
+        ((Toolbar)elements.get("toolbar_stgs")).setBackgroundResource(R.color.colorBlack);
+        ((TabLayout)elements.get("tablayout_stgs")).setBackgroundResource(R.color.colorBlack);
+        ((ViewPager)elements.get("viewpager_stgs")).setBackgroundResource(R.color.colorLightWhite);
 
+        ((Toolbar)elements.get("toolbar_settings")).setBackgroundResource(R.color.colorBlack);
+        ((RelativeLayout)elements.get("relative_layout_stgs")).setBackgroundResource(R.color.colorLightWhite);
+        ((Button)elements.get("btnSettingsSave")).setBackgroundResource(R.drawable.button_shape2);
     }
 
+ /*
     private void searchTab (){
-        SearchFragment.search_button.setVisibility(Button.INVISIBLE);
+        SearchFragment.search_button.setVisibility(Button.VISIBLE);
         SearchFragment.search_button2.setVisibility(Button.VISIBLE);
-        SearchFragment.search_button2.setBackgroundResource(R.drawable.button_shape2);
-        SearchFragment.search_text.setHint("Search by username");
+        SearchFragment.search_button.setBackgroundResource(R.drawable.button_shape);
+        SearchFragment.search_button2.setBackgroundResource(R.drawable.button_shape);
+        SearchFragment.search_text.setHint("Search by email or username");
     }
+   */
 }
 
