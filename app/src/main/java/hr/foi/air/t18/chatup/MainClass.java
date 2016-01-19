@@ -4,15 +4,19 @@ import android.app.ProgressDialog;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 
+import android.util.JsonWriter;
 import android.widget.Toast;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.google.android.gms.common.api.GoogleApiClient;
 
 
 import hr.foi.air.t18.chatup.Fragments.FragmentBuffer;
@@ -35,9 +39,9 @@ import hr.foi.air.t18.webservice.WebServiceResult;
 
 public class MainClass extends AppCompatActivity {
 
-    public static android.support.v7.widget.Toolbar toolbar_stgs;
-    public static android.support.design.widget.TabLayout tablayout_stgs;
-    public static android.support.v4.view.ViewPager viewpager_stgs;
+    public static Toolbar toolbar_stgs;
+    public static TabLayout tablayout_stgs;
+    public static ViewPager viewpager_stgs;
 
     private SharedPreferences sharedPref;
     public String loggedIn;
@@ -46,12 +50,17 @@ public class MainClass extends AppCompatActivity {
     private PagerAdapter adapter;
 
     private SocketNotificationsManager snManager;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.snManager = new SocketNotificationsManager("http://104.236.58.50:3000/",getApplicationContext());
+        this.snManager = new SocketNotificationsManager("http://104.236.58.50:3000/", getApplicationContext());
 
 
         this.snManager.attachAsyncTasks(new CreateSocketConnectionAsync(this.snManager), null);
@@ -91,10 +100,9 @@ public class MainClass extends AppCompatActivity {
     }
 
     /**
-     *  Private function for Logout user
+     * Private function for Logout user
      */
-    private void Logout()
-    {
+    private void Logout() {
         LogoutAsync logoutAsync = new LogoutAsync(loggedIn, new IListener<Void>() {
 
             /***
@@ -115,11 +123,10 @@ public class MainClass extends AppCompatActivity {
              */
             @Override
             public void onFinish(WebServiceResult<Void> wsResult) {
-                if(progress.isShowing()) progress.dismiss();
+                if (progress.isShowing()) progress.dismiss();
 
                 Toast.makeText(getApplicationContext(), wsResult.message, Toast.LENGTH_LONG).show();
-                if(wsResult.status == 0)
-                {
+                if (wsResult.status == 0) {
                     finish();
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
@@ -141,8 +148,7 @@ public class MainClass extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id)
-        {
+        switch (id) {
             case R.id.action_edit_profile:
                 Intent i = new Intent(getApplicationContext(), EditProfile.class);
                 startActivity(i);
@@ -172,8 +178,7 @@ public class MainClass extends AppCompatActivity {
         return true;
     }
 
-    private void createTabs()
-    {
+    private void createTabs() {
         FragmentBuffer fragmentBuffer = new FragmentBuffer();
         fragmentBuffer.add(new HomePageFragment(), "Home Page");
         fragmentBuffer.add(new SearchFragment(), "Search");
@@ -181,8 +186,7 @@ public class MainClass extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        for (int i = 0; i < fragmentBuffer.count(); i++)
-        {
+        for (int i = 0; i < fragmentBuffer.count(); i++) {
             String tag = fragmentBuffer.getTag(i);
             tabLayout.addTab(tabLayout.newTab().setText(tag));
         }
@@ -198,22 +202,18 @@ public class MainClass extends AppCompatActivity {
 
         // Further the Android TabLayout is attached to a tab selected listener
         // here ViewPager’s page is set when a tab is selected
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
-        {
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab)
-            {
+            public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab)
-            {
+            public void onTabUnselected(TabLayout.Tab tab) {
             }
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab)
-            {
+            public void onTabReselected(TabLayout.Tab tab) {
             }
         });
         this.snManager.bindToService();
@@ -222,5 +222,4 @@ public class MainClass extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
-
 }

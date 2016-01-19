@@ -1,10 +1,15 @@
 package hr.foi.air.t18.chatup.SocketNotifications;
 
 
+import android.app.NotificationManager;
+import android.content.Context;
+import android.support.v7.app.NotificationCompat;
 import android.widget.Toast;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
+
+import hr.foi.air.t18.chatup.R;
 
 import static com.google.android.gms.internal.zzip.runOnUiThread;
 
@@ -73,13 +78,31 @@ public class SocketServerListeners{
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(socketNotificationsManager.getContext(), args[0].toString(), Toast.LENGTH_LONG).show();
+                       // Toast.makeText(socketNotificationsManager.getContext(), args[0].toString(), Toast.LENGTH_LONG).show();
+                        showNotification("Friend Request",args[0].toString());
                         return;
                     }
                 });
 
             }
         });
+    }
+
+    public void showNotification(String title, String content)
+    {
+        NotificationCompat.Builder mBuilder =
+                (NotificationCompat.Builder) new NotificationCompat.Builder(this.socketNotificationsManager.getContext())
+                        .setSmallIcon(R.drawable.logo_v1)
+                        .setContentTitle(title)
+                        .setContentText(content);
+
+
+        int mNotificationId = 001;
+        NotificationManager mNotifyMgr =
+                (NotificationManager) this.socketNotificationsManager.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+
     }
 
 

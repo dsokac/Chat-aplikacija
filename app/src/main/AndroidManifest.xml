@@ -41,6 +41,11 @@
         <activity android:name=".Menu.Settings" android:noHistory="true"></activity>
 
         <service android:name=".SocketNotifications.BackgroundService"/>
+
+
+
+
+
     </application>
 
 </manifest>
