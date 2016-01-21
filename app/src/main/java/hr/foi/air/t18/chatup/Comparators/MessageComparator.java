@@ -1,6 +1,8 @@
-package hr.foi.air.t18.core;
+package hr.foi.air.t18.chatup.Comparators;
 
 import java.util.Comparator;
+
+import hr.foi.air.t18.core.Message;
 
 /**
  * Comparator class used for comparing the timestamp

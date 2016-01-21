@@ -10,8 +10,11 @@ import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 
+import hr.foi.air.t18.chatup.Comparators.ConversationComparator;
 import hr.foi.air.t18.chatup.Conversation.ConversationActivity;
 import hr.foi.air.t18.chatup.Conversation.ConversationExpandableAdapter;
 import hr.foi.air.t18.chatup.R;
@@ -90,6 +93,9 @@ public class MessagesFragment extends Fragment
             else
                 singleConversations.add(conversations.get(i));
         }
+
+        Collections.sort(groupConversations, new ConversationComparator());
+        Collections.sort(singleConversations, new ConversationComparator());
 
         conversationMap.put("Single conversations", singleConversations);
         conversationMap.put("Group conversations", groupConversations);

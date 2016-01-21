@@ -25,7 +25,7 @@ import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.chatup.Ads.DlAdsListener;
 import hr.foi.air.t18.core.Conversation;
 import hr.foi.air.t18.core.Message;
-import hr.foi.air.t18.core.MessageComparator;
+import hr.foi.air.t18.chatup.Comparators.MessageComparator;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.webservice.ConversationAsync.AddParticipantsToConversationAsyncTask;
