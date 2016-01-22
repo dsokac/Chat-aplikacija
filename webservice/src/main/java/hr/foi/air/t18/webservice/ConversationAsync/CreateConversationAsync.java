@@ -9,6 +9,7 @@ import java.util.HashMap;
 import hr.foi.air.t18.webservice.HttpPOST;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.WebServiceResult;
+import hr.foi.air.t18.webservice.WebServiceStrings;
 
 /**
  * An AsyncTask class that contacts the server and creates the conversation
@@ -46,7 +47,7 @@ public class CreateConversationAsync extends AsyncTask<Void, Void, String>
 
         try
         {
-            HttpPOST connection = new HttpPOST("http://104.236.58.50:8080/createConversation");
+            HttpPOST connection = new HttpPOST(WebServiceStrings.SERVER + WebServiceStrings.CREATE_CONVERSATION);
             connection.sendRequest(parameters);
             response = connection.getResponse();
         }

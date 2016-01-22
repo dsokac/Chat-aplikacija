@@ -15,6 +15,7 @@ import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.HttpPOST;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.WebServiceResult;
+import hr.foi.air.t18.webservice.WebServiceStrings;
 
 /**
  * An AsyncTask class that fetches all the conversation the user
@@ -53,7 +54,7 @@ public class FetchMessagesAsync extends AsyncTask<Void, Void, String>
         parameters.put("email", user.getEmail());
 
         try {
-            HttpPOST connection = new HttpPOST("http://104.236.58.50:8080/getMessages");
+            HttpPOST connection = new HttpPOST(WebServiceStrings.SERVER + WebServiceStrings.GET_MESSAGES);
             connection.sendRequest(parameters);
             response = connection.getResponse();
         } catch (Exception e)

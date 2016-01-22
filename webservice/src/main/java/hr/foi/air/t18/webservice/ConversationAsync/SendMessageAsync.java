@@ -12,6 +12,7 @@ import hr.foi.air.t18.core.Message;
 import hr.foi.air.t18.webservice.HttpPOST;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.WebServiceResult;
+import hr.foi.air.t18.webservice.WebServiceStrings;
 
 /**
  * An AsyncTask class that sends a message to be stored in a conversation.
@@ -56,7 +57,7 @@ public class SendMessageAsync extends AsyncTask<Void, Void, String>
         parameters.put("type", message.getType());
 
         try {
-            HttpPOST connection = new HttpPOST("http://104.236.58.50:8080/sendMessage");
+            HttpPOST connection = new HttpPOST(WebServiceStrings.SERVER + WebServiceStrings.SEND_MESSAGE);
             connection.sendRequest(parameters);
             response = connection.getResponse();
         } catch (Exception e)

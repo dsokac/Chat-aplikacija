@@ -11,6 +11,7 @@ import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.HttpPOST;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.WebServiceResult;
+import hr.foi.air.t18.webservice.WebServiceStrings;
 
 /**
  * AsyncTask class that fetches required user data from the Web service.
@@ -43,7 +44,7 @@ public class FetchUserDataAsync extends AsyncTask<Void, Void, String>
 
         try
         {
-            HttpPOST connection = new HttpPOST("http://104.236.58.50:8080/getUserData");
+            HttpPOST connection = new HttpPOST(WebServiceStrings.SERVER + WebServiceStrings.GET_USER_DATA);
             connection.sendRequest(parameters);
             response = connection.getResponse();
         }

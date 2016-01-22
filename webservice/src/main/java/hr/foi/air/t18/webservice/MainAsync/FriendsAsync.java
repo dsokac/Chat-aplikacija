@@ -10,6 +10,7 @@ import java.util.HashMap;
 import hr.foi.air.t18.webservice.HttpPOST;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.WebServiceResult;
+import hr.foi.air.t18.webservice.WebServiceStrings;
 
 /**
  * Created by Danijel on 8.12.2015..
@@ -39,7 +40,7 @@ public class FriendsAsync extends AsyncTask<Void, Void, String> {
 
         try
         {
-            HttpPOST connection = new HttpPOST("http://104.236.58.50:8080/getFriends");
+            HttpPOST connection = new HttpPOST(WebServiceStrings.SERVER + WebServiceStrings.GET_FRIENDS);
             connection.sendRequest(parameters);
             response = connection.getResponse();
         }

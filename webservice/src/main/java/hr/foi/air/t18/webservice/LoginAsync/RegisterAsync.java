@@ -10,6 +10,7 @@ import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.HttpPOST;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.WebServiceResult;
+import hr.foi.air.t18.webservice.WebServiceStrings;
 
 /**
  * This class is used to start an async task which will contact the
@@ -65,7 +66,7 @@ public class RegisterAsync extends AsyncTask<Void, Void, String>
         parameters.put("password", this.password);
 
         try {
-            HttpPOST connection = new HttpPOST("http://104.236.58.50:8080/register");
+            HttpPOST connection = new HttpPOST(WebServiceStrings.SERVER + WebServiceStrings.REGISTER);
             connection.sendRequest(parameters);
             response = connection.getResponse();
         } catch(Exception e) {

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import hr.foi.air.t18.webservice.HttpPOST;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.WebServiceResult;
+import hr.foi.air.t18.webservice.WebServiceStrings;
 
 /**
  *  This class is used to communicate with database through web service. The class purpose is to
@@ -50,7 +51,7 @@ public class GetDataEditProfileAsync extends AsyncTask<Void, Void, String> {
 
         try
         {
-            HttpPOST connection = new HttpPOST("http://104.236.58.50:8080/getUserDataEditProfile");
+            HttpPOST connection = new HttpPOST(WebServiceStrings.SERVER + WebServiceStrings.GET_USER_DATA_EDIT_PROFILE);
             connection.sendRequest(parameters);
             response = connection.getResponse();
         }

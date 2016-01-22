@@ -13,6 +13,7 @@ import hr.foi.air.t18.core.Message;
 import hr.foi.air.t18.webservice.HttpPOST;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.WebServiceResult;
+import hr.foi.air.t18.webservice.WebServiceStrings;
 
 /**
  * AsyncTask class that refreshes the active conversation by contacting
@@ -50,7 +51,7 @@ public class RefreshConversationAsync extends AsyncTask<Void, Void, String>
 
         try
         {
-            HttpPOST connection = new HttpPOST("http://104.236.58.50:8080/getNewMessages");
+            HttpPOST connection = new HttpPOST(WebServiceStrings.SERVER + WebServiceStrings.GET_NEW_MESSAGES);
             connection.sendRequest(parameters);
             response = connection.getResponse();
         }

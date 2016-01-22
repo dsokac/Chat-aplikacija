@@ -10,6 +10,7 @@ import java.util.HashMap;
 import hr.foi.air.t18.webservice.HttpPOST;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.WebServiceResult;
+import hr.foi.air.t18.webservice.WebServiceStrings;
 
 /**
  * Created by Laptop on 18.12.2015..
@@ -49,7 +50,7 @@ public class SaveImageAsync extends AsyncTask<Void, Void, String> {
         parameters.put("picture", this.imageEncoded);
 
         try {
-            HttpPOST connection = new HttpPOST("http://104.236.58.50:8080/saveProfilePic");
+            HttpPOST connection = new HttpPOST(WebServiceStrings.SERVER + WebServiceStrings.SAVE_PROFILE_PIC);
             connection.sendRequest(parameters);
             response = connection.getResponse();
             Log.d("response", response);
