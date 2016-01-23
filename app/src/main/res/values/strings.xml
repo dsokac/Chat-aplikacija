@@ -72,4 +72,7 @@
     <string name="ConversationDialogTitle">Warning</string>
     <string name="ConversationDialogContent">You can not send EMPTY message.</string>
     <string name="ConversationDialogButtonText">OK</string>
+    <string name="ForgotPassDialogContent">"E-mail has been sent to "</string>
+    <string name="ForgotPassEmptyDialogContent">E-mail is required!</string>
+    <string name="ForgotPassDialogTitle">Success</string>
 </resources>

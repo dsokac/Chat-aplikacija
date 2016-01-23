@@ -1,7 +1,12 @@
 package hr.foi.air.t18.chatup.Login;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.DialerKeyListener;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,9 +37,14 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     //all users and users informations
     final ArrayList<User> forgot_users = new ArrayList<User>();
 
+    private Context ctx;
+    private Activity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.ctx = this.getApplicationContext();
+        this.activity = this;
         setContentView(R.layout.activity_forgot_password);
         final EditText forgotEmail = (EditText) findViewById(R.id.forgotUnos);
         final Button forgotSend = (Button) findViewById(R.id.forgotSendButton);
@@ -44,6 +54,22 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 forgot_entered = forgotEmail.getText().toString();
+                
+                //check if empty e-mail is sent , if yes it shows alert with warning
+                if(forgot_entered.contentEquals(""))
+                {
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity)
+                            .setTitle(R.string.ConversationDialogTitle)
+                            .setMessage(R.string.ForgotPassEmptyDialogContent)
+                            .setNeutralButton(R.string.ConversationDialogButtonText, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                    alertDialog.show();
+                    return;
+                }
                 ForgotPasswordAsync forgotPasswordAsync = new ForgotPasswordAsync(forgot_entered, new IListener<JSONArray>() {
 
                     /***
@@ -101,8 +127,26 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 });
                 forgotPasswordAsync.execute();
                 forgot_password = "";
+
+                //Inform that e-mail is sent and destroyes the activity
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity)
+                        .setTitle(R.string.ForgotPassDialogTitle)
+                        .setMessage(getString(R.string.ForgotPassDialogContent)+forgot_entered)
+                        .setNeutralButton(R.string.ConversationDialogButtonText, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                                ForgotPasswordActivity.this.finish();
+                            }
+                        });
+                alertDialog.show();
             }
 
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }
