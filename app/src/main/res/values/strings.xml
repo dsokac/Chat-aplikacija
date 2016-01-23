@@ -69,4 +69,7 @@
 
     <string name="dialog_noselection_title">Empty selection</string>
     <string name="dialog_noselection_participants">There are no selected users to add to the converation.</string>
+    <string name="ConversationDialogTitle">Warning</string>
+    <string name="ConversationDialogContent">You can not send EMPTY message.</string>
+    <string name="ConversationDialogButtonText">OK</string>
 </resources>

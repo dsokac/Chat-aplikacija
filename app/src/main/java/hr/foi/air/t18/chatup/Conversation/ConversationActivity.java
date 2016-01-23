@@ -1,6 +1,8 @@
 package hr.foi.air.t18.chatup.Conversation;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -168,36 +170,56 @@ public class ConversationActivity extends AppCompatActivity
     private void AddSendMessageEvent()
     {
         btnSendMessage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final View view = v;
+                @Override
+                public void onClick(View v) {
+                    final View view = v;
 
-                Message message = new Message(
-                        txtMessage.getText().toString(),
-                        SharedPreferencesClass.getDefaults("UserUsername", getApplicationContext()),
-                        "",
-                        "",
-                        Message.TEXT
-                );
-                SendMessageAsync sm = new SendMessageAsync(conversation, message, new IListener<Message>() {
-                    @Override
-                    public void onBegin() {
+                    Message message = new Message(
+                            txtMessage.getText().toString(),
+                            SharedPreferencesClass.getDefaults("UserUsername", getApplicationContext()),
+                            "",
+                            "",
+                            Message.TEXT
+                    );
+
+                    //If checks if message contains any letters, and if it is empty it shows
+                    //a alert dialog with message and terminate proces to avoid error message
+                    //from server.
+                    if(message.getContent().contentEquals(""))
+                    {
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity)
+                                .setTitle(R.string.ConversationDialogTitle)
+                                .setMessage(R.string.ConversationDialogContent)
+                                .setNeutralButton(R.string.ConversationDialogButtonText, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+                        alertDialog.show();
+                        return;
                     }
 
-                    @Override
-                    public void onFinish(WebServiceResult<Message> result) {
-                        if (result.status == 0) {
-                            txtMessage.setText("");
-                            conversation.addMessage(result.data);
-                            SortAndLoadMessagesIntoListView();
-                            lvMessages.setSelection(lvMessages.getCount() - 1);
-                        } else
-                            Toast.makeText(view.getContext(), result.message, Toast.LENGTH_LONG).show();
-                    }
-                });
-                sm.execute();
-            }
-        });
+                    SendMessageAsync sm = new SendMessageAsync(conversation, message, new IListener<Message>() {
+                        @Override
+                        public void onBegin() {
+                        }
+
+                        @Override
+                        public void onFinish(WebServiceResult<Message> result) {
+                            if (result.status == 0) {
+                                txtMessage.setText("");
+                                conversation.addMessage(result.data);
+                                SortAndLoadMessagesIntoListView();
+                                lvMessages.setSelection(lvMessages.getCount() - 1);
+                            } else
+                                Toast.makeText(view.getContext(), result.message, Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    sm.execute();
+                }
+            });
+
     }
 
     /**

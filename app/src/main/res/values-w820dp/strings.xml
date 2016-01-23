@@ -2,4 +2,7 @@
 <resources>
     <string name="change_image">Change image</string>
     <string name="save_image">Save image</string>
+    <string name="ConversationDialogTitle">Warning</string>
+    <string name="ConversationDialogContent">You can not send EMPTY message.</string>
+    <string name="ConversationDialogButtonText">OK</string>
 </resources>
