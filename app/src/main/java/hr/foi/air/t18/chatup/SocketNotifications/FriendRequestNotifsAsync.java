@@ -10,35 +10,22 @@ import org.json.JSONObject;
  * Class used to send friend requests to socket server.
  * Created by Danijel on 17.1.2016..
  */
-public class FriendRequestNotifsAsync extends AsyncTask<Object,Void,Object> implements ISocketOperation {
+public class FriendRequestNotifsAsync extends SocketAbstractAsync{
 
-
-    private Socket socket;
-    private SocketNotificationsManager socketNotificationsManager;
-
-    public FriendRequestNotifsAsync(SocketNotificationsManager socketNotificationsManager)
-    {
-        this.socketNotificationsManager = socketNotificationsManager;
+    public FriendRequestNotifsAsync(SocketNotificationsManager socketNotificationsManager, JSONObject params) {
+        super(socketNotificationsManager, params);
     }
 
     @Override
-    protected void onPreExecute() {
-        this.socket = this.socketNotificationsManager.getSocket();
+    public void sendToServer(SocketEvents socketEvents, JSONObject params) {
+        super.sendToServer(SocketEvents.friendRequest, params);
     }
 
-    @Override
-    protected Object doInBackground(Object... params) {
-        this.sendToServer("friendRequest", (JSONObject)params[0]);
-        return null;
-    }
 
-    /***
-     * Function sends friend request to socket server.
-     * @param eventName - event name for friend requests is friendRequest
-     * @param params - params that should be sent to server
-     */
+    public FriendRequestNotifsAsync(){super();}
+
     @Override
-    public void sendToServer(String eventName, JSONObject params) {
-         this.socket.emit(eventName,params);
+    public void listenServer(SocketNotificationsManager snManager, SocketEvents socketEvents, String title, int icon, int notifID) {
+        super.listenServer(snManager, socketEvents, title, icon, notifID);
     }
 }

@@ -12,6 +12,8 @@ import com.github.nkzawa.socketio.client.Socket;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 
 /**
  * Class which connects to socket server and establish connection with it.
@@ -19,61 +21,39 @@ import org.json.JSONObject;
  *
  * Created by Danijel on 17.1.2016..
  */
-public class CreateSocketConnectionAsync extends AsyncTask<Object,Void,Object> implements ISocketOperation {
+public class CreateSocketConnectionAsync extends SocketAbstractAsync implements ISocketOperation {
 
+    private Context ctx;
     private Socket socket;
 
-    public SocketNotificationsManager socketNotificationsManager;
-
-    public CreateSocketConnectionAsync(SocketNotificationsManager socketNotificationsManager)
+    public CreateSocketConnectionAsync(SocketNotificationsManager socketNotificationsManager, JSONObject params)
     {
-        this.socketNotificationsManager = socketNotificationsManager;
+        super(socketNotificationsManager,params);
+        this.ctx = socketNotificationsManager.getContext();
+        this.socket = socketNotificationsManager.getSocket();
     }
 
     @Override
-    protected void onPreExecute() {
-        try
-        {
-            //establish connection with socket server
-            this.socket = IO.socket(socketNotificationsManager.getSocketAddr());
-
-            //connect
+    public void sendToServer(SocketEvents eventName, JSONObject params) {
+        try {
             this.socket.connect();
-            this.sendToServer(
-                    "registration",
+
+            super.sendToServer(SocketEvents.registration,
                     this.parseRegistrationData(
                             "id",
-                            this.getIDFromSharedPreferences("UserEmail", socketNotificationsManager.getContext()
-                            )
-                    ));
-            this.socketNotificationsManager.setSocket(this.socket);
-
-        }catch(Exception ex)
+                            this.getIDFromSharedPreferences("UserEmail", ctx)));
+        } catch (Exception ex)
         {
-            Log.e("error", "onPreExecute: ", ex );
+            Log.e("error", "sendToServer: ",ex );
         }
+
     }
 
     @Override
-    protected Object doInBackground(Object... params) {
-        return "";
+    protected void onPostExecute(Object o) {
+        super.onPostExecute(o);
+        Toast.makeText(ctx,"Connected to Socket",Toast.LENGTH_SHORT).show();
     }
-
-    @Override
-    protected void onPostExecute(Object s) {
-        Toast.makeText(socketNotificationsManager.getContext(),"Connected to Socket",Toast.LENGTH_SHORT).show();
-    }
-
-    /***
-     * Function from interface which sends request to server for registration.
-     * @param eventName - event name for registration is "registration"
-     * @param params - send registration params
-     */
-    @Override
-    public void sendToServer(String eventName, JSONObject params) {
-        this.socket.emit(eventName,params);
-    }
-
 
     /**
      * Function which parse data neccessary for registration.
@@ -107,4 +87,8 @@ public class CreateSocketConnectionAsync extends AsyncTask<Object,Void,Object> i
         return sharedPref.getString(sharedPrefKey,"");
     }
 
+    /*@Override
+    public void sendToServer(SocketEvents eventName, JSONObject params) {
+
+    }*/
 }

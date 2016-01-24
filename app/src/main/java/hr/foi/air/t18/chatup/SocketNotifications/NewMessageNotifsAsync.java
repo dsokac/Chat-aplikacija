@@ -9,9 +9,26 @@ import org.json.JSONObject;
 /**
  * Created by Laptop on 19.1.2016..
  */
-public class NewMessageNotifsAsync extends AsyncTask<Object,Void,Object> implements ISocketOperation{
+public class NewMessageNotifsAsync extends SocketAbstractAsync implements ISocketOperation{
 
-    private Socket socket;
+    public NewMessageNotifsAsync(SocketNotificationsManager socketNotificationsManager,JSONObject params)
+    {
+        super(socketNotificationsManager,params);
+    }
+
+    @Override
+    public void sendToServer(SocketEvents eventName, JSONObject params) {
+        super.sendToServer(SocketEvents.newMessage, params);
+    }
+
+    public NewMessageNotifsAsync(){super();}
+
+    @Override
+    public void listenServer(SocketNotificationsManager snManager, SocketEvents socketEvents, String title, int icon, int notifID) {
+        super.listenServer(snManager, socketEvents, title, icon, notifID);
+    }
+
+    /*private Socket socket;
     private SocketNotificationsManager socketNotificationsManager;
 
     public NewMessageNotifsAsync(SocketNotificationsManager socketNotificationsManager) {
@@ -27,15 +44,20 @@ public class NewMessageNotifsAsync extends AsyncTask<Object,Void,Object> impleme
     protected Object doInBackground(Object... params) {
         this.sendToServer("newMessage", (JSONObject)params[0]);
         return null;
-    }
+    }*/
 
     /***
      * Function sends new message notification to socket server.
      * @param eventName - event name for new message is newMessage
      * @param params - params that should be sent to server
      */
-    @Override
+/*
     public void sendToServer(String eventName, JSONObject params) {
         this.socket.emit(eventName,params);
     }
+
+    @Override
+    public void sendToServer(SocketEvents eventName, JSONObject params) {
+
+    }*/
 }

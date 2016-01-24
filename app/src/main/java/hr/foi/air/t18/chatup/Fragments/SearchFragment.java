@@ -193,10 +193,7 @@ public class SearchFragment extends Fragment {
             Log.e("error", "onCreate: ", ex);
         }
 
-        Object[] obj = new Object[1];
-        obj[0] = (Object)json;
-
-        this.socketNotificationsManager.attachAsyncTasks(new FriendRequestNotifsAsync(this.socketNotificationsManager), obj);
+        this.socketNotificationsManager.attachAsyncTasks(new FriendRequestNotifsAsync(this.socketNotificationsManager,json));
     }
 
     //onCreateContextMenu logic

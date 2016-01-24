@@ -29,6 +29,9 @@ import hr.foi.air.t18.chatup.Menu.AboutUsDialog;
 import hr.foi.air.t18.chatup.Menu.EditProfile;
 import hr.foi.air.t18.chatup.Menu.Settings;
 import hr.foi.air.t18.chatup.SocketNotifications.CreateSocketConnectionAsync;
+import hr.foi.air.t18.chatup.SocketNotifications.FriendRequestNotifsAsync;
+import hr.foi.air.t18.chatup.SocketNotifications.NewMessageNotifsAsync;
+import hr.foi.air.t18.chatup.SocketNotifications.SocketEvents;
 import hr.foi.air.t18.chatup.SocketNotifications.SocketNotificationsManager;
 import hr.foi.air.t18.chatup.SocketNotifications.SocketServerListeners;
 import hr.foi.air.t18.core.MiddleMan;
@@ -63,9 +66,10 @@ public class MainClass extends AppCompatActivity {
         this.snManager = new SocketNotificationsManager("http://104.236.58.50:3000/", getApplicationContext());
 
 
-        this.snManager.attachAsyncTasks(new CreateSocketConnectionAsync(this.snManager), null);
-        SocketServerListeners listeners = new SocketServerListeners(this.snManager);
-        this.snManager.setSocket(listeners.refreshSocket());
+        this.snManager.attachAsyncTasks(new CreateSocketConnectionAsync(this.snManager,null));
+
+        new FriendRequestNotifsAsync().listenServer(this.snManager, SocketEvents.friendRequest,"Friend Request",R.drawable.logo_v1,001);
+        new NewMessageNotifsAsync().listenServer(this.snManager,SocketEvents.newMessage,"New message!",R.drawable.logo_v1,002);
 
         setContentView(R.layout.activity_main);
 

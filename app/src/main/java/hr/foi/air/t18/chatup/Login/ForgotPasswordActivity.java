@@ -54,7 +54,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 forgot_entered = forgotEmail.getText().toString();
-                
+
                 //check if empty e-mail is sent , if yes it shows alert with warning
                 if(forgot_entered.contentEquals(""))
                 {

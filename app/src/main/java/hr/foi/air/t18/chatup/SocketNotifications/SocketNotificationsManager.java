@@ -3,7 +3,9 @@ package hr.foi.air.t18.chatup.SocketNotifications;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 
+import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 
 
@@ -43,6 +45,13 @@ public class SocketNotificationsManager {
         this.socketAddr = socketAddr;
         this.context = context;
         this.runBackgroundService();
+        try {
+            this.socket = IO.socket(socketAddr);
+        }catch (Exception ex)
+        {
+            Log.e("error", "SocketNotificationsManager: ", ex );
+        }
+
     }
 
     /***
@@ -105,7 +114,7 @@ public class SocketNotificationsManager {
      * Function to get stored socket server address
      * @return socket server address
      */
-    public String getSocketAddr() {
+    protected String getSocketAddr() {
         return socketAddr;
     }
 
