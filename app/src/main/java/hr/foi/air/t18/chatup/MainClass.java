@@ -68,7 +68,6 @@ public class MainClass extends AppCompatActivity {
 
         this.snManager = new SocketNotificationsManager("http://104.236.58.50:3000/", getApplicationContext());
 
-
         this.snManager.attachAsyncTasks(new CreateSocketConnectionAsync(this.snManager, null));
 
         new FriendRequestNotifsAsync().listenServer(this.snManager, SocketEvents.friendRequest,"Friend Request",R.drawable.logo_v1);

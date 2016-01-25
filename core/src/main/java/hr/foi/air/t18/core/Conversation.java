@@ -11,6 +11,8 @@ import hr.foi.air.t18.socketnotifications.SocketNotificationsManager;
  */
 public class Conversation
 {
+
+    private SocketNotificationsManager socketNotificationManager;
     private ArrayList<User> participants;
     private ArrayList<Message> messages;
     private String id;
@@ -86,5 +88,13 @@ public class Conversation
     public void setID(String id)
     {
         this.id = id;
+    }
+
+    public SocketNotificationsManager getSocketNotificationManager() {
+        return socketNotificationManager;
+    }
+
+    public void setSocketNotificationManager(SocketNotificationsManager socketNotificationManager) {
+        this.socketNotificationManager = socketNotificationManager;
     }
 }

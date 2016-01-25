@@ -22,6 +22,7 @@ import hr.foi.air.t18.core.Conversation;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.User;
+import hr.foi.air.t18.socketnotifications.SocketNotificationsManager;
 import hr.foi.air.t18.webservice.ConversationAsync.FetchMessagesAsync;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.WebServiceResult;
@@ -32,6 +33,7 @@ import hr.foi.air.t18.webservice.WebServiceResult;
  */
 public class MessagesFragment extends Fragment
 {
+    private SocketNotificationsManager socketNotificationsManager;
     private ArrayList<Conversation> conversations;
     private HashMap<String, ArrayList<Conversation>> conversationMap;
     private ExpandableListView elv;
@@ -40,7 +42,7 @@ public class MessagesFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View root = inflater.inflate(R.layout.tab_fragment_messages, container, false);
-
+        socketNotificationsManager = (SocketNotificationsManager) MiddleMan.getObject();
         conversations = new ArrayList<>();
         conversationMap = new HashMap<>();
         elv = (ExpandableListView) root.findViewById(R.id.conversation_expandable);
@@ -112,7 +114,7 @@ public class MessagesFragment extends Fragment
             {
                 String key = (String) conversationMap.keySet().toArray()[groupPosition];
                 Conversation conversation = conversationMap.get(key).get(childPosition);
-
+                conversation.setSocketNotificationManager(socketNotificationsManager);
                 MiddleMan.setObject(conversation);
 
                 Intent intent = new Intent(getActivity(), ConversationActivity.class);

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,8 +19,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.InterstitialAd;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -30,6 +35,9 @@ import hr.foi.air.t18.core.Message;
 import hr.foi.air.t18.chatup.Comparators.MessageComparator;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.SharedPreferencesClass;
+import hr.foi.air.t18.core.User;
+import hr.foi.air.t18.socketnotifications.NewMessageNotifsAsync;
+import hr.foi.air.t18.socketnotifications.SocketNotificationsManager;
 import hr.foi.air.t18.webservice.ConversationAsync.AddParticipantsToConversationAsyncTask;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.ConversationAsync.RefreshConversationAsync;
@@ -41,6 +49,8 @@ import hr.foi.air.t18.webservice.WebServiceResult;
  */
 public class ConversationActivity extends AppCompatActivity
 {
+
+    private SocketNotificationsManager socketNotificationManager;
     private InterstitialAd mInterstitial;
     private static final String AD_UNIT_ID = "ca-app-pub-8639732656343372/9330745843";
     private int adds_counter=0;
@@ -138,6 +148,7 @@ public class ConversationActivity extends AppCompatActivity
         activity = this;
 
         conversation = (Conversation) MiddleMan.getObject();
+        socketNotificationManager = conversation.getSocketNotificationManager();
         lvMessages = (ListView) findViewById(R.id.convMessages);
         btnSendMessage = (Button) findViewById(R.id.convSendButton);
         txtMessage = (EditText) findViewById(R.id.convTextBox);
@@ -212,6 +223,15 @@ public class ConversationActivity extends AppCompatActivity
                                 conversation.addMessage(result.data);
                                 SortAndLoadMessagesIntoListView();
                                 lvMessages.setSelection(lvMessages.getCount() - 1);
+                                JSONObject object = new JSONObject();
+
+                                try {
+                                    object.put("participants", conversation.getParticipants());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                                socketNotificationManager.attachAsyncTasks(new NewMessageNotifsAsync(socketNotificationManager, object));
                             } else
                                 Toast.makeText(view.getContext(), result.message, Toast.LENGTH_LONG).show();
                         }
