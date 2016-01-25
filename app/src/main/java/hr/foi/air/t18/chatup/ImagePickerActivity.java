@@ -35,7 +35,7 @@ import hr.foi.air.t18.webservice.WebServiceResult;
  */
 public class ImagePickerActivity extends AppCompatActivity implements View.OnClickListener, SaveAttachments {
 
-    Button fromCamera, fromSdCard, saveImage;
+    Button fromSdCard, saveImage;
     private ImageFileSelector mImageFileSelector;
     private ImageCropper mImageCropper;
     private ImageView imageView;
@@ -51,9 +51,6 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
         //setting toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        fromCamera = (Button) findViewById(R.id.btn_crop);
-        fromCamera.setOnClickListener(this);
 
         fromSdCard = (Button) findViewById(R.id.btn_pick);
         fromSdCard.setOnClickListener(this);
@@ -81,6 +78,11 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
                 if (!TextUtils.isEmpty(file)) {
                     loadImage(file);
                     mCurrentSelectFile = new File(file);
+                    if (mCurrentSelectFile != null) {
+                        mImageCropper.setOutPut(150, 150);
+                        mImageCropper.setOutPutAspect(1, 1);
+                        mImageCropper.cropImage(mCurrentSelectFile);
+                    }
                 } else {
                     Toast.makeText(getApplicationContext(), "select image file error", Toast.LENGTH_LONG).show();
                 }
@@ -175,14 +177,6 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
                 }
                 break;
             }
-            case R.id.btn_crop: {
-                if (mCurrentSelectFile != null) {
-                    mImageCropper.setOutPut(150, 150);
-                    mImageCropper.setOutPutAspect(1, 1);
-                    mImageCropper.cropImage(mCurrentSelectFile);
-                }
-                break;
-            }
         }
     }
 
@@ -204,9 +198,11 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
     public void saveAttachment(final String base64String) {
 
         String userMail = SharedPreferencesClass.getDefaults("UserEmail", getApplicationContext());
+        Log.e("Base64 length", Integer.toString(base64String.length()));
 
         if (userMail != null) {
             SaveImageAsync process = new SaveImageAsync(userMail, base64String, new IListener<Void>() {
+
 
                 @Override
                 public void onBegin() {
