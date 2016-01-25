@@ -1,4 +1,4 @@
-package hr.foi.air.t18.chatup.SocketNotifications;
+package hr.foi.air.t18.socketnotifications;
 
 import android.app.Service;
 import android.content.Intent;

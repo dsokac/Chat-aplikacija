@@ -1,18 +1,14 @@
-package hr.foi.air.t18.chatup.SocketNotifications;
+package hr.foi.air.t18.socketnotifications;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 
 import org.json.JSONObject;
-
-import java.util.Objects;
 
 
 /**
@@ -87,8 +83,4 @@ public class CreateSocketConnectionAsync extends SocketAbstractAsync implements 
         return sharedPref.getString(sharedPrefKey,"");
     }
 
-    /*@Override
-    public void sendToServer(SocketEvents eventName, JSONObject params) {
-
-    }*/
 }

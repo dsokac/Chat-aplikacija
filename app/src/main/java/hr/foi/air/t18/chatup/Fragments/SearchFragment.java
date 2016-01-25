@@ -21,12 +21,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import hr.foi.air.t18.chatup.SocketNotifications.BackgroundService;
-import hr.foi.air.t18.chatup.SocketNotifications.ConnectToService;
+import hr.foi.air.t18.socketnotifications.BackgroundService;
+import hr.foi.air.t18.socketnotifications.ConnectToService;
 import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.chatup.RegisteredUsersListAdapter;
-import hr.foi.air.t18.chatup.SocketNotifications.FriendRequestNotifsAsync;
-import hr.foi.air.t18.chatup.SocketNotifications.SocketNotificationsManager;
+import hr.foi.air.t18.socketnotifications.FriendRequestNotifsAsync;
+import hr.foi.air.t18.socketnotifications.SocketNotificationsManager;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.MainAsync.AddFriendAsync;

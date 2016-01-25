@@ -1,10 +1,8 @@
-package hr.foi.air.t18.chatup.SocketNotifications;
+package hr.foi.air.t18.socketnotifications;
 
 import android.content.ComponentName;
 import android.content.ServiceConnection;
 import android.os.IBinder;
-
-import hr.foi.air.t18.chatup.SocketNotifications.BackgroundService;
 
 /**
  * Class which implements Service connection functions to handle binding to a service

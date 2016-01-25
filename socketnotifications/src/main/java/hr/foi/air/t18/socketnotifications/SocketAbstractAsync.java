@@ -1,4 +1,4 @@
-package hr.foi.air.t18.chatup.SocketNotifications;
+package hr.foi.air.t18.socketnotifications;
 
 import android.app.NotificationManager;
 import android.content.Context;
@@ -8,10 +8,6 @@ import android.support.v7.app.NotificationCompat;
 import com.github.nkzawa.emitter.Emitter;
 
 import org.json.JSONObject;
-
-import java.util.Objects;
-
-import hr.foi.air.t18.chatup.R;
 
 import static com.google.android.gms.internal.zzip.runOnUiThread;
 
@@ -44,7 +40,8 @@ abstract class SocketAbstractAsync extends AsyncTask<Object,Void,Object> impleme
 
     public SocketAbstractAsync(){}
 
-    public void listenServer(final SocketNotificationsManager snManager, SocketEvents socketEvents,final String title,final int icon, final int notifID)
+    @Override
+    public void listenServer(final SocketNotificationsManager snManager, SocketEvents socketEvents,final String title,final int icon)
     {
         snManager.getSocket().on(socketEvents.getEvent(), new Emitter.Listener() {
             @Override
@@ -52,7 +49,7 @@ abstract class SocketAbstractAsync extends AsyncTask<Object,Void,Object> impleme
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        showNotification(snManager, title, args[0].toString(),icon,notifID);
+                        showNotification(snManager, title, args[0].toString(),icon);
                         return;
                     }
                 });
@@ -61,7 +58,7 @@ abstract class SocketAbstractAsync extends AsyncTask<Object,Void,Object> impleme
         });
     }
 
-    private void showNotification(SocketNotificationsManager snManager, String title, String content, int icon, int notifID)
+    private void showNotification(SocketNotificationsManager snManager, String title, String content, int icon)
     {
         NotificationCompat.Builder mBuilder =
                 (NotificationCompat.Builder) new NotificationCompat.Builder(snManager.getContext())
@@ -70,7 +67,7 @@ abstract class SocketAbstractAsync extends AsyncTask<Object,Void,Object> impleme
                         .setContentText(content);
 
 
-        int mNotificationId = notifID;
+        int mNotificationId = (int)System.currentTimeMillis();
         NotificationManager mNotifyMgr =
                 (NotificationManager) snManager.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
 

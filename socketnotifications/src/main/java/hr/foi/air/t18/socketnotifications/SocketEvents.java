@@ -1,4 +1,4 @@
-package hr.foi.air.t18.chatup.SocketNotifications;
+package hr.foi.air.t18.socketnotifications;
 
 /**
  * Created by Danijel on 23.1.2016..

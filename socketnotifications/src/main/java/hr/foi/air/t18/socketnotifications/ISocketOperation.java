@@ -1,6 +1,4 @@
-package hr.foi.air.t18.chatup.SocketNotifications;
-
-import android.app.PendingIntent;
+package hr.foi.air.t18.socketnotifications;
 
 import org.json.JSONObject;
 
@@ -10,4 +8,5 @@ import org.json.JSONObject;
  */
 public interface ISocketOperation {
       void sendToServer(SocketEvents eventName, JSONObject params);
+      void listenServer(SocketNotificationsManager snManager, SocketEvents socketEvents, String title, int icon);
 }

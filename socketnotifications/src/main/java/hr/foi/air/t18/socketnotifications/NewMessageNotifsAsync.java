@@ -1,8 +1,4 @@
-package hr.foi.air.t18.chatup.SocketNotifications;
-
-import android.os.AsyncTask;
-
-import com.github.nkzawa.socketio.client.Socket;
+package hr.foi.air.t18.socketnotifications;
 
 import org.json.JSONObject;
 
@@ -24,8 +20,8 @@ public class NewMessageNotifsAsync extends SocketAbstractAsync implements ISocke
     public NewMessageNotifsAsync(){super();}
 
     @Override
-    public void listenServer(SocketNotificationsManager snManager, SocketEvents socketEvents, String title, int icon, int notifID) {
-        super.listenServer(snManager, socketEvents, title, icon, notifID);
+    public void listenServer(SocketNotificationsManager snManager, SocketEvents socketEvents, String title, int icon) {
+        super.listenServer(snManager, socketEvents, title, icon);
     }
 
     /*private Socket socket;

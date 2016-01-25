@@ -28,12 +28,13 @@ import hr.foi.air.t18.chatup.Login.LoginActivity;
 import hr.foi.air.t18.chatup.Menu.AboutUsDialog;
 import hr.foi.air.t18.chatup.Menu.EditProfile;
 import hr.foi.air.t18.chatup.Menu.Settings;
-import hr.foi.air.t18.chatup.SocketNotifications.CreateSocketConnectionAsync;
-import hr.foi.air.t18.chatup.SocketNotifications.FriendRequestNotifsAsync;
-import hr.foi.air.t18.chatup.SocketNotifications.NewMessageNotifsAsync;
-import hr.foi.air.t18.chatup.SocketNotifications.SocketEvents;
-import hr.foi.air.t18.chatup.SocketNotifications.SocketNotificationsManager;
-import hr.foi.air.t18.chatup.SocketNotifications.SocketServerListeners;
+
+import hr.foi.air.t18.socketnotifications.CreateSocketConnectionAsync;
+import hr.foi.air.t18.socketnotifications.FriendRequestNotifsAsync;
+import hr.foi.air.t18.socketnotifications.NewMessageNotifsAsync;
+import hr.foi.air.t18.socketnotifications.SocketEvents;
+import hr.foi.air.t18.socketnotifications.SocketNotificationsManager;
+
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.User;
@@ -70,8 +71,8 @@ public class MainClass extends AppCompatActivity {
 
         this.snManager.attachAsyncTasks(new CreateSocketConnectionAsync(this.snManager, null));
 
-        new FriendRequestNotifsAsync().listenServer(this.snManager, SocketEvents.friendRequest,"Friend Request",R.drawable.logo_v1,001);
-        new NewMessageNotifsAsync().listenServer(this.snManager, SocketEvents.newMessage, "New message!", R.drawable.logo_v1, 002);
+        new FriendRequestNotifsAsync().listenServer(this.snManager, SocketEvents.friendRequest,"Friend Request",R.drawable.logo_v1);
+        new NewMessageNotifsAsync().listenServer(this.snManager, SocketEvents.newMessage, "New message!", R.drawable.logo_v1);
 
         setContentView(R.layout.activity_main);
 

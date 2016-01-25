@@ -2,6 +2,8 @@ package hr.foi.air.t18.core;
 
 import java.util.ArrayList;
 
+import hr.foi.air.t18.socketnotifications.SocketNotificationsManager;
+
 /**
  * Class that represents a conversation.
  *
@@ -12,7 +14,6 @@ public class Conversation
     private ArrayList<User> participants;
     private ArrayList<Message> messages;
     private String id;
-
     /**
      * Constructor for Conversation class.
      */
