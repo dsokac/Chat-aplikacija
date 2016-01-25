@@ -113,25 +113,21 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(currentClass.emailText.getText().toString().isEmpty() || currentClass.passwordText.getText().toString().isEmpty())
-                {
-                    if(currentClass.emailText.getText().toString().isEmpty()) {
+                if (currentClass.emailText.getText().toString().isEmpty() || currentClass.passwordText.getText().toString().isEmpty()) {
+                    if (currentClass.emailText.getText().toString().isEmpty()) {
                         currentClass.emailText.setError("E-mail is required!");
                     }
 
-                    if(currentClass.passwordText.getText().toString().isEmpty()) {
+                    if (currentClass.passwordText.getText().toString().isEmpty()) {
                         currentClass.passwordText.setError("Password is required!");
                     }
-                }
-                else
-                {
+                } else {
                     User user = new User();
                     user.setEmail(currentClass.emailText.getText().toString());
-                    if(!user.validateEmail())
-                    {
+                    if (!user.validateEmail()) {
                         currentClass.emailText.setError("Invalid e-mail format!");
-                    }
-                    else Login(currentClass.emailText.getText().toString(), currentClass.passwordText.getText().toString(), currentClass);
+                    } else
+                        Login(currentClass.emailText.getText().toString(), currentClass.passwordText.getText().toString(), currentClass);
                 }
             }
         });
@@ -175,10 +171,9 @@ public class LoginActivity extends AppCompatActivity {
                     User user = new User();
                     user.setEmail(email);
 
-                    fetchLoggedUserData(email , user);
+                    fetchLoggedUserData(user.getEmail(), user, intent);
 
-                    MiddleMan.setObject(user);
-                    startActivity(intent);
+
                 }
                 else
                 {
@@ -191,7 +186,7 @@ public class LoginActivity extends AppCompatActivity {
         loginAsync.execute();
     }
 
-    private void fetchLoggedUserData(String email, User user)
+    private void fetchLoggedUserData(String email,final User user,final Intent intent)
     {
         FetchUserDataAsync fud = new FetchUserDataAsync(email, new IListener<User>()
         {
@@ -219,8 +214,13 @@ public class LoginActivity extends AppCompatActivity {
                             getApplicationContext()
                     );
                 }
+
+                Toast.makeText(getApplicationContext(),"Fetching done",Toast.LENGTH_SHORT).show();
+                MiddleMan.setObject(user);
+                startActivity(intent);
             }
         });
         fud.execute();
     }
+
 }

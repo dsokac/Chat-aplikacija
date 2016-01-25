@@ -35,8 +35,10 @@ import hr.foi.air.t18.chatup.SocketNotifications.SocketEvents;
 import hr.foi.air.t18.chatup.SocketNotifications.SocketNotificationsManager;
 import hr.foi.air.t18.chatup.SocketNotifications.SocketServerListeners;
 import hr.foi.air.t18.core.MiddleMan;
+import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.IListener;
+import hr.foi.air.t18.webservice.MainAsync.FetchUserDataAsync;
 import hr.foi.air.t18.webservice.MenuAsync.LogoutAsync;
 import hr.foi.air.t18.webservice.WebServiceResult;
 
@@ -66,18 +68,21 @@ public class MainClass extends AppCompatActivity {
         this.snManager = new SocketNotificationsManager("http://104.236.58.50:3000/", getApplicationContext());
 
 
-        this.snManager.attachAsyncTasks(new CreateSocketConnectionAsync(this.snManager,null));
+        this.snManager.attachAsyncTasks(new CreateSocketConnectionAsync(this.snManager, null));
 
         new FriendRequestNotifsAsync().listenServer(this.snManager, SocketEvents.friendRequest,"Friend Request",R.drawable.logo_v1,001);
-        new NewMessageNotifsAsync().listenServer(this.snManager,SocketEvents.newMessage,"New message!",R.drawable.logo_v1,002);
+        new NewMessageNotifsAsync().listenServer(this.snManager, SocketEvents.newMessage, "New message!", R.drawable.logo_v1, 002);
 
         setContentView(R.layout.activity_main);
 
+        User user = new User();
         if (MiddleMan.getObject() != null) {
-            User user = (User) MiddleMan.getObject();
+            user = (User) MiddleMan.getObject();
             loggedIn = user.getEmail();
             this.progress = new ProgressDialog(this);
         }
+
+
 
         this.sharedPref = this.getPreferences(MODE_PRIVATE);
         if (!this.sharedPref.contains("id") || (this.sharedPref.contains("id") && !this.sharedPref.getString("id", "unknown").equals(loggedIn))) {
@@ -226,4 +231,6 @@ public class MainClass extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
+
 }
