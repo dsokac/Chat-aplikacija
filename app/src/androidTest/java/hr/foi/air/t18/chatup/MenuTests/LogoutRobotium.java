@@ -1,23 +1,21 @@
-package hr.foi.air.t18.chatup;
+package hr.foi.air.t18.chatup.MenuTests;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.MediumTest;
-import android.widget.ImageView;
-
 import com.robotium.solo.Solo;
-
 import hr.foi.air.t18.chatup.Login.LoginActivity;
+
 
 /**
  * Created by JurmanLap on 9.1.2016..
  */
-public class HomePageFragmentRobotium extends ActivityInstrumentationTestCase2<LoginActivity> {
+public class LogoutRobotium extends ActivityInstrumentationTestCase2<LoginActivity> {
     Activity activity;
     private Solo solo;
 
     //konstruktor
-    public HomePageFragmentRobotium() {
+    public LogoutRobotium() {
         super (LoginActivity.class);
     }
 
@@ -45,20 +43,18 @@ public class HomePageFragmentRobotium extends ActivityInstrumentationTestCase2<L
         solo.typeText(1, "test");
         solo.clickOnButton(0);
         solo.waitForActivity(hr.foi.air.t18.chatup.MainClass.class, 100);
-        //testing friend list
-        solo.clickInList(1);
-        solo.clickLongInList(2);
-        solo.clickOnMenuItem("Cancel");
+        solo.clickOnView(solo.getView(android.widget.ImageView.class, 0));
+        solo.clickInList(5, 0);
+        solo.waitForActivity(hr.foi.air.t18.chatup.Login.LoginActivity.class, 100);
+        solo.clearEditText(0);
+        solo.clearEditText(1);
+        solo.typeText(0, "mjurman@foi.hr");
+        solo.typeText(1, "test");
+        solo.clickOnButton(0);
         solo.waitForActivity(hr.foi.air.t18.chatup.MainClass.class, 100);
-        solo.clickLongInList(1);
-        solo.clickOnMenuItem("Start conversation");
-        solo.waitForActivity(hr.foi.air.t18.chatup.MainClass.class, 100);
-        //testing image
-        ImageView imageButton = (ImageView) solo.getView(R.id.profilePicture);
-        solo.clickLongOnView(imageButton);
+        solo.sleep(5000);
         solo.goBack();
-        /// /exit
-        solo.goBack();
+
     }
 
 }

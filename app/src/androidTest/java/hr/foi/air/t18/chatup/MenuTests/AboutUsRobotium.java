@@ -1,23 +1,21 @@
-package hr.foi.air.t18.chatup;
+package hr.foi.air.t18.chatup.MenuTests;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.MediumTest;
-import android.view.Display;
-
 import com.robotium.solo.Solo;
-
 import hr.foi.air.t18.chatup.Login.LoginActivity;
 
+
 /**
- * Created by JurmanLap on 10.1.2016..
+ * Created by JurmanLap on 9.1.2016..
  */
-public class MessagesFragmentRobotium extends ActivityInstrumentationTestCase2<LoginActivity> {
+public class AboutUsRobotium extends ActivityInstrumentationTestCase2<LoginActivity> {
     Activity activity;
     private Solo solo;
 
     //konstruktor
-    public MessagesFragmentRobotium() {
+    public AboutUsRobotium() {
         super (LoginActivity.class);
     }
 
@@ -45,10 +43,17 @@ public class MessagesFragmentRobotium extends ActivityInstrumentationTestCase2<L
         solo.typeText(1, "test");
         solo.clickOnButton(0);
         solo.waitForActivity(hr.foi.air.t18.chatup.MainClass.class, 100);
-        //testovi...
-        solo.drag(300,0,100, 100,1);
-        solo.clickLongInList(1);    //samo test
+        solo.clickOnView(solo.getView(android.widget.ImageView.class, 0));
+        solo.clickInList(4, 0);
+        solo.sleep(5000);
+        solo.clickOnView(solo.getView(hr.foi.air.t18.chatup.R.id.btnAboutUsClose));
+
 
     }
 
-    }
+}
+
+
+
+
+

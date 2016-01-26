@@ -45,7 +45,8 @@ public class SettingsRobotium extends ActivityInstrumentationTestCase2<LoginActi
         solo.typeText(1, "test");
         solo.clickOnButton(0);
         solo.waitForActivity(hr.foi.air.t18.chatup.MainClass.class, 100);
-        solo.clickOnMenuItem("Settings");
+        solo.clickOnView(solo.getView(android.widget.ImageView.class, 0));
+        solo.clickInList(2, 0);
         solo.waitForActivity(hr.foi.air.t18.chatup.Menu.Settings.class, 100);
         solo.clickOnRadioButton(0);
         solo.clickOnButton("Save");
@@ -59,8 +60,3 @@ public class SettingsRobotium extends ActivityInstrumentationTestCase2<LoginActi
     }
 
 }
-
-
-
-
-
