@@ -13,9 +13,9 @@ import java.util.List;
  */
 public interface IState {
 
-    public void paint(Context context);
+    void applyChange(Context context, View view);
 
-    void setColor();
+    Object getData();
 
 
 

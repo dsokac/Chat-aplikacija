@@ -75,4 +75,13 @@
     <string name="ForgotPassDialogContent">"E-mail has been sent to "</string>
     <string name="ForgotPassEmptyDialogContent">E-mail is required!</string>
     <string name="ForgotPassDialogTitle">Success</string>
+    <string name="SearchOptionHeadingText">Search by</string>
+    <string name="SettingsRadioEmail">E-mail</string>
+    <string name="SettingsRadioUsername">Username</string>
+    <string name="SettingsSearch">ChatUP_SearchBy</string>
+    <string name="SettingsColor">ChatUP_Color</string>
+    <string name="SettingsColorPink">Pink</string>
+    <string name="SettingsColorBlack">Black</string>
+    <string name="SettingsColorBlue">Blue</string>
+
 </resources>

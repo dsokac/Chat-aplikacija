@@ -1,6 +1,7 @@
 package hr.foi.air.t18.webservice.MainAsync;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -91,6 +92,7 @@ public class FetchUserDataAsync extends AsyncTask<Void, Void, String>
 
         user.setEmail(jsonObject.getString("email"));
         user.setUsername(jsonObject.getString("username"));
+        user.setProfilePicture(jsonObject.getString("profilePicture"));
         return user;
     }
 }

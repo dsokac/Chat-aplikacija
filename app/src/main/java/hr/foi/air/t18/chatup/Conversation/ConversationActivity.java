@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.InterstitialAd;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -212,10 +213,20 @@ public class ConversationActivity extends AppCompatActivity
                         AddMessageToConversation(result.data);
                         SortAndLoadMessagesIntoListView();
 
-                        
+
                         JSONObject object = new JSONObject();
                         try {
-                            object.put("participants", conversation.getParticipants());
+                            String sender = SharedPreferencesClass.getDefaults("UserEmail", getApplicationContext());
+                            JSONArray usersInConversation = new JSONArray();
+                            int i = 0;
+                            for(User user : conversation.getParticipants()) {
+                                if(!(user.getEmail().equalsIgnoreCase(sender))) {
+                                    usersInConversation.put(user.getEmail());
+                                    i++;
+                                }
+                            }
+                            object.put("sender", sender);
+                            object.put("participants", usersInConversation);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -316,7 +327,17 @@ public class ConversationActivity extends AppCompatActivity
 
                             JSONObject object = new JSONObject();
                             try {
-                                object.put("participants", conversation.getParticipants());
+                                String sender = SharedPreferencesClass.getDefaults("UserEmail", getApplicationContext());
+                                JSONArray usersInConversation = new JSONArray();
+                                int i = 0;
+                                for(User user : conversation.getParticipants()) {
+                                    if(!(user.getEmail().equalsIgnoreCase(sender))) {
+                                        usersInConversation.put(user.getEmail());
+                                        i++;
+                                    }
+                                }
+                                object.put("sender", sender);
+                                object.put("participants", usersInConversation);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

@@ -56,7 +56,6 @@ public class HomePageFragment extends Fragment {
 
         this.sharedPref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
         this.loggedIn = sharedPref.getString("id", "unknown");
-
         View root = inflater.inflate(R.layout.tab_fragment_main, container, false);
         friends = new ArrayList<>();
 
@@ -124,12 +123,10 @@ public class HomePageFragment extends Fragment {
     }
 
     private void setProfilePicture() {
-        if (!sharedPref.contains("UserProfilePictureBase64")) {
-            String profilePictureInBase64 = SharedPreferencesClass.getDefaults("UserProfilePictureBase64", getActivity().getApplicationContext());
-            byte[] decodedByte = Base64.decode(profilePictureInBase64, 0);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
-            profilePicture.setImageBitmap(bitmap);
-        }
+        String profilePictureInBase64 = SharedPreferencesClass.getDefaults("UserProfilePictureBase64", getActivity().getApplicationContext());
+        byte[] decodedByte = Base64.decode(profilePictureInBase64, Base64.NO_WRAP | Base64.URL_SAFE);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+        profilePicture.setImageBitmap(bitmap);
     }
 
     @Override

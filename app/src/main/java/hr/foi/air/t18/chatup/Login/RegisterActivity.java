@@ -67,6 +67,7 @@ public class RegisterActivity extends AppCompatActivity
                 User newUser = buildUser();
                 String password1 = editPassword.getText().toString();
                 String password2 = editPassword2.getText().toString();
+
                 if (newUser.validateEmail() && newUser.validatePassword(password1, password2)) {
                     registerUser(newUser, password1);
                 }

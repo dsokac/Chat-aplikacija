@@ -1,6 +1,7 @@
 package hr.foi.air.t18.socketnotifications;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.app.NotificationCompat;
@@ -72,5 +73,7 @@ abstract class SocketAbstractAsync extends AsyncTask<Object,Void,Object> impleme
                 (NotificationManager) snManager.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
 
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
+
+
     }
 }
