@@ -12,8 +12,11 @@ import java.util.Map;
  * Class used for sending POST requests to Web services.
  * Created by Danijel on 24.10.2015..
  */
-public class HttpPOST extends HttpMethod
+public class HttpPOST
 {
+    HttpURLConnection connection;
+    String url;
+    StringBuffer response;
     private String query = "";
 
     /**
@@ -22,14 +25,19 @@ public class HttpPOST extends HttpMethod
      */
     public HttpPOST(String url)
     {
-        super(url);
+        this.url = url;
+        this.response = new StringBuffer();
+    }
+
+    public String getResponse()
+    {
+        return response.toString();
     }
 
     /**
      * Sends empty POST request to Web service.
      * @throws IOException
      */
-    @Override
     public void sendRequest() throws IOException
     {
         try {
@@ -56,7 +64,6 @@ public class HttpPOST extends HttpMethod
      * @param data POST parameters as Map object
      * @throws IOException
      */
-    @Override
     public void sendRequest(Map<String, String> data) throws IOException
     {
         generateQuery(data);
@@ -68,7 +75,6 @@ public class HttpPOST extends HttpMethod
      * @param data POST parameters as list of Pair objects
      * @throws IOException
      */
-    @Override
     public void sendRequest(ArrayList<Pair<String, String>> data) throws IOException
     {
         generateQuery(data);
