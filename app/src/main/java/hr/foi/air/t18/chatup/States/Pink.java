@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import java.util.HashMap;
 import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.core.State.Context;
@@ -16,11 +18,11 @@ import hr.foi.air.t18.core.State.IState;
 /**
  * Created by JurmanLap on 11.1.2016..
  */
-public class Green extends AppCompatActivity implements IState {
+public class Pink extends AppCompatActivity implements IState {
 
     private HashMap<String,Object> elements;
 
-    public Green(HashMap<String, Object> elements)
+    public Pink(HashMap<String, Object> elements)
     {
         this.elements = elements;
     }
@@ -28,13 +30,14 @@ public class Green extends AppCompatActivity implements IState {
     @Override
     public void applyChange(Context context, View view){
 
-        ((Toolbar)elements.get("toolbar_stgs")).setBackgroundResource(R.color.colorGreen);
-        ((TabLayout)elements.get("tablayout_stgs")).setBackgroundResource(R.color.colorGreen);
-        ((ViewPager)elements.get("viewpager_stgs")).setBackgroundResource(R.color.colorVeryLightGreen);
+        ((Toolbar)elements.get("toolbar_stgs")).setBackgroundResource(R.color.colorPink);
+        ((TabLayout)elements.get("tablayout_stgs")).setBackgroundResource(R.color.colorPink);
+        ((ViewPager)elements.get("viewpager_stgs")).setBackgroundResource(R.color.colorLightPink);
+//        ((TextView)elements.get("elv")).setBackgroundResource(R.color.colorPink);
 
-        ((Toolbar)elements.get("toolbar_settings")).setBackgroundResource(R.color.colorGreen);
+  /*      ((Toolbar)elements.get("toolbar_settings")).setBackgroundResource(R.color.colorGreen);
         ((RelativeLayout)elements.get("relative_layout_stgs")).setBackgroundResource(R.color.colorVeryLightGreen);
-        ((Button)elements.get("btnSettingsSave")).setBackgroundResource(R.drawable.button_shape3);
+        ((Button)elements.get("btnSettingsSave")).setBackgroundResource(R.drawable.button_shape3);+*/
 
         context.setState(this);
     }

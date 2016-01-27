@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import java.util.HashMap;
 import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.core.State.Context;
@@ -30,10 +32,11 @@ public class Blue implements IState {
         ((Toolbar)elements.get("toolbar_stgs")).setBackgroundResource(R.color.colorPrimary);
         ((TabLayout)elements.get("tablayout_stgs")).setBackgroundResource(R.color.colorPrimary);
         ((ViewPager)elements.get("viewpager_stgs")).setBackgroundResource(R.color.colorWhite);
+    //    ((TextView)elements.get("elv")).setBackgroundResource(R.color.colorPrimary);
 
-        ((Toolbar)elements.get("toolbar_settings")).setBackgroundResource(R.color.colorPrimary);
+ /*       ((Toolbar)elements.get("toolbar_settings")).setBackgroundResource(R.color.colorPrimary);
         ((RelativeLayout)elements.get("relative_layout_stgs")).setBackgroundResource(R.color.colorWhite);
-        ((Button)elements.get("btnSettingsSave")).setBackgroundResource(R.drawable.button_shape);
+        ((Button)elements.get("btnSettingsSave")).setBackgroundResource(R.drawable.button_shape);*/
 
         context.setState(this);
     }

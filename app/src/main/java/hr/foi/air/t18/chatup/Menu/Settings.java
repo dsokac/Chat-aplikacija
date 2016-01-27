@@ -9,14 +9,10 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import java.util.HashMap;
-import hr.foi.air.t18.chatup.MainClass;
+
 import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.State.Context;
 import hr.foi.air.t18.chatup.R;
-import hr.foi.air.t18.chatup.States.Black;
-import hr.foi.air.t18.chatup.States.Green;
-import hr.foi.air.t18.chatup.States.Blue;
-import hr.foi.air.t18.core.State.IState;
 
 
 /**
@@ -72,7 +68,7 @@ public class Settings extends AppCompatActivity {
                 String searchSettings_text = getCheckedRadioButtonText(search_radiogroup);
                 SharedPreferencesClass.setDefaults(getString(R.string.SettingsSearch),searchSettings_text,getApplicationContext());
 
-                hashElems.clear();
+                /*hashElems.clear();
                 hashElems.put("toolbar_stgs", MainClass.toolbar_stgs);
                 hashElems.put("tablayout_stgs",MainClass.tablayout_stgs);
                 hashElems.put("viewpager_stgs",MainClass.viewpager_stgs);
@@ -83,7 +79,7 @@ public class Settings extends AppCompatActivity {
                 IState state = null;
 
                 if (settings_id.equals("0")) {
-                    state = new Green(hashElems);
+                    state = new Pink(hashElems);
                 }
 
                 else if (settings_id.equals("1")) {
@@ -93,7 +89,7 @@ public class Settings extends AppCompatActivity {
                     state = new Blue(hashElems);
                 }
 
-                state.applyChange(context,null);
+                state.applyChange(context,null);*/
                 Toast.makeText(getApplicationContext(), "Update successfully", Toast.LENGTH_SHORT).show();
                 Settings.this.finish();
             }

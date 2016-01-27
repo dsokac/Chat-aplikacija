@@ -13,4 +13,6 @@
     <string name="SettingsRadioUsername">Username</string>
     <string name="SettingsSearch">ChatUP_SearchBy</string>
     <string name="SettingsColor">ChatUP_Color</string>
+    <string name="SettingsColorPink">Pink</string>
+    <string name="SettingsColorBlue">Blue</string>
 </resources>

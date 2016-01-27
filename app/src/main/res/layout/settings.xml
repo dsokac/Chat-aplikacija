@@ -52,19 +52,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Green and email" />
+            android:text="@string/SettingsColorPink" />
 
         <RadioButton
             android:id="@+id/radioDesign2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Black and username" />
+            android:text="@string/SettingsColorBlack" />
 
         <RadioButton
             android:id="@+id/radioDesign3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Blue and both" />
+            android:text="@string/SettingsColorBlue" />
 
     </RadioGroup>
 

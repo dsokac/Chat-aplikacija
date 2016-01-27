@@ -4,20 +4,19 @@ import android.app.ProgressDialog;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 
-import android.util.JsonWriter;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.util.HashMap;
 
 import hr.foi.air.t18.chatup.Fragments.FragmentBuffer;
 import hr.foi.air.t18.chatup.Fragments.HomePageFragment;
@@ -29,6 +28,11 @@ import hr.foi.air.t18.chatup.Menu.AboutUsDialog;
 import hr.foi.air.t18.chatup.Menu.EditProfile;
 import hr.foi.air.t18.chatup.Menu.Settings;
 
+import hr.foi.air.t18.chatup.States.Black;
+import hr.foi.air.t18.chatup.States.Blue;
+import hr.foi.air.t18.chatup.States.Pink;
+import hr.foi.air.t18.core.State.Context;
+import hr.foi.air.t18.core.State.IState;
 import hr.foi.air.t18.socketnotifications.CreateSocketConnectionAsync;
 import hr.foi.air.t18.socketnotifications.FriendRequestNotifsAsync;
 import hr.foi.air.t18.socketnotifications.NewMessageNotifsAsync;
@@ -39,7 +43,6 @@ import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.IListener;
-import hr.foi.air.t18.webservice.MainAsync.FetchUserDataAsync;
 import hr.foi.air.t18.webservice.MenuAsync.LogoutAsync;
 import hr.foi.air.t18.webservice.WebServiceResult;
 
@@ -235,5 +238,38 @@ public class MainClass extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+        HashMap<String,Object> hashElems = new HashMap<>();
+
+        hashElems.clear();
+        hashElems.put("toolbar_stgs", MainClass.toolbar_stgs);
+        hashElems.put("tablayout_stgs",MainClass.tablayout_stgs);
+        hashElems.put("viewpager_stgs",MainClass.viewpager_stgs);
+      //  hashElems.put("elv",findViewById(R.id.conversation_expandable));
+
+        hashElems.put("toolbar_settings",Settings.toolbar_settings);
+        hashElems.put("relative_layout_stgs",Settings.relative_layout_stgs);
+        hashElems.put("btnSettingsSave",Settings.btnSettingsSave);
+
+        IState state = null;
+
+        String settings_id = SharedPreferencesClass.getDefaults(getString(R.string.SettingsColor),getApplicationContext());
+
+        if (settings_id.equals("0")) {
+            state = new Pink(hashElems);
+        }
+
+        else if (settings_id.equals("1")) {
+            state = new Black(hashElems);
+        }
+        else if (settings_id.equals("2")) {
+            state = new Blue(hashElems);
+        }
+
+        Context context = new Context();
+        state.applyChange(context, null);
+    }
 }
