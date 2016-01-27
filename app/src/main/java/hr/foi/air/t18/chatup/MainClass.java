@@ -56,11 +56,6 @@ public class MainClass extends AppCompatActivity {
     private PagerAdapter adapter;
 
     private SocketNotificationsManager snManager;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +76,6 @@ public class MainClass extends AppCompatActivity {
             loggedIn = user.getEmail();
             this.progress = new ProgressDialog(this);
         }
-
-
 
         this.sharedPref = this.getPreferences(MODE_PRIVATE);
         if (!this.sharedPref.contains("id") || (this.sharedPref.contains("id") && !this.sharedPref.getString("id", "unknown").equals(loggedIn))) {

@@ -75,4 +75,5 @@
     <string name="ForgotPassDialogContent">"E-mail has been sent to "</string>
     <string name="ForgotPassEmptyDialogContent">E-mail is required!</string>
     <string name="ForgotPassDialogTitle">Success</string>
+
 </resources>

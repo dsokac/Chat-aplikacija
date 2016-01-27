@@ -64,7 +64,7 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
 
         if (!SharedPreferencesClass.getDefaults("UserProfilePictureBase64", getApplicationContext()).isEmpty()) {
             String profilePictureInBase64 = SharedPreferencesClass.getDefaults("UserProfilePictureBase64", getApplicationContext());
-            byte[] decodedByte = Base64.decode(profilePictureInBase64, 0);
+            byte[] decodedByte = Base64.decode(profilePictureInBase64, Base64.NO_WRAP | Base64.URL_SAFE);
             Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
             imageView.setImageBitmap(bitmap);
         }
@@ -186,7 +186,7 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG, 90, byteArrayOutputStream);
         byte[] b = byteArrayOutputStream.toByteArray();
-        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
+        String imageEncoded = Base64.encodeToString(b, Base64.NO_WRAP | Base64.URL_SAFE);
 
         // print in log base64 string for bitmap
         Log.e("BASE64", imageEncoded);
