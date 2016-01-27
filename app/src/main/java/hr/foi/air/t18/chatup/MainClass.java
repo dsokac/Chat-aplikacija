@@ -84,8 +84,8 @@ public class MainClass extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         User user = new User();
-        if (MiddleMan.getObject() != null) {
-            user = (User) MiddleMan.getObject();
+        if (MiddleMan.getUserObject() != null) {
+            user = (User) MiddleMan.getUserObject();
             loggedIn = user.getEmail();
             this.progress = new ProgressDialog(this);
         }
@@ -111,7 +111,7 @@ public class MainClass extends AppCompatActivity {
         tablayout_stgs = (TabLayout) this.findViewById(R.id.tab_layout);
 
         createTabs();
-        MiddleMan.setObject(snManager);
+        MiddleMan.setNotificationObject(snManager);
     }
 
     /**

@@ -62,7 +62,7 @@ public class SearchFragment extends Fragment {
     private String current="";
     public static EditText search_text;
 
-    private SocketNotificationsManager socketNotificationsManager;
+    private SocketNotificationsManager socketNotificationsManager = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -78,7 +78,7 @@ public class SearchFragment extends Fragment {
         search_button = (Button) root.findViewById(R.id.searchButton);
         search_text = (EditText) root.findViewById(R.id.searchUser);
 
-        socketNotificationsManager  = (SocketNotificationsManager) MiddleMan.getObject();
+        socketNotificationsManager  = (SocketNotificationsManager) MiddleMan.getNotificationObject();
 
         //fetching all registered users
         SearchAsync registeredUsers = new SearchAsync(this.loggedIn, new IListener<JSONArray>() {
@@ -182,10 +182,6 @@ public class SearchFragment extends Fragment {
         return (reg_users.get((int)position_in_list).getEmail());
     }
 
-    public String toString2() {
-
-        return (reg_users2.get((int)position_in_list).getEmail());
-    }
 
     //onContextItemSelected logic
     @Override
