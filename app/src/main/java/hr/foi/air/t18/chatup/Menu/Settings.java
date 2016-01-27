@@ -4,11 +4,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import java.util.HashMap;
 import hr.foi.air.t18.chatup.MainClass;
+import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.State.Context;
 import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.chatup.States.Black;
@@ -32,6 +34,19 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
+
+        String searchOption = SharedPreferencesClass.getDefaults(getString(R.string.SettingsSearch),getApplicationContext());
+        if(searchOption.contentEquals(getString(R.string.SettingsRadioUsername)))
+        {
+            ((RadioButton)findViewById(R.id.SettingsRadioUsername)).setChecked(true);
+
+        }
+
+        String colorOption = SharedPreferencesClass.getDefaults(getString(R.string.SettingsColor), getApplicationContext());
+        if(colorOption.equalsIgnoreCase("0")) ((RadioButton)findViewById(R.id.radioDesign1)).setChecked(true);
+        else if(colorOption.equalsIgnoreCase("1")) ((RadioButton)findViewById(R.id.radioDesign2)).setChecked(true);
+        else if(colorOption.equalsIgnoreCase("2")) ((RadioButton)findViewById(R.id.radioDesign3)).setChecked(true);
+
         created=true;
         toolbar_settings = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar_settings);
@@ -40,6 +55,7 @@ public class Settings extends AppCompatActivity {
         btnSettingsSave = (Button) findViewById(R.id.btnSettingsSave);
         final RadioGroup settings_radiogroup = (RadioGroup) findViewById(R.id.SettingsColor);
         final Context context = new Context();
+        final RadioGroup search_radiogroup = (RadioGroup) findViewById(R.id.SettingsSearchRadioGroup);
 
 
         btnSettingsSave.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +65,12 @@ public class Settings extends AppCompatActivity {
                 View radioButton = settings_radiogroup.findViewById(radioButtonID);
                 int idx = settings_radiogroup.indexOfChild(radioButton);
                 settings_id = Integer.toString(idx);
+
+                String colorSettings_text = Integer.toString(getCheckedRadioButtonIndex(settings_radiogroup));
+                SharedPreferencesClass.setDefaults(getString(R.string.SettingsColor),colorSettings_text,getApplicationContext());
+
+                String searchSettings_text = getCheckedRadioButtonText(search_radiogroup);
+                SharedPreferencesClass.setDefaults(getString(R.string.SettingsSearch),searchSettings_text,getApplicationContext());
 
                 hashElems.clear();
                 hashElems.put("toolbar_stgs", MainClass.toolbar_stgs);
@@ -71,9 +93,24 @@ public class Settings extends AppCompatActivity {
                     state = new Blue(hashElems);
                 }
 
-                state.paint(context);
+                state.applyChange(context,null);
                 Toast.makeText(getApplicationContext(), "Update successfully", Toast.LENGTH_SHORT).show();
+                Settings.this.finish();
             }
         });
+    }
+
+    public int getCheckedRadioButtonIndex(RadioGroup radioGroup)
+    {
+        int radioID = radioGroup.getCheckedRadioButtonId();
+        View radioButton = radioGroup.findViewById(radioID);
+        return radioGroup.indexOfChild(radioButton);
+    }
+
+    public String getCheckedRadioButtonText(RadioGroup radioGroup)
+    {
+        int radioID = radioGroup.getCheckedRadioButtonId();
+        RadioButton radio = (RadioButton)radioGroup.findViewById(radioID);
+        return radio.getText().toString();
     }
 }

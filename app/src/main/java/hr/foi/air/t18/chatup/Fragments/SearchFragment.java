@@ -1,8 +1,10 @@
 package hr.foi.air.t18.chatup.Fragments;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -21,6 +23,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import hr.foi.air.t18.chatup.States.SearchEmail;
+import hr.foi.air.t18.chatup.States.SearchUsername;
+import hr.foi.air.t18.core.SharedPreferencesClass;
+import hr.foi.air.t18.core.State.Context;
+import hr.foi.air.t18.core.State.IState;
 import hr.foi.air.t18.socketnotifications.BackgroundService;
 import hr.foi.air.t18.socketnotifications.ConnectToService;
 import hr.foi.air.t18.chatup.R;
@@ -46,8 +53,8 @@ public class SearchFragment extends Fragment {
     ListView lv;
     private String selected_friend="";
     long position_in_list;
-    final ArrayList<User> reg_users = new ArrayList<User>();
-    final ArrayList<User> reg_users2 = new ArrayList<User>();
+    ArrayList<User> reg_users = new ArrayList<User>();
+    ArrayList<User> reg_users2 = new ArrayList<User>();
     final ArrayList<User> search = new ArrayList<User>();
     final ArrayList<User> search2 = new ArrayList<User>();
     public static Button search_button;
@@ -69,48 +76,9 @@ public class SearchFragment extends Fragment {
         View root = inflater.inflate(R.layout.tab_fragment_search, container, false);
         final View final_root = root;
         search_button = (Button) root.findViewById(R.id.searchButton);
-        search_button2 = (Button) root.findViewById(R.id.searchButton2);
         search_text = (EditText) root.findViewById(R.id.searchUser);
 
         socketNotificationsManager  = (SocketNotificationsManager) MiddleMan.getObject();
-
-        //logic when user click on search button
-        search_button.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                reg_users.clear();
-                lv = (ListView) final_root.findViewById(R.id.searchListview);
-                for (int i = 0; i < search.size(); i++) {
-                    if(search.get(i).getEmail().contains(search_text.getText().toString())){
-                        reg_users.add(search.get(i));
-                    }
-
-                }
-                lv.setAdapter(new RegisteredUsersListAdapter(getActivity(), reg_users));
-                current="onClick1";
-            }
-        });
-
-        search_button2.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                reg_users2.clear();
-                lv = (ListView) final_root.findViewById(R.id.searchListview);
-                for (int i = 0; i < search2.size(); i++) {
-                    if(search2.get(i).getEmail().contains(search_text.getText().toString())){
-                        reg_users2.add(search2.get(i));
-                    }
-
-                }
-                lv.setAdapter(new RegisteredUsersListAdapter(getActivity(), reg_users2));
-                current="onClick2";
-            }
-        });
-
 
         //fetching all registered users
         SearchAsync registeredUsers = new SearchAsync(this.loggedIn, new IListener<JSONArray>() {
@@ -182,7 +150,7 @@ public class SearchFragment extends Fragment {
             }
         });
         addFriendAsync.execute();
-        //mConnection.connectedService().useSocket().NotifyFriendRequest(this.loggedIn, selected_friend);
+
         JSONObject json = new JSONObject();
         try
         {
@@ -204,13 +172,8 @@ public class SearchFragment extends Fragment {
         MenuInflater inflater = getActivity().getMenuInflater();
         inflater.inflate(R.menu.add_friends_menu, menu);
         position_in_list = ((AdapterView.AdapterContextMenuInfo) menuInfo).position;
-        //store value of selected frend into variable
-        if (current.equals("onClick1")) {
-            selected_friend = toString();
-        }
-        else if (current.equals("onClick2")) {
-            selected_friend = toString2();
-        }
+
+        selected_friend = toString();
     }
     //Returns selected user on long click
 
@@ -240,5 +203,23 @@ public class SearchFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        Context ctx = new Context();
 
+        String searchOption = SharedPreferencesClass.getDefaults(getString(R.string.SettingsSearch), getActivity().getApplicationContext());
+
+        IState state = null;
+
+        if(searchOption.contentEquals(getString(R.string.SettingsRadioEmail))) state = new SearchEmail(search,lv,search_text.getText().toString(),getActivity(), reg_users2);
+        else state = new SearchUsername(search2,lv,search_text.getText().toString(),getActivity(), reg_users);
+
+        state.applyChange(ctx, search_button);
+        this.reg_users = (ArrayList<User>)state.getData();
+
+    }
 }
+
+
+

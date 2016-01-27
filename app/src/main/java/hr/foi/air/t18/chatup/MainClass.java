@@ -61,6 +61,16 @@ public class MainClass extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if(SharedPreferencesClass.getDefaults(getString(R.string.SettingsSearch),getApplicationContext()).equals(""))
+        {
+            SharedPreferencesClass.setDefaults(getString(R.string.SettingsSearch),getString(R.string.SettingsRadioEmail),getApplicationContext());
+        }
+
+        if(SharedPreferencesClass.getDefaults(getString(R.string.SettingsColor),getApplicationContext()).equals(""))
+        {
+            SharedPreferencesClass.setDefaults(getString(R.string.SettingsColor),"0",getApplicationContext());
+        }
+
         this.snManager = new SocketNotificationsManager("http://104.236.58.50:3000/", getApplicationContext());
 
         this.snManager.attachAsyncTasks(new CreateSocketConnectionAsync(this.snManager, null));

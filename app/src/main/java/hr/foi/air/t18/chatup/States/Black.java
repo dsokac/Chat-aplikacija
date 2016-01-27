@@ -4,6 +4,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import java.util.HashMap;
@@ -24,34 +25,21 @@ public class Black implements IState {
     }
 
     @Override
-    public void paint(Context context) {
+    public void applyChange(Context context, View view) {
 
-        Log.d("Odabir plava", "");
-        setColor();
-        //searchTab();
+        ((Toolbar) elements.get("toolbar_stgs")).setBackgroundResource(R.color.colorBlack);
+        ((TabLayout) elements.get("tablayout_stgs")).setBackgroundResource(R.color.colorBlack);
+        ((ViewPager) elements.get("viewpager_stgs")).setBackgroundResource(R.color.colorLightWhite);
+
+        ((Toolbar) elements.get("toolbar_settings")).setBackgroundResource(R.color.colorBlack);
+        ((RelativeLayout) elements.get("relative_layout_stgs")).setBackgroundResource(R.color.colorLightWhite);
+        ((Button) elements.get("btnSettingsSave")).setBackgroundResource(R.drawable.button_shape2);
         context.setState(this);
     }
 
     @Override
-    public void setColor(){
-
-        ((Toolbar)elements.get("toolbar_stgs")).setBackgroundResource(R.color.colorBlack);
-        ((TabLayout)elements.get("tablayout_stgs")).setBackgroundResource(R.color.colorBlack);
-        ((ViewPager)elements.get("viewpager_stgs")).setBackgroundResource(R.color.colorLightWhite);
-
-        ((Toolbar)elements.get("toolbar_settings")).setBackgroundResource(R.color.colorBlack);
-        ((RelativeLayout)elements.get("relative_layout_stgs")).setBackgroundResource(R.color.colorLightWhite);
-        ((Button)elements.get("btnSettingsSave")).setBackgroundResource(R.drawable.button_shape2);
+    public Object getData() {
+        return null;
     }
-
- /*
-    private void searchTab (){
-        SearchFragment.search_button.setVisibility(Button.VISIBLE);
-        SearchFragment.search_button2.setVisibility(Button.VISIBLE);
-        SearchFragment.search_button.setBackgroundResource(R.drawable.button_shape);
-        SearchFragment.search_button2.setBackgroundResource(R.drawable.button_shape);
-        SearchFragment.search_text.setHint("Search by email or username");
-    }
-   */
 }
 
