@@ -217,7 +217,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 Toast.makeText(getApplicationContext(),"Fetching done",Toast.LENGTH_SHORT).show();
-                MiddleMan.setObject(user);
+                MiddleMan.setUserObject(user);
                 startActivity(intent);
             }
         });

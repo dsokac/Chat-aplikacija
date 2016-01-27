@@ -17,6 +17,4 @@ public interface IState {
 
     Object getData();
 
-
-
 }

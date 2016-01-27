@@ -106,7 +106,7 @@ public class ConversationActivity extends AppCompatActivity
         if (itemID == R.id.action_add_participant)
         {
             Intent i = new Intent(this, AddParticipantActivity.class);
-            MiddleMan.setObject(conversation.getParticipants());
+            MiddleMan.setConversationObject(conversation.getParticipants());
             startActivityForResult(i, requestCode);
         }
         return true;
@@ -118,7 +118,7 @@ public class ConversationActivity extends AppCompatActivity
         if (resultCode == RESULT_OK)
         {
             ArrayList<String> emailBuffer =
-                    (ArrayList<String>) MiddleMan.getObject();
+                    (ArrayList<String>) MiddleMan.getConversationObject();
 
             AddParticipantsToConversationAsyncTask aptc =
                     new AddParticipantsToConversationAsyncTask(conversation.getID(), emailBuffer, new IListener<ArrayList<String>>()
@@ -148,7 +148,7 @@ public class ConversationActivity extends AppCompatActivity
     {
         activity = this;
 
-        conversation = (Conversation) MiddleMan.getObject();
+        conversation = (Conversation) MiddleMan.getConversationObject();
         socketNotificationManager = conversation.getSocketNotificationManager();
         lvMessages = (ListView) findViewById(R.id.convMessages);
         btnSendMessage = (Button) findViewById(R.id.convSendButton);

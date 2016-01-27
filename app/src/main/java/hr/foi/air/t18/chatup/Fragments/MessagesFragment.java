@@ -115,7 +115,7 @@ public class MessagesFragment extends Fragment
                 String key = (String) conversationMap.keySet().toArray()[groupPosition];
                 Conversation conversation = conversationMap.get(key).get(childPosition);
                 conversation.setSocketNotificationManager(socketNotificationsManager);
-                MiddleMan.setObject(conversation);
+                MiddleMan.setConversationObject(conversation);
 
                 Intent intent = new Intent(getActivity(), ConversationActivity.class);
                 startActivity(intent);
