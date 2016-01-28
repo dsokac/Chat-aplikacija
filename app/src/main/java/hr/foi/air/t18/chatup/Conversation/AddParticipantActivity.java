@@ -67,7 +67,7 @@ public class AddParticipantActivity extends AppCompatActivity
     {
         activity = this;
         friends = new ArrayList<>();
-        currentParticipants = (ArrayList<User>) MiddleMan.getObject();
+        currentParticipants = (ArrayList<User>) MiddleMan.getConversationObject();
 
         lvFriends = (ListView) findViewById(R.id.convAddParticipantList);
         buttonOK = (Button) findViewById(R.id.convAddParticipantOK);
@@ -96,7 +96,7 @@ public class AddParticipantActivity extends AppCompatActivity
                             emailBuffer.add(friends.get(i).getEmail());
                     }
 
-                    MiddleMan.setObject(emailBuffer);
+                    MiddleMan.setConversationObject(emailBuffer);
 
                     setResult(RESULT_OK);
                     finish();
