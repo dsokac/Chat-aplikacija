@@ -245,17 +245,12 @@ public class ConversationActivity extends AppCompatActivity
     private Bitmap ResizeImage(Bitmap image)
     {
         float aspectRatio = image.getWidth() / image.getHeight();
+        int width = 480;
 
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-
-        if (image.getWidth() > size.x)
+        if (image.getWidth() > width)
         {
-            int width = size.x;
             int height = Math.round(width / aspectRatio);
-
-            return Bitmap.createScaledBitmap(image, width, height, false);
+            return Bitmap.createScaledBitmap(image, width, height, true);
         }
         else
             return image;
