@@ -59,7 +59,6 @@ public class MainClass extends AppCompatActivity {
     private PagerAdapter adapter;
 
     private SocketNotificationsManager snManager;
-    public PendingIntent pIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,15 +78,8 @@ public class MainClass extends AppCompatActivity {
 
         this.snManager.attachAsyncTasks(new CreateSocketConnectionAsync(this.snManager, null));
 
-        pIntent = PendingIntent.getActivity(
-            this,
-            0,
-            new Intent(this, Conversation.class),
-            PendingIntent.FLAG_UPDATE_CURRENT
-        );
-
         new FriendRequestNotifsAsync().listenServer(this.snManager, SocketEvents.friendRequest,"Friend Request",R.drawable.logo_v1, null);
-        new NewMessageNotifsAsync().listenServer(this.snManager, SocketEvents.newMessage, "New message!", R.drawable.logo_v1, pIntent);
+        new NewMessageNotifsAsync().listenServer(this.snManager, SocketEvents.newMessage, "New message!", R.drawable.logo_v1, null);
 
         setContentView(R.layout.activity_main);
 
