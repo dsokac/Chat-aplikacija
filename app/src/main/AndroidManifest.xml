@@ -36,11 +36,8 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ImagePickerActivity" />
         <activity android:name=".Conversation.AddParticipantActivity"/>
-        <activity android:name=".AboutUsDialog" />
         <activity android:name=".Menu.EditProfile" android:noHistory="true"></activity>
         <activity android:name=".Menu.Settings" android:noHistory="true"></activity>
-
-        <service android:name=".SocketNotifications.BackgroundService"/>
 
 
 
