@@ -13,6 +13,7 @@ import com.google.android.gms.ads.AdRequest;
 public class DlAdsListener extends AdListener {
     private Context mContext;
 
+    //construktor
     public DlAdsListener(Context context) {
         this.mContext = context;
     }

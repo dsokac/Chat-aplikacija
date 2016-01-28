@@ -62,6 +62,7 @@ public class SocketNotificationsManager {
         this.backgroundService = new BackgroundService();
         this.context.startService(new Intent(this.context,BackgroundService.class));
         this.isServiceRunning = true;
+        this.bindToService();
     }
 
     /***
@@ -99,7 +100,7 @@ public class SocketNotificationsManager {
      */
     public void attachAsyncTasks(AsyncTask<Object,Void,Object> asyncTask, Object... params)
     {
-         asyncTask.execute(params);
+         backgroundService.executeAsyncTask(asyncTask,params);
     }
 
     /***

@@ -232,7 +232,6 @@ public class ConversationActivity extends AppCompatActivity
                             }
                             object.put("sender", sender);
                             object.put("participants", usersInConversation);
-                            object.put("conversationID", conversation.getID());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -352,7 +351,6 @@ public class ConversationActivity extends AppCompatActivity
                                 }
                                 object.put("sender", sender);
                                 object.put("participants", usersInConversation);
-                                object.put("conversationID", conversation.getID());
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

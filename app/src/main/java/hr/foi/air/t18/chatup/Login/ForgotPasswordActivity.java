@@ -25,6 +25,7 @@ import hr.foi.air.t18.webservice.WebServiceResult;
 
 /**
  * Public class ForgotPasswordActivity implements logic of Forgot Password Activity
+ * Send mail to entered e-mail with password for this email
  */
 public class ForgotPasswordActivity extends AppCompatActivity {
 
@@ -105,6 +106,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                                             @Override
                                             public void run() {
                                                 try {
+
                                                     GMailSender sender = new GMailSender("matija.jurman@gmail.com",
                                                             "tipkovnica");
                                                     sender.sendMail("ChatUP forgotten password", "Dear " + forgot_entered + ",\nyour ChatUP password is: '" + forgot_password + "'",
