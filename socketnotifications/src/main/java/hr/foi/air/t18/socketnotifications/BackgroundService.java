@@ -2,6 +2,7 @@ package hr.foi.air.t18.socketnotifications;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ public class BackgroundService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+        Toast.makeText(getApplicationContext(),"bound",Toast.LENGTH_SHORT).show();
         return mBinder;
     }
 
@@ -49,6 +51,11 @@ public class BackgroundService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    public void executeAsyncTask(AsyncTask<Object,Void,Object> asyncTask, Object... params)
+    {
+          asyncTask.execute(params);
     }
 
 }

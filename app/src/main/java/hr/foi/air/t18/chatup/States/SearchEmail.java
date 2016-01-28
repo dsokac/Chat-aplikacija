@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -20,10 +21,10 @@ public class SearchEmail implements IState {
     ArrayList<User> search;
     ArrayList<User> reg_users;
     ListView lv;
-    String search_text;
+    TextView search_text;
     Activity activity;
 
-    public SearchEmail(ArrayList<User> list, ListView lv, String search_text, Activity activity, ArrayList<User> reg_users)
+    public SearchEmail(ArrayList<User> list, ListView lv, TextView search_text, Activity activity, ArrayList<User> reg_users)
     {
         this.search = new ArrayList<>();
         this.reg_users = new ArrayList<>();
@@ -45,7 +46,7 @@ public class SearchEmail implements IState {
             public void onClick(View v) {
                 reg_users.clear();
                 for (int i = 0; i < search.size(); i++) {
-                    if(search.get(i).getEmail().contains(search_text.toString())){
+                    if(search.get(i).getEmail().contains(search_text.getText().toString())){
                         reg_users.add(search.get(i));
                     }
 

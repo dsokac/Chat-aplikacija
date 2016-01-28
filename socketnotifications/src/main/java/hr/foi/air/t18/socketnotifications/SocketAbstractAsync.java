@@ -1,8 +1,10 @@
 package hr.foi.air.t18.socketnotifications;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.media.RingtoneManager;
 import android.os.AsyncTask;
 import android.support.v7.app.NotificationCompat;
 
@@ -65,6 +67,8 @@ public abstract class SocketAbstractAsync extends AsyncTask<Object,Void,Object> 
                         .setSmallIcon(icon)
                         .setContentTitle(title)
                         .setContentText(content)
+                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                        .setDefaults(Notification.DEFAULT_ALL)
                         .setContentIntent(pendingIntent);
 
         int mNotificationId = (int)System.currentTimeMillis();

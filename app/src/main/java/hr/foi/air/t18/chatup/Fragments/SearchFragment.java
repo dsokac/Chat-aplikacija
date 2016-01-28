@@ -53,8 +53,6 @@ public class SearchFragment extends Fragment {
     final ArrayList<User> search = new ArrayList<User>();
     final ArrayList<User> search2 = new ArrayList<User>();
     public static Button search_button;
-    public static Button search_button2;
-    private String current="";
     public static EditText search_text;
 
     private SocketNotificationsManager socketNotificationsManager = null;
@@ -114,8 +112,8 @@ public class SearchFragment extends Fragment {
 
                         IState state = null;
 
-                        if(searchOption.contentEquals(getString(R.string.SettingsRadioEmail))) state = new SearchEmail(search,lv,search_text.getText().toString(),getActivity(), reg_users2);
-                        else state = new SearchUsername(search2,lv,search_text.getText().toString(),getActivity(), reg_users);
+                        if(searchOption.contentEquals(getString(R.string.SettingsRadioEmail))) state = new SearchEmail(search,lv,search_text,getActivity(), reg_users2);
+                        else state = new SearchUsername(search2,lv,search_text,getActivity(), reg_users);
 
                         state.applyChange(ctx, search_button);
                         reg_users = (ArrayList<User>)state.getData();
@@ -214,8 +212,8 @@ public class SearchFragment extends Fragment {
 
         IState state = null;
 
-        if(searchOption.contentEquals(getString(R.string.SettingsRadioEmail))) state = new SearchEmail(search,lv,search_text.getText().toString(),getActivity(), reg_users2);
-        else state = new SearchUsername(search2,lv,search_text.getText().toString(),getActivity(), reg_users);
+        if(searchOption.contentEquals(getString(R.string.SettingsRadioEmail))) state = new SearchEmail(search,lv,search_text,getActivity(), reg_users2);
+        else state = new SearchUsername(search2,lv,search_text,getActivity(), reg_users);
 
         state.applyChange(ctx, search_button);
         this.reg_users = (ArrayList<User>)state.getData();
