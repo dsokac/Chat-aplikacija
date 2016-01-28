@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 
-import android.widget.TextView;
 import android.widget.Toast;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,9 +32,9 @@ import hr.foi.air.t18.chatup.States.Blue;
 import hr.foi.air.t18.chatup.States.Pink;
 import hr.foi.air.t18.core.State.Context;
 import hr.foi.air.t18.core.State.IState;
-import hr.foi.air.t18.socketnotifications.CreateSocketConnectionAsync;
-import hr.foi.air.t18.socketnotifications.FriendRequestNotifsAsync;
-import hr.foi.air.t18.socketnotifications.NewMessageNotifsAsync;
+import hr.foi.air.t18.chatup.Notifications.CreateSocketConnectionAsync;
+import hr.foi.air.t18.chatup.Notifications.FriendRequestNotifsAsync;
+import hr.foi.air.t18.chatup.Notifications.NewMessageNotifsAsync;
 import hr.foi.air.t18.socketnotifications.SocketEvents;
 import hr.foi.air.t18.socketnotifications.SocketNotificationsManager;
 

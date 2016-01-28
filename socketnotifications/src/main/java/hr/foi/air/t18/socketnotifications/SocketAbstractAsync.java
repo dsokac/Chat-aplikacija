@@ -16,7 +16,7 @@ import static com.google.android.gms.internal.zzip.runOnUiThread;
  * Created by Danijel on 23.1.2016..
  */
 
-abstract class SocketAbstractAsync extends AsyncTask<Object,Void,Object> implements ISocketOperation{
+public abstract class SocketAbstractAsync extends AsyncTask<Object,Void,Object> implements ISocketOperation{
     private SocketNotificationsManager socketNotificationsManager;
     private SocketEvents socketEvents;
     private JSONObject params;

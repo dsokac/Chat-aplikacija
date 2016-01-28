@@ -42,7 +42,7 @@ public class MessagesFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View root = inflater.inflate(R.layout.tab_fragment_messages, container, false);
-        socketNotificationsManager = (SocketNotificationsManager) MiddleMan.getObject();
+        socketNotificationsManager = (SocketNotificationsManager) MiddleMan.getNotificationObject();
         conversations = new ArrayList<>();
         conversationMap = new HashMap<>();
         elv = (ExpandableListView) root.findViewById(R.id.conversation_expandable);

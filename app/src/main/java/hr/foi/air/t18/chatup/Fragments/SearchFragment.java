@@ -1,10 +1,8 @@
 package hr.foi.air.t18.chatup.Fragments;
 
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -28,11 +26,8 @@ import hr.foi.air.t18.chatup.States.SearchUsername;
 import hr.foi.air.t18.core.SharedPreferencesClass;
 import hr.foi.air.t18.core.State.Context;
 import hr.foi.air.t18.core.State.IState;
-import hr.foi.air.t18.socketnotifications.BackgroundService;
-import hr.foi.air.t18.socketnotifications.ConnectToService;
 import hr.foi.air.t18.chatup.R;
-import hr.foi.air.t18.chatup.RegisteredUsersListAdapter;
-import hr.foi.air.t18.socketnotifications.FriendRequestNotifsAsync;
+import hr.foi.air.t18.chatup.Notifications.FriendRequestNotifsAsync;
 import hr.foi.air.t18.socketnotifications.SocketNotificationsManager;
 import hr.foi.air.t18.core.MiddleMan;
 import hr.foi.air.t18.core.User;
@@ -113,6 +108,17 @@ public class SearchFragment extends Fragment {
                         //setting values of ArrayList <User> search into ListView
 
                         registerForContextMenu(lv);
+                        Context ctx = new Context();
+
+                        String searchOption = SharedPreferencesClass.getDefaults(getString(R.string.SettingsSearch), getActivity().getApplicationContext());
+
+                        IState state = null;
+
+                        if(searchOption.contentEquals(getString(R.string.SettingsRadioEmail))) state = new SearchEmail(search,lv,search_text.getText().toString(),getActivity(), reg_users2);
+                        else state = new SearchUsername(search2,lv,search_text.getText().toString(),getActivity(), reg_users);
+
+                        state.applyChange(ctx, search_button);
+                        reg_users = (ArrayList<User>)state.getData();
                     } catch (Exception e) {
                         Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                     }

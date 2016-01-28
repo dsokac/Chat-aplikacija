@@ -1,4 +1,4 @@
-package hr.foi.air.t18.socketnotifications;
+package hr.foi.air.t18.chatup.Notifications;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,6 +9,11 @@ import android.widget.Toast;
 import com.github.nkzawa.socketio.client.Socket;
 
 import org.json.JSONObject;
+
+import hr.foi.air.t18.socketnotifications.ISocketOperation;
+import hr.foi.air.t18.socketnotifications.SocketAbstractAsync;
+import hr.foi.air.t18.socketnotifications.SocketEvents;
+import hr.foi.air.t18.socketnotifications.SocketNotificationsManager;
 
 
 /**
