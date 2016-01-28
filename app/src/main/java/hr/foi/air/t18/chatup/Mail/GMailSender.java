@@ -12,6 +12,7 @@ import javax.mail.internet.MimeMessage;
 
 /**
  * Created by JurmanLap on 29.12.2015..
+ * public clas GmailSender used for sendig mail in ForgotPasswordActivity
  */
 public class GMailSender extends javax.mail.Authenticator {
     private String mailhost = "smtp.gmail.com";
@@ -19,17 +20,25 @@ public class GMailSender extends javax.mail.Authenticator {
     private String password;
     private Session session;
 
+    //adding JsseProvider
     static {
         Security.addProvider(new JSSEProvider());
     }
-
+    /**
+     * Constructor for mail sender
+     * @param user sender email adres
+     * @param password sender password
+     */
     public GMailSender(String user, String password) {
         this.user = user;
         this.password = password;
 
         Properties props = new Properties();
+        //set transport protocol
         props.setProperty("mail.transport.protocol", "smtp");
+        //set host
         props.setProperty("mail.host", mailhost);
+        //put other specs
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "465");
         props.put("mail.smtp.socketFactory.port", "465");
@@ -43,20 +52,30 @@ public class GMailSender extends javax.mail.Authenticator {
     protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
         return new javax.mail.PasswordAuthentication(user, password);
     }
-
+    /**
+     * public sendMail method for sending mail message with seting properties
+     * @param subject Mail subject
+     * @param body Mail body
+     * @param sender Mail sender
+     * @param recipients Mail recipients
+     */
     public synchronized void sendMail(String subject, String body,
                                       String sender, String recipients) throws Exception {
         MimeMessage message = new MimeMessage(session);
         DataHandler handler = new DataHandler(new ByteArrayDataSource(body.getBytes(), "text/plain"));
+        //set sender
         message.setSender(new InternetAddress(sender));
+        //set subject
         message.setSubject(subject);
+        //set datahandler
         message.setDataHandler(handler);
-
+        //if has more then 1 recipients
         if (recipients.indexOf(',') > 0)
             message.setRecipients(javax.mail.Message.RecipientType.TO, InternetAddress.parse(recipients));
+            //else if 1 recipient
         else
             message.setRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(recipients));
-
+        //send mail
         Transport.send(message);
     }
 }

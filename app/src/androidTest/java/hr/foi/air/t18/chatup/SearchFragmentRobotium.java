@@ -44,13 +44,14 @@ public class SearchFragmentRobotium extends ActivityInstrumentationTestCase2<Log
         solo.typeText(1, "test");
         solo.clickOnButton(0);
         solo.waitForActivity(hr.foi.air.t18.chatup.MainClass.class, 100);
-        //testovi...
+        //click on Search
         solo.clickOnText("Search");
+        //enter matija in Search
         solo.enterText((android.widget.EditText) solo.getView(hr.foi.air.t18.chatup.R.id.searchUser), "matija");
         solo.clickOnView(solo.getView(hr.foi.air.t18.chatup.R.id.searchButton));
+        //long click on matija
         solo.clickLongOnView(solo.getView(hr.foi.air.t18.chatup.R.id.searchListview));;
         solo.clickOnMenuItem("Cancel");
 
     }
-
 }

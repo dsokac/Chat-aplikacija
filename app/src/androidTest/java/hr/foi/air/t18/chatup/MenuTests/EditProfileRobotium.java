@@ -44,6 +44,7 @@ public class EditProfileRobotium extends ActivityInstrumentationTestCase2<LoginA
         solo.clickOnButton(0);
         solo.waitForActivity(hr.foi.air.t18.chatup.MainClass.class, 100);
         solo.clickOnView(solo.getView(android.widget.ImageView.class, 0));
+        //open edit profile menu
         solo.clickInList(1, 0);
         solo.waitForActivity(hr.foi.air.t18.chatup.Menu.EditProfile.class, 100);
         solo.typeText(0, "usr_test");
@@ -57,6 +58,7 @@ public class EditProfileRobotium extends ActivityInstrumentationTestCase2<LoginA
         solo.clickOnButton("Save");
         solo.goBack();
         solo.clickOnView(solo.getView(android.widget.ImageView.class, 0));
+        //open edit profile menu
         solo.clickInList(1, 0);
         solo.goBack();
         solo.sleep(5000);

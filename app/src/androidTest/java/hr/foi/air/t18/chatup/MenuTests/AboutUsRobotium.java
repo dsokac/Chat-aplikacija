@@ -28,7 +28,8 @@ public class AboutUsRobotium extends ActivityInstrumentationTestCase2<LoginActiv
     }
 
 
-    @Override protected void tearDown() throws  Exception {
+    @Override
+    protected void tearDown() throws  Exception {
         solo.finishOpenedActivities();
         activity.finish();
         super.tearDown();
@@ -44,16 +45,11 @@ public class AboutUsRobotium extends ActivityInstrumentationTestCase2<LoginActiv
         solo.clickOnButton(0);
         solo.waitForActivity(hr.foi.air.t18.chatup.MainClass.class, 100);
         solo.clickOnView(solo.getView(android.widget.ImageView.class, 0));
+        //open about us menu
         solo.clickInList(4, 0);
         solo.sleep(5000);
         solo.clickOnView(solo.getView(hr.foi.air.t18.chatup.R.id.btnAboutUsClose));
 
 
     }
-
 }
-
-
-
-
-

@@ -44,8 +44,10 @@ public class LogoutRobotium extends ActivityInstrumentationTestCase2<LoginActivi
         solo.clickOnButton(0);
         solo.waitForActivity(hr.foi.air.t18.chatup.MainClass.class, 100);
         solo.clickOnView(solo.getView(android.widget.ImageView.class, 0));
+        //Click on Logout in Menu
         solo.clickInList(5, 0);
         solo.waitForActivity(hr.foi.air.t18.chatup.Login.LoginActivity.class, 100);
+        //login
         solo.clearEditText(0);
         solo.clearEditText(1);
         solo.typeText(0, "mjurman@foi.hr");
@@ -54,12 +56,5 @@ public class LogoutRobotium extends ActivityInstrumentationTestCase2<LoginActivi
         solo.waitForActivity(hr.foi.air.t18.chatup.MainClass.class, 100);
         solo.sleep(5000);
         solo.goBack();
-
     }
-
 }
-
-
-
-
-
