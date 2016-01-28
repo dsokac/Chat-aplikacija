@@ -5,8 +5,17 @@ import java.util.Comparator;
 import hr.foi.air.t18.core.Conversation;
 import hr.foi.air.t18.core.Message;
 
+/**
+ * Class that compares two conversations.
+ */
 public class ConversationComparator implements Comparator<Conversation>
 {
+    /**
+     * Compares two conversations depending on their latest messages.
+     * @param conv1 First conversation
+     * @param conv2 Second conversation
+     * @return comparison between two conversations
+     */
     @Override
     public int compare(Conversation conv1, Conversation conv2)
     {
@@ -28,6 +37,11 @@ public class ConversationComparator implements Comparator<Conversation>
         return returnValue;
     }
 
+    /**
+     * Returns newest message from conversation.
+     * @param conversation Conversation object
+     * @return newest message from conversation
+     */
     private Message newestMessage(Conversation conversation)
     {
         Message message = null;

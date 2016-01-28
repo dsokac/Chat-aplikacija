@@ -23,13 +23,13 @@ import java.util.ArrayList;
 
 import hr.foi.air.t18.chatup.States.SearchEmail;
 import hr.foi.air.t18.chatup.States.SearchUsername;
-import hr.foi.air.t18.core.SharedPreferencesClass;
+import hr.foi.air.t18.core.ChatUpPreferences;
 import hr.foi.air.t18.core.State.Context;
 import hr.foi.air.t18.core.State.IState;
 import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.chatup.Notifications.FriendRequestNotifsAsync;
 import hr.foi.air.t18.socketnotifications.SocketNotificationsManager;
-import hr.foi.air.t18.core.MiddleMan;
+import hr.foi.air.t18.chatup.MiddleMan;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.MainAsync.AddFriendAsync;
 import hr.foi.air.t18.webservice.IListener;
@@ -110,7 +110,7 @@ public class SearchFragment extends Fragment {
                         registerForContextMenu(lv);
                         Context ctx = new Context();
 
-                        String searchOption = SharedPreferencesClass.getDefaults(getString(R.string.SettingsSearch), getActivity().getApplicationContext());
+                        String searchOption = ChatUpPreferences.getDefaults(getString(R.string.SettingsSearch), getActivity().getApplicationContext());
 
                         IState state = null;
 
@@ -210,7 +210,7 @@ public class SearchFragment extends Fragment {
         super.onStart();
         Context ctx = new Context();
 
-        String searchOption = SharedPreferencesClass.getDefaults(getString(R.string.SettingsSearch), getActivity().getApplicationContext());
+        String searchOption = ChatUpPreferences.getDefaults(getString(R.string.SettingsSearch), getActivity().getApplicationContext());
 
         IState state = null;
 

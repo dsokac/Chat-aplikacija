@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 import java.util.HashMap;
 
-import hr.foi.air.t18.core.SharedPreferencesClass;
+import hr.foi.air.t18.core.ChatUpPreferences;
 import hr.foi.air.t18.core.State.Context;
 import hr.foi.air.t18.chatup.R;
 
@@ -31,14 +31,14 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
 
-        String searchOption = SharedPreferencesClass.getDefaults(getString(R.string.SettingsSearch),getApplicationContext());
+        String searchOption = ChatUpPreferences.getDefaults(getString(R.string.SettingsSearch), getApplicationContext());
         if(searchOption.contentEquals(getString(R.string.SettingsRadioUsername)))
         {
             ((RadioButton)findViewById(R.id.SettingsRadioUsername)).setChecked(true);
 
         }
 
-        String colorOption = SharedPreferencesClass.getDefaults(getString(R.string.SettingsColor), getApplicationContext());
+        String colorOption = ChatUpPreferences.getDefaults(getString(R.string.SettingsColor), getApplicationContext());
         if(colorOption.equalsIgnoreCase("0")) ((RadioButton)findViewById(R.id.radioDesign1)).setChecked(true);
         else if(colorOption.equalsIgnoreCase("1")) ((RadioButton)findViewById(R.id.radioDesign2)).setChecked(true);
         else if(colorOption.equalsIgnoreCase("2")) ((RadioButton)findViewById(R.id.radioDesign3)).setChecked(true);
@@ -63,10 +63,10 @@ public class Settings extends AppCompatActivity {
                 settings_id = Integer.toString(idx);
 
                 String colorSettings_text = Integer.toString(getCheckedRadioButtonIndex(settings_radiogroup));
-                SharedPreferencesClass.setDefaults(getString(R.string.SettingsColor),colorSettings_text,getApplicationContext());
+                ChatUpPreferences.setDefaults(getString(R.string.SettingsColor), colorSettings_text, getApplicationContext());
 
                 String searchSettings_text = getCheckedRadioButtonText(search_radiogroup);
-                SharedPreferencesClass.setDefaults(getString(R.string.SettingsSearch),searchSettings_text,getApplicationContext());
+                ChatUpPreferences.setDefaults(getString(R.string.SettingsSearch), searchSettings_text, getApplicationContext());
 
                 /*hashElems.clear();
                 hashElems.put("toolbar_stgs", MainClass.toolbar_stgs);

@@ -38,8 +38,7 @@ import hr.foi.air.t18.chatup.Notifications.NewMessageNotifsAsync;
 import hr.foi.air.t18.socketnotifications.SocketEvents;
 import hr.foi.air.t18.socketnotifications.SocketNotificationsManager;
 
-import hr.foi.air.t18.core.MiddleMan;
-import hr.foi.air.t18.core.SharedPreferencesClass;
+import hr.foi.air.t18.core.ChatUpPreferences;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.MenuAsync.LogoutAsync;
@@ -63,14 +62,14 @@ public class MainClass extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(SharedPreferencesClass.getDefaults(getString(R.string.SettingsSearch),getApplicationContext()).equals(""))
+        if(ChatUpPreferences.getDefaults(getString(R.string.SettingsSearch), getApplicationContext()).equals(""))
         {
-            SharedPreferencesClass.setDefaults(getString(R.string.SettingsSearch),getString(R.string.SettingsRadioEmail),getApplicationContext());
+            ChatUpPreferences.setDefaults(getString(R.string.SettingsSearch), getString(R.string.SettingsRadioEmail), getApplicationContext());
         }
 
-        if(SharedPreferencesClass.getDefaults(getString(R.string.SettingsColor),getApplicationContext()).equals(""))
+        if(ChatUpPreferences.getDefaults(getString(R.string.SettingsColor), getApplicationContext()).equals(""))
         {
-            SharedPreferencesClass.setDefaults(getString(R.string.SettingsColor),"0",getApplicationContext());
+            ChatUpPreferences.setDefaults(getString(R.string.SettingsColor), "0", getApplicationContext());
         }
 
         this.snManager = new SocketNotificationsManager("http://104.236.58.50:3000/", getApplicationContext());
@@ -255,7 +254,7 @@ public class MainClass extends AppCompatActivity {
 
         IState state = null;
 
-        String settings_id = SharedPreferencesClass.getDefaults(getString(R.string.SettingsColor),getApplicationContext());
+        String settings_id = ChatUpPreferences.getDefaults(getString(R.string.SettingsColor), getApplicationContext());
 
         if (settings_id.equals("0")) {
             state = new Pink(hashElems);

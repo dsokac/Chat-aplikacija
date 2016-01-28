@@ -20,15 +20,15 @@ import java.util.ArrayList;
 
 import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.chatup.UserListAdapter;
-import hr.foi.air.t18.core.MiddleMan;
-import hr.foi.air.t18.core.SharedPreferencesClass;
+import hr.foi.air.t18.chatup.MiddleMan;
+import hr.foi.air.t18.core.ChatUpPreferences;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.MainAsync.FriendsAsync;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.WebServiceResult;
 
 /**
- * Created by Danijel on 9.1.2016..
+ * Activity used to add participant to one conversation.
  */
 public class AddParticipantActivity extends AppCompatActivity
 {
@@ -60,6 +60,9 @@ public class AddParticipantActivity extends AppCompatActivity
         loadCandidates();
     }
 
+    /**
+     * Inititalizes controls and objects.
+     */
     private void initializeComponents()
     {
         activity = this;
@@ -71,6 +74,10 @@ public class AddParticipantActivity extends AppCompatActivity
         buttonCancel = (Button) findViewById(R.id.convAddParticipantCancel);
     }
 
+    /**
+     * Creates events for OK and Cancel buttons. Also marks the
+     * selected would-be participants.
+     */
     private void initializeEvents()
     {
         listenerOK = new View.OnClickListener()
@@ -132,6 +139,9 @@ public class AddParticipantActivity extends AppCompatActivity
         };
     }
 
+    /**
+     * Binds the created events to their designated controls.
+     */
     private void bindEvents()
     {
         buttonOK.setOnClickListener(listenerOK);
@@ -139,9 +149,15 @@ public class AddParticipantActivity extends AppCompatActivity
         lvFriends.setOnItemClickListener(listenerFriends);
     }
 
+    /**
+     * Loads users that are possible candidates for being added to
+     * the conversation. This method fetches all users from web
+     * server and removes those candidates that are already
+     * participating in the conversation.
+     */
     private void loadCandidates()
     {
-        String currentUserEmail = SharedPreferencesClass.getDefaults("UserEmail", getApplicationContext());
+        String currentUserEmail = ChatUpPreferences.getDefaults("UserEmail", getApplicationContext());
         FriendsAsync f = new FriendsAsync(currentUserEmail, new IListener<JSONArray>()
         {
             @Override
@@ -179,6 +195,10 @@ public class AddParticipantActivity extends AppCompatActivity
         f.execute();
     }
 
+    /**
+     * Removes users that are already participating in
+     * conversation.
+     */
     private void removeCurrentParticipants()
     {
         ArrayList<User> removalList = new ArrayList<>();
@@ -190,6 +210,12 @@ public class AddParticipantActivity extends AppCompatActivity
         friends.removeAll(removalList);
     }
 
+    /**
+     * Checks if the user is already participating in
+     * conversation.
+     * @param user user that needs to be checked
+     * @return True if the user is participating already, False otherwise
+     */
     private boolean isParticipant(User user)
     {
         boolean participating = false;

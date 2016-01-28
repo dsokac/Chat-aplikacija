@@ -1,4 +1,4 @@
-package hr.foi.air.t18.core;
+package hr.foi.air.t18.chatup;
 
 import java.util.Objects;
 

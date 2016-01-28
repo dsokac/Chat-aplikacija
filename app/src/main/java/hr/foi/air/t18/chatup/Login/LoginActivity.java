@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,8 +13,8 @@ import android.widget.Toast;
 
 import hr.foi.air.t18.chatup.MainClass;
 import hr.foi.air.t18.chatup.R;
-import hr.foi.air.t18.core.MiddleMan;
-import hr.foi.air.t18.core.SharedPreferencesClass;
+import hr.foi.air.t18.chatup.MiddleMan;
+import hr.foi.air.t18.core.ChatUpPreferences;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.MainAsync.FetchUserDataAsync;
 import hr.foi.air.t18.webservice.IListener;
@@ -197,19 +196,19 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFinish(WebServiceResult<User> result)
             {
-                SharedPreferencesClass.setDefaults(
+                ChatUpPreferences.setDefaults(
                         "UserEmail",
                         result.data.getEmail(),
                         getApplicationContext()
                 );
-                SharedPreferencesClass.setDefaults(
+                ChatUpPreferences.setDefaults(
                         "UserUsername",
                         result.data.getUsername(),
                         getApplicationContext()
                 );
 
                 if (result.data.getProfilePicture() != null) {
-                    SharedPreferencesClass.setDefaults(
+                    ChatUpPreferences.setDefaults(
                             "UserProfilePictureBase64",
                             result.data.getProfilePicture(),
                             getApplicationContext()

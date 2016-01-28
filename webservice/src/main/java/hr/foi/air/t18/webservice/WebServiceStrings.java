@@ -1,5 +1,8 @@
 package hr.foi.air.t18.webservice;
 
+/**
+ * String resource class for 'webservice' module.
+ */
 public class WebServiceStrings
 {
     private WebServiceStrings()

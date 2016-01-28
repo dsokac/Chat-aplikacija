@@ -25,7 +25,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-import hr.foi.air.t18.core.SharedPreferencesClass;
+import hr.foi.air.t18.core.ChatUpPreferences;
 import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.MainAsync.SaveImageAsync;
 import hr.foi.air.t18.webservice.WebServiceResult;
@@ -62,8 +62,8 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
 
         imageView = (ImageView) findViewById(R.id.imageView);
 
-        if (!SharedPreferencesClass.getDefaults("UserProfilePictureBase64", getApplicationContext()).isEmpty()) {
-            String profilePictureInBase64 = SharedPreferencesClass.getDefaults("UserProfilePictureBase64", getApplicationContext());
+        if (!ChatUpPreferences.getDefaults("UserProfilePictureBase64", getApplicationContext()).isEmpty()) {
+            String profilePictureInBase64 = ChatUpPreferences.getDefaults("UserProfilePictureBase64", getApplicationContext());
             byte[] decodedByte = Base64.decode(profilePictureInBase64, Base64.NO_WRAP | Base64.URL_SAFE);
             Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
             imageView.setImageBitmap(bitmap);
@@ -197,7 +197,7 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void saveAttachment(final String base64String) {
 
-        String userMail = SharedPreferencesClass.getDefaults("UserEmail", getApplicationContext());
+        String userMail = ChatUpPreferences.getDefaults("UserEmail", getApplicationContext());
         Log.e("Base64 length", Integer.toString(base64String.length()));
 
         if (userMail != null) {
@@ -217,7 +217,7 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
                     }
                     Toast.makeText(getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
                     if (result.status == 0) {
-                        SharedPreferencesClass.setDefaults(
+                        ChatUpPreferences.setDefaults(
                                 "UserProfilePictureBase64",
                                 base64String,
                                 getApplicationContext()

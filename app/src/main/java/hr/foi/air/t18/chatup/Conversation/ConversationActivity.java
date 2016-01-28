@@ -6,14 +6,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,8 +38,8 @@ import hr.foi.air.t18.chatup.Ads.DlAdsListener;
 import hr.foi.air.t18.core.Conversation;
 import hr.foi.air.t18.core.Message;
 import hr.foi.air.t18.chatup.Comparators.MessageComparator;
-import hr.foi.air.t18.core.MiddleMan;
-import hr.foi.air.t18.core.SharedPreferencesClass;
+import hr.foi.air.t18.chatup.MiddleMan;
+import hr.foi.air.t18.core.ChatUpPreferences;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.chatup.Notifications.NewMessageNotifsAsync;
 import hr.foi.air.t18.socketnotifications.SocketNotificationsManager;
@@ -154,6 +152,10 @@ public class ConversationActivity extends AppCompatActivity
         AddRefreshEvent();
     }
 
+    /**
+     * Adds participants to the current conversation and registers
+     * those participants in database.
+     */
     private void AddParticipants()
     {
         ArrayList<String> emailBuffer =
@@ -177,6 +179,10 @@ public class ConversationActivity extends AppCompatActivity
         aptc.execute();
     }
 
+    /**
+     * Send picture as a message
+     * @param imageUri URI of chosen image
+     */
     private void SendPicture(Uri imageUri)
     {
         try
@@ -184,7 +190,7 @@ public class ConversationActivity extends AppCompatActivity
             InputStream imageStream = getContentResolver().openInputStream(imageUri);
             Bitmap image = BitmapFactory.decodeStream(imageStream);
 
-            image = ResizeImage(image);
+            image = ScaleImageTo480pWidth(image);
 
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
             image.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
@@ -193,7 +199,7 @@ public class ConversationActivity extends AppCompatActivity
 
             Message message = new Message(
                     imageBase64,
-                    SharedPreferencesClass.getDefaults("UserUsername", getApplicationContext()),
+                    ChatUpPreferences.getDefaults("UserUsername", getApplicationContext()),
                     "", "",
                     Message.IMAGE
             );
@@ -214,7 +220,7 @@ public class ConversationActivity extends AppCompatActivity
 
                         JSONObject object = new JSONObject();
                         try {
-                            String sender = SharedPreferencesClass.getDefaults("UserEmail", getApplicationContext());
+                            String sender = ChatUpPreferences.getDefaults("UserEmail", getApplicationContext());
                             JSONArray usersInConversation = new JSONArray();
                             int i = 0;
                             for(User user : conversation.getParticipants()) {
@@ -242,7 +248,12 @@ public class ConversationActivity extends AppCompatActivity
         }
     }
 
-    private Bitmap ResizeImage(Bitmap image)
+    /**
+     * Takes and existing image and scales to 480p of width.
+     * @param image image that needs to be scaled
+     * @return scaled image
+     */
+    private Bitmap ScaleImageTo480pWidth(Bitmap image)
     {
         float aspectRatio = image.getWidth() / image.getHeight();
         int width = 480;
@@ -282,7 +293,7 @@ public class ConversationActivity extends AppCompatActivity
 
                 Message message = new Message(
                         txtMessage.getText().toString(),
-                        SharedPreferencesClass.getDefaults("UserUsername", getApplicationContext()),
+                        ChatUpPreferences.getDefaults("UserUsername", getApplicationContext()),
                         "", "",
                         Message.TEXT
                 );
@@ -290,14 +301,16 @@ public class ConversationActivity extends AppCompatActivity
                 //It checks if message contains any letters, and if it is empty it shows
                 //a alert dialog with message and terminate proces to avoid error message
                 //from server.
-                if(message.getContent().contentEquals(""))
+                if (message.getContent().contentEquals(""))
                 {
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity)
                             .setTitle(R.string.ConversationDialogTitle)
                             .setMessage(R.string.ConversationDialogContent)
-                            .setNeutralButton(R.string.ConversationDialogButtonText, new DialogInterface.OnClickListener() {
+                            .setNeutralButton(R.string.ConversationDialogButtonText, new DialogInterface.OnClickListener()
+                            {
                                 @Override
-                                public void onClick(DialogInterface dialog, int which) {
+                                public void onClick(DialogInterface dialog, int which)
+                                {
                                     dialog.cancel();
                                 }
                             });
@@ -305,13 +318,16 @@ public class ConversationActivity extends AppCompatActivity
                     return;
                 }
 
-                SendMessageAsync sm = new SendMessageAsync(conversation, message, new IListener<Message>() {
+                SendMessageAsync sm = new SendMessageAsync(conversation, message, new IListener<Message>()
+                {
                     @Override
-                    public void onBegin() {
+                    public void onBegin()
+                    {
                     }
 
                     @Override
-                    public void onFinish(WebServiceResult<Message> result) {
+                    public void onFinish(WebServiceResult<Message> result)
+                    {
                         if (result.status == 0)
                         {
                             txtMessage.setText("");
@@ -319,19 +335,23 @@ public class ConversationActivity extends AppCompatActivity
                             SortAndLoadMessagesIntoListView();
 
                             JSONObject object = new JSONObject();
-                            try {
-                                String sender = SharedPreferencesClass.getDefaults("UserEmail", getApplicationContext());
+                            try
+                            {
+                                String sender = ChatUpPreferences.getDefaults("UserEmail", getApplicationContext());
                                 JSONArray usersInConversation = new JSONArray();
                                 int i = 0;
-                                for(User user : conversation.getParticipants()) {
-                                    if(!(user.getEmail().equalsIgnoreCase(sender))) {
+                                for (User user : conversation.getParticipants())
+                                {
+                                    if (!(user.getEmail().equalsIgnoreCase(sender)))
+                                    {
                                         usersInConversation.put(user.getEmail());
                                         i++;
                                     }
                                 }
                                 object.put("sender", sender);
                                 object.put("participants", usersInConversation);
-                            } catch (JSONException e) {
+                            } catch (JSONException e)
+                            {
                                 e.printStackTrace();
                             }
 
@@ -345,6 +365,10 @@ public class ConversationActivity extends AppCompatActivity
         });
     }
 
+    /**
+     * Creates an event that for sending a message that contains
+     * a picture.
+     */
     private void AddSendPictureEvent()
     {
         btnSendPicture.setOnClickListener(new View.OnClickListener()
@@ -436,6 +460,12 @@ public class ConversationActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Adds new message to the conversation. This function was meant to counter
+     * the double messages that appear when user sends the message at the same
+     * time refresh event runs.
+     * @param message
+     */
     private void AddMessageToConversation(Message message)
     {
         boolean messageExists = conversation.getMessages().contains(message);

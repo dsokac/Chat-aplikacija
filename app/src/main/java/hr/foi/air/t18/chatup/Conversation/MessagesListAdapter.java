@@ -25,8 +25,6 @@ import hr.foi.air.t18.core.Message;
 
 /**
  * An adapter that lists all available messages in one conversation.
- *
- * Created by Danijel on 3.12.2015..
  */
 public class MessagesListAdapter extends BaseAdapter
 {

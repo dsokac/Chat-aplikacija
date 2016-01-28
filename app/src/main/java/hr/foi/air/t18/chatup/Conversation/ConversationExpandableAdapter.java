@@ -13,11 +13,12 @@ import java.util.HashMap;
 
 import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.core.Conversation;
-import hr.foi.air.t18.core.SharedPreferencesClass;
+import hr.foi.air.t18.core.ChatUpPreferences;
 import hr.foi.air.t18.core.User;
 
 /**
- * Created by Danijel on 11.1.2016..
+ * Expandable list adapter for conversations. It divides the conversations into
+ * single and group conversations.
  */
 public class ConversationExpandableAdapter extends BaseExpandableListAdapter
 {
@@ -108,7 +109,7 @@ public class ConversationExpandableAdapter extends BaseExpandableListAdapter
         TextView conversationItem = (TextView) convertView.findViewById(R.id.conversation_list_item);
         ArrayList<User> participants = conversations.get(key).get(childPosition).getParticipants();
 
-        String currentUserUsername = SharedPreferencesClass.getDefaults("UserUsername", activity.getApplicationContext());
+        String currentUserUsername = ChatUpPreferences.getDefaults("UserUsername", activity.getApplicationContext());
         for (int i = 0; i < participants.size(); i++)
         {
             String username = participants.get(i).getUsername();

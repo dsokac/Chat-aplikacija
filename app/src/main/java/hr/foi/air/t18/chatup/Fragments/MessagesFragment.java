@@ -10,7 +10,6 @@ import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 
@@ -19,8 +18,8 @@ import hr.foi.air.t18.chatup.Conversation.ConversationActivity;
 import hr.foi.air.t18.chatup.Conversation.ConversationExpandableAdapter;
 import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.core.Conversation;
-import hr.foi.air.t18.core.MiddleMan;
-import hr.foi.air.t18.core.SharedPreferencesClass;
+import hr.foi.air.t18.chatup.MiddleMan;
+import hr.foi.air.t18.core.ChatUpPreferences;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.socketnotifications.SocketNotificationsManager;
 import hr.foi.air.t18.webservice.ConversationAsync.FetchMessagesAsync;
@@ -57,8 +56,8 @@ public class MessagesFragment extends Fragment
         super.onResume();
 
         User user = new User();
-        user.setEmail(SharedPreferencesClass.getDefaults("UserEmail", getActivity().getApplicationContext()));
-        user.setUsername(SharedPreferencesClass.getDefaults("UserUsername", getActivity().getApplicationContext()));
+        user.setEmail(ChatUpPreferences.getDefaults("UserEmail", getActivity().getApplicationContext()));
+        user.setUsername(ChatUpPreferences.getDefaults("UserUsername", getActivity().getApplicationContext()));
 
         FetchMessagesAsync fm = new FetchMessagesAsync(user, new IListener<ArrayList<Conversation>>()
         {
@@ -82,6 +81,10 @@ public class MessagesFragment extends Fragment
         fm.execute();
     }
 
+    /**
+     * Loads the list of conversations into the expandable list adapter
+     * and displays it on screen.
+     */
     private void loadConversationsIntoListView()
     {
         ArrayList<Conversation> singleConversations = new ArrayList<>();
@@ -105,6 +108,9 @@ public class MessagesFragment extends Fragment
         elv.expandGroup(1);
     }
 
+    /**
+     * Adds events onChildClick() event to the expandable list adapter.
+     */
     private void addEvents()
     {
         elv.setOnChildClickListener(new ExpandableListView.OnChildClickListener()

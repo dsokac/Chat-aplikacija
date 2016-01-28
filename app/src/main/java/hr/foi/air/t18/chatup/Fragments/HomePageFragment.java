@@ -1,15 +1,12 @@
 package hr.foi.air.t18.chatup.Fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -29,7 +26,7 @@ import java.util.ArrayList;
 import hr.foi.air.t18.chatup.ImagePickerActivity;
 import hr.foi.air.t18.chatup.R;
 import hr.foi.air.t18.chatup.UserListAdapter;
-import hr.foi.air.t18.core.SharedPreferencesClass;
+import hr.foi.air.t18.core.ChatUpPreferences;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.ConversationAsync.CreateConversationAsync;
 import hr.foi.air.t18.webservice.MainAsync.FriendsAsync;
@@ -111,8 +108,8 @@ public class HomePageFragment extends Fragment {
     }
 
     private void getSharedPreferencesData() {
-        if (!SharedPreferencesClass.getDefaults("UserUsername", getActivity().getApplicationContext()).isEmpty()) {
-            usernameText.setText(SharedPreferencesClass.getDefaults("UserUsername", getActivity().getApplicationContext()));
+        if (!ChatUpPreferences.getDefaults("UserUsername", getActivity().getApplicationContext()).isEmpty()) {
+            usernameText.setText(ChatUpPreferences.getDefaults("UserUsername", getActivity().getApplicationContext()));
         }
     }
 
@@ -123,7 +120,7 @@ public class HomePageFragment extends Fragment {
     }
 
     private void setProfilePicture() {
-        String profilePictureInBase64 = SharedPreferencesClass.getDefaults("UserProfilePictureBase64", getActivity().getApplicationContext());
+        String profilePictureInBase64 = ChatUpPreferences.getDefaults("UserProfilePictureBase64", getActivity().getApplicationContext());
         byte[] decodedByte = Base64.decode(profilePictureInBase64, Base64.NO_WRAP | Base64.URL_SAFE);
         Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
         profilePicture.setImageBitmap(bitmap);
@@ -155,9 +152,14 @@ public class HomePageFragment extends Fragment {
         return returnValue;
     }
 
+    /**
+     * Creates new conversation with the user on given index
+     * from the list of users.
+     * @param index position of user in the list of friends
+     */
     private void createNewConversation(int index)
     {
-        String email1 = SharedPreferencesClass.getDefaults("UserEmail", getActivity().getApplicationContext());
+        String email1 = ChatUpPreferences.getDefaults("UserEmail", getActivity().getApplicationContext());
         String email2 = friends.get(index).getEmail();
 
         CreateConversationAsync cc = new CreateConversationAsync(email1, email2, new IListener<Void>()

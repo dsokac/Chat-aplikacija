@@ -90,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity
                 ? 'M'
                 : 'Z';
         String dateOfBirth = Integer.toString(dpDateOfBirth.getYear()) + "-"
-                + Integer.toString(dpDateOfBirth.getMonth()) + "-"
+                + Integer.toString(dpDateOfBirth.getMonth() + 1) + "-"
                 + Integer.toString(dpDateOfBirth.getDayOfMonth());
 
         User newUser = new User(email, username, String.valueOf(gender), dateOfBirth);

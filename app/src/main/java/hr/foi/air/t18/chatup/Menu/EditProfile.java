@@ -19,7 +19,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import hr.foi.air.t18.chatup.R;
-import hr.foi.air.t18.core.SharedPreferencesClass;
+import hr.foi.air.t18.core.ChatUpPreferences;
 import hr.foi.air.t18.core.User;
 import hr.foi.air.t18.webservice.MenuAsync.EditProfileAsync;
 import hr.foi.air.t18.webservice.MenuAsync.GetDataEditProfileAsync;
@@ -59,7 +59,7 @@ public class EditProfile extends AppCompatActivity {
         setSupportActionBar(toolbar_edit_profile);
 
         //get mail of logged in user
-        loggedIn2=SharedPreferencesClass.getDefaults("UserEmail", getApplicationContext());
+        loggedIn2= ChatUpPreferences.getDefaults("UserEmail", getApplicationContext());
         Log.d(loggedIn2,loggedIn2);
         
         //finding references

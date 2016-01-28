@@ -7,7 +7,8 @@ import android.preference.PreferenceManager;
 /**
  * Created by Laptop on 22.12.2015..
  */
-public class SharedPreferencesClass {
+public class ChatUpPreferences
+{
 
     public static void setDefaults(String key, String value, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
