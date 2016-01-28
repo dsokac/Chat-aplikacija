@@ -1,1 +1,1 @@
-include ':app', ':core', ':webservice', ':socketnotifications'
+include ':app', ':core', ':webservice', ':socketnotifications', ':state'

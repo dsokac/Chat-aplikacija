@@ -1,6 +1,5 @@
 package hr.foi.air.t18.chatup;
 
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 
 import android.content.Intent;
@@ -31,9 +30,8 @@ import hr.foi.air.t18.chatup.Menu.Settings;
 import hr.foi.air.t18.chatup.States.Black;
 import hr.foi.air.t18.chatup.States.Blue;
 import hr.foi.air.t18.chatup.States.Pink;
-import hr.foi.air.t18.core.Conversation;
-import hr.foi.air.t18.core.State.Context;
-import hr.foi.air.t18.core.State.IState;
+import hr.foi.air.t18.state.Context;
+import hr.foi.air.t18.state.IState;
 import hr.foi.air.t18.chatup.Notifications.CreateSocketConnectionAsync;
 import hr.foi.air.t18.chatup.Notifications.FriendRequestNotifsAsync;
 import hr.foi.air.t18.chatup.Notifications.NewMessageNotifsAsync;

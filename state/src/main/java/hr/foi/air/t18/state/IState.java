@@ -1,4 +1,4 @@
-package hr.foi.air.t18.core.State;
+package hr.foi.air.t18.state;
 
 import android.view.View;
 

@@ -11,7 +11,7 @@ import android.widget.Toast;
 import java.util.HashMap;
 
 import hr.foi.air.t18.core.ChatUpPreferences;
-import hr.foi.air.t18.core.State.Context;
+import hr.foi.air.t18.state.Context;
 import hr.foi.air.t18.chatup.R;
 
 

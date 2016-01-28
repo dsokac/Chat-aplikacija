@@ -9,8 +9,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import hr.foi.air.t18.chatup.RegisteredUsersListAdapter;
-import hr.foi.air.t18.core.State.Context;
-import hr.foi.air.t18.core.State.IState;
+import hr.foi.air.t18.state.Context;
+import hr.foi.air.t18.state.IState;
 import hr.foi.air.t18.core.User;
 
 /**

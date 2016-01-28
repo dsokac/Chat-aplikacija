@@ -1,4 +1,4 @@
-package hr.foi.air.t18.core.State;
+package hr.foi.air.t18.state;
 
 /**
  * Created by JurmanLap on 11.1.2016..
