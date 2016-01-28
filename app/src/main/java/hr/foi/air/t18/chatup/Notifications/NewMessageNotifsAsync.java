@@ -27,8 +27,8 @@ public class NewMessageNotifsAsync extends SocketAbstractAsync implements ISocke
     public NewMessageNotifsAsync(){super();}
 
     @Override
-    public void listenServer(SocketNotificationsManager snManager, SocketEvents socketEvents, String title, int icon) {
-        super.listenServer(snManager, socketEvents, title, icon);
+    public void listenServer(SocketNotificationsManager snManager, SocketEvents socketEvents, String title, int icon, PendingIntent pendingIntent) {
+        super.listenServer(snManager, socketEvents, title, icon, pendingIntent);
 
     }
 

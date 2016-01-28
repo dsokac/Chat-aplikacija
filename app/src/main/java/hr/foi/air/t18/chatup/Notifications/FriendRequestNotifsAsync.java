@@ -1,5 +1,7 @@
 package hr.foi.air.t18.chatup.Notifications;
 
+import android.app.PendingIntent;
+
 import org.json.JSONObject;
 
 import hr.foi.air.t18.socketnotifications.SocketAbstractAsync;
@@ -25,7 +27,7 @@ public class FriendRequestNotifsAsync extends SocketAbstractAsync {
     public FriendRequestNotifsAsync(){super();}
 
     @Override
-    public void listenServer(SocketNotificationsManager snManager, SocketEvents socketEvents, String title, int icon) {
-        super.listenServer(snManager, socketEvents, title, icon);
+    public void listenServer(SocketNotificationsManager snManager, SocketEvents socketEvents, String title, int icon, PendingIntent pendingIntent) {
+        super.listenServer(snManager, socketEvents, title, icon, pendingIntent);
     }
 }

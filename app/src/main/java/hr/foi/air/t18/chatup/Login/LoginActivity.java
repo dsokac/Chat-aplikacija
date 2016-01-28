@@ -50,34 +50,16 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-        /*
-        //Find reference to loginAdminLoginButton and subscribe to onClick event
-        Button btnloginAdminLoginButton = (Button)findViewById(R.id.loginAdminLoginButton);
-        btnloginAdminLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), MainClass.class);
-                User user = new User();
-                user.setEmail("dsokac@foi.hr");
-                MiddleMan.setObject(user);
-                startActivity(i);
-            }
-        });
-        */
     }
 
     /**
      * Check if user mail exists in SharedPreferences data, if yes then update EditText emailText with user mail
      */
     private void getSharedPreferencesDataForLogin() {
-//        if (!SharedPreferencesClass.getDefaults("UserEmail", getApplicationContext()).isEmpty()) {
-//            emailText.setText(SharedPreferencesClass.getDefaults("UserEmail", getApplicationContext()));
-//        }
 
-        // hardcoded for Second projects evaluation purpose
-        emailText.setText("mjurman@foi.hr");
-        passwordText.setText("test");
+        if (!ChatUpPreferences.getDefaults("UserEmail", getApplicationContext()).isEmpty()) {
+            emailText.setText(ChatUpPreferences.getDefaults("UserEmail", getApplicationContext()));
+        }
     }
 
     /***
@@ -186,6 +168,12 @@ public class LoginActivity extends AppCompatActivity {
         loginAsync.execute();
     }
 
+    /**
+     * Method for saving login user data in SharedPreferences
+     * @param email - user email
+     * @param user - user name
+     * @param intent - intent to start activity
+     */
     private void fetchLoggedUserData(String email,final User user,final Intent intent)
     {
         FetchUserDataAsync fud = new FetchUserDataAsync(email, new IListener<User>()

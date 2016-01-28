@@ -42,7 +42,7 @@ public abstract class SocketAbstractAsync extends AsyncTask<Object,Void,Object> 
     public SocketAbstractAsync(){}
 
     @Override
-    public void listenServer(final SocketNotificationsManager snManager, SocketEvents socketEvents,final String title,final int icon)
+    public void listenServer(final SocketNotificationsManager snManager, SocketEvents socketEvents, final String title, final int icon, final PendingIntent pendingIntent)
     {
         snManager.getSocket().on(socketEvents.getEvent(), new Emitter.Listener() {
             @Override
@@ -50,30 +50,27 @@ public abstract class SocketAbstractAsync extends AsyncTask<Object,Void,Object> 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        showNotification(snManager, title, args[0].toString(),icon);
+                        showNotification(snManager, title, args[0].toString(),icon, pendingIntent);
                         return;
                     }
                 });
-
             }
         });
     }
 
-    private void showNotification(SocketNotificationsManager snManager, String title, String content, int icon)
+    private void showNotification(SocketNotificationsManager snManager, String title, String content, int icon, PendingIntent pendingIntent)
     {
         NotificationCompat.Builder mBuilder =
                 (NotificationCompat.Builder) new NotificationCompat.Builder(snManager.getContext())
                         .setSmallIcon(icon)
                         .setContentTitle(title)
-                        .setContentText(content);
-
+                        .setContentText(content)
+                        .setContentIntent(pendingIntent);
 
         int mNotificationId = (int)System.currentTimeMillis();
         NotificationManager mNotifyMgr =
                 (NotificationManager) snManager.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
 
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
-
-
     }
 }

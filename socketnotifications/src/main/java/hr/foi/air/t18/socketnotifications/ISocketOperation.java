@@ -1,5 +1,7 @@
 package hr.foi.air.t18.socketnotifications;
 
+import android.app.PendingIntent;
+
 import org.json.JSONObject;
 
 /**
@@ -8,5 +10,5 @@ import org.json.JSONObject;
  */
 public interface ISocketOperation {
       void sendToServer(SocketEvents eventName, JSONObject params);
-      void listenServer(SocketNotificationsManager snManager, SocketEvents socketEvents, String title, int icon);
+      void listenServer(SocketNotificationsManager snManager, SocketEvents socketEvents, String title, int icon, PendingIntent pendingIntent);
 }

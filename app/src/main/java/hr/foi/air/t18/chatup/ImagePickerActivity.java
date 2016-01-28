@@ -30,9 +30,6 @@ import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.MainAsync.SaveImageAsync;
 import hr.foi.air.t18.webservice.WebServiceResult;
 
-/**
- * Created by Laptop on 6.12.2015..
- */
 public class ImagePickerActivity extends AppCompatActivity implements View.OnClickListener, SaveAttachments {
 
     Button fromSdCard, saveImage;
@@ -48,7 +45,7 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_picker);
 
-        //setting toolbar
+        // Setting toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -110,6 +107,10 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
         });
     }
 
+    /**
+     * Method for loading image to imageView
+     * @param file
+     */
     private void loadImage(final String file) {
         new Thread(new Runnable() {
             @Override
@@ -180,16 +181,17 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    // Function for encoding bitmap file to Base64 format
+    /**
+     * Method for encoding Bitmap file to Base64 format String
+     * @param i is Bitmap
+     * @return Base64 String of picture
+     */
     public String encodeToBase64(Bitmap i) {
         Bitmap image = i;
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG, 90, byteArrayOutputStream);
         byte[] b = byteArrayOutputStream.toByteArray();
         String imageEncoded = Base64.encodeToString(b, Base64.NO_WRAP | Base64.URL_SAFE);
-
-        // print in log base64 string for bitmap
-        Log.e("BASE64", imageEncoded);
 
         return imageEncoded;
     }
@@ -202,7 +204,6 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
 
         if (userMail != null) {
             SaveImageAsync process = new SaveImageAsync(userMail, base64String, new IListener<Void>() {
-
 
                 @Override
                 public void onBegin() {

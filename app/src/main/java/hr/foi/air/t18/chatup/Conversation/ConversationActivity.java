@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -231,6 +232,7 @@ public class ConversationActivity extends AppCompatActivity
                             }
                             object.put("sender", sender);
                             object.put("participants", usersInConversation);
+                            object.put("conversationID", conversation.getID());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -350,8 +352,8 @@ public class ConversationActivity extends AppCompatActivity
                                 }
                                 object.put("sender", sender);
                                 object.put("participants", usersInConversation);
-                            } catch (JSONException e)
-                            {
+                                object.put("conversationID", conversation.getID());
+                            } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
