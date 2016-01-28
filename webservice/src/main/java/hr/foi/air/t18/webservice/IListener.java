@@ -13,12 +13,11 @@ public interface IListener<T>
     /**
      * What happens just as async task begins.
      */
-    public void onBegin();
+    void onBegin();
 
     /**
      * What happens when async task finishes.
-     * @param status Status cose of response (custom)
-     * @param message Message retrieved with response (could also be data)
+     * @param result Data structure that holds the Web service result
      */
-    public void onFinish(WebServiceResult<T> result);
+    void onFinish(WebServiceResult<T> result);
 }
