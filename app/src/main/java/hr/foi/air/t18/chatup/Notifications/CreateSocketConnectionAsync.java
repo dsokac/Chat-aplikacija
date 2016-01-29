@@ -34,6 +34,11 @@ public class CreateSocketConnectionAsync extends SocketAbstractAsync implements 
         this.socket = socketNotificationsManager.getSocket();
     }
 
+    /***
+     * Defines how android sends message to server.
+     * @param eventName - defined name for socket event
+     * @param params - all params that should be sent to server
+     */
     @Override
     public void sendToServer(SocketEvents eventName, JSONObject params) {
         try {
@@ -50,6 +55,7 @@ public class CreateSocketConnectionAsync extends SocketAbstractAsync implements 
 
     }
 
+    //Može se obrisat!
     @Override
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);

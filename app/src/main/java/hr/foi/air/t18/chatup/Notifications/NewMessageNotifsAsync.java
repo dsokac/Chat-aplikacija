@@ -19,6 +19,11 @@ public class NewMessageNotifsAsync extends SocketAbstractAsync implements ISocke
         super(socketNotificationsManager,params);
     }
 
+    /***
+     * Defines function which sends notification to server when you send a message.
+     * @param eventName
+     * @param params
+     */
     @Override
     public void sendToServer(SocketEvents eventName, JSONObject params) {
         super.sendToServer(SocketEvents.newMessage, params);
@@ -26,6 +31,16 @@ public class NewMessageNotifsAsync extends SocketAbstractAsync implements ISocke
 
     public NewMessageNotifsAsync(){super();}
 
+
+    /***
+     * Function which listen when server sends you notification
+     * that somebody has sent you a message
+     * @param snManager - socket notification manager which manages whole notification module
+     * @param socketEvents
+     * @param title
+     * @param icon
+     * @param pendingIntent
+     */
     @Override
     public void listenServer(SocketNotificationsManager snManager, SocketEvents socketEvents, String title, int icon, PendingIntent pendingIntent) {
         super.listenServer(snManager, socketEvents, title, icon, pendingIntent);

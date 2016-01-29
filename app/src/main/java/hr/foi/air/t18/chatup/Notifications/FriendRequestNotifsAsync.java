@@ -18,6 +18,11 @@ public class FriendRequestNotifsAsync extends SocketAbstractAsync {
         super(socketNotificationsManager, params);
     }
 
+    /***
+     * Defines event which occures when you add friend
+     * @param socketEvents
+     * @param params
+     */
     @Override
     public void sendToServer(SocketEvents socketEvents, JSONObject params) {
         super.sendToServer(SocketEvents.friendRequest, params);
@@ -26,6 +31,14 @@ public class FriendRequestNotifsAsync extends SocketAbstractAsync {
 
     public FriendRequestNotifsAsync(){super();}
 
+    /***
+     * Defines listener which wait untill somebody adds you. And server should notify you then.
+     * @param snManager - socket notification manager, which manages whole module
+     * @param socketEvents
+     * @param title
+     * @param icon
+     * @param pendingIntent
+     */
     @Override
     public void listenServer(SocketNotificationsManager snManager, SocketEvents socketEvents, String title, int icon, PendingIntent pendingIntent) {
         super.listenServer(snManager, socketEvents, title, icon, pendingIntent);

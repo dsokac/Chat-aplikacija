@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import static com.google.android.gms.internal.zzip.runOnUiThread;
 
 /**
+ * Class is used to restict what programmer can do.
  * Created by Danijel on 23.1.2016..
  */
 
@@ -29,12 +30,23 @@ public abstract class SocketAbstractAsync extends AsyncTask<Object,Void,Object> 
         this.params = params;
     }
 
+    /***
+     * Defines event which sends data to socket server.
+     * @param eventName
+     * @param params
+     */
     @Override
     public void sendToServer(SocketEvents eventName, JSONObject params) {
          this.socketEvents = eventName;
          this.socketNotificationsManager.getSocket().emit(eventName.getEvent(), params);
     }
 
+
+    /***
+     * Runs function in background
+     * @param params
+     * @return
+     */
     @Override
     public Object doInBackground(Object... params) {
          this.sendToServer(this.socketEvents, this.params);
@@ -43,6 +55,14 @@ public abstract class SocketAbstractAsync extends AsyncTask<Object,Void,Object> 
 
     public SocketAbstractAsync(){}
 
+    /***
+     * Default implementation for socket listener
+     * @param snManager
+     * @param socketEvents
+     * @param title
+     * @param icon
+     * @param pendingIntent
+     */
     @Override
     public void listenServer(final SocketNotificationsManager snManager, SocketEvents socketEvents, final String title, final int icon, final PendingIntent pendingIntent)
     {
@@ -60,6 +80,14 @@ public abstract class SocketAbstractAsync extends AsyncTask<Object,Void,Object> 
         });
     }
 
+    /***
+     * Function to display notification.
+     * @param snManager
+     * @param title
+     * @param content
+     * @param icon
+     * @param pendingIntent
+     */
     private void showNotification(SocketNotificationsManager snManager, String title, String content, int icon, PendingIntent pendingIntent)
     {
         NotificationCompat.Builder mBuilder =

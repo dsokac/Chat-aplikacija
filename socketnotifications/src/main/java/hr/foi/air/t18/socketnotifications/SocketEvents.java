@@ -1,6 +1,7 @@
 package hr.foi.air.t18.socketnotifications;
 
 /**
+ * Class which defines events to communicate with server
  * Created by Danijel on 23.1.2016..
  */
 public enum SocketEvents {

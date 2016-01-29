@@ -62,9 +62,11 @@ public class Settings extends AppCompatActivity {
                 int idx = settings_radiogroup.indexOfChild(radioButton);
                 settings_id = Integer.toString(idx);
 
+                //Saves color settings
                 String colorSettings_text = Integer.toString(getCheckedRadioButtonIndex(settings_radiogroup));
                 ChatUpPreferences.setDefaults(getString(R.string.SettingsColor), colorSettings_text, getApplicationContext());
 
+                //saves search settings
                 String searchSettings_text = getCheckedRadioButtonText(search_radiogroup);
                 ChatUpPreferences.setDefaults(getString(R.string.SettingsSearch), searchSettings_text, getApplicationContext());
 

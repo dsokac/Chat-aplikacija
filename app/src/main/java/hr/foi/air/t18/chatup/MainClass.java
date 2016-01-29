@@ -72,10 +72,13 @@ public class MainClass extends AppCompatActivity {
             ChatUpPreferences.setDefaults(getString(R.string.SettingsColor), "0", getApplicationContext());
         }
 
+        //initializes notification manager to listen server
         this.snManager = new SocketNotificationsManager("http://104.236.58.50:3000/", getApplicationContext());
 
+        //notification manager runs async task on service which connects to server and registers new client
         this.snManager.attachAsyncTasks(new CreateSocketConnectionAsync(this.snManager, null));
 
+        //socket server listeners are below. They listen to server and wait for messages to show notifications
         new FriendRequestNotifsAsync().listenServer(this.snManager, SocketEvents.friendRequest,"Friend Request",R.drawable.logo_v1, null);
         new NewMessageNotifsAsync().listenServer(this.snManager, SocketEvents.newMessage, "New message!", R.drawable.logo_v1, null);
 
@@ -236,6 +239,9 @@ public class MainClass extends AppCompatActivity {
         super.onDestroy();
     }
 
+    /***
+     * Event occures whenever user sees activity
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -254,6 +260,7 @@ public class MainClass extends AppCompatActivity {
 
         IState state = null;
 
+        //loads saved settings and applies it to app
         String settings_id = ChatUpPreferences.getDefaults(getString(R.string.SettingsColor), getApplicationContext());
 
         if (settings_id.equals("0")) {
