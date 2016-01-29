@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -118,10 +117,8 @@ public class SearchFragment extends Fragment {
                         state.applyChange(ctx, search_button);
                         reg_users = (ArrayList<User>)state.getData();
                     } catch (Exception e) {
-                        Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -192,11 +189,9 @@ public class SearchFragment extends Fragment {
     public boolean onContextItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_friend_add:
-                Toast.makeText(getActivity().getApplicationContext(), "Adding friend...", Toast.LENGTH_SHORT).show();
                 AddFriend();
                 return true;
             case R.id.add_friend_cancel:
-                Toast.makeText(getActivity().getApplicationContext(), "Cancel", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onContextItemSelected(item);

@@ -116,14 +116,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                                                 }
                                             }
                                         }).start();
-                                        //Toast.makeText(getApplicationContext(), "Successfully sended mail with instructions.", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             } catch (Exception e) {
-                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(getApplicationContext(), result.message, Toast.LENGTH_LONG).show();
                         }
                     }
                 });

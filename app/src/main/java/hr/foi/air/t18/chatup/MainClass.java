@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 
-import android.widget.Toast;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -101,8 +100,6 @@ public class MainClass extends AppCompatActivity {
             loggedIn = sharedPref.getString("id", "unknown");
         }
 
-        Toast.makeText(this, loggedIn, Toast.LENGTH_LONG).show();
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -141,7 +138,6 @@ public class MainClass extends AppCompatActivity {
             public void onFinish(WebServiceResult<Void> wsResult) {
                 if (progress.isShowing()) progress.dismiss();
 
-                Toast.makeText(getApplicationContext(), wsResult.message, Toast.LENGTH_LONG).show();
                 if (wsResult.status == 0) {
                     finish();
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -194,6 +190,9 @@ public class MainClass extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Method for creating tabs and putting them into fragmentBuffer
+     */
     private void createTabs() {
         FragmentBuffer fragmentBuffer = new FragmentBuffer();
         fragmentBuffer.add(new HomePageFragment(), "Home Page");
@@ -252,7 +251,6 @@ public class MainClass extends AppCompatActivity {
         hashElems.put("toolbar_stgs", MainClass.toolbar_stgs);
         hashElems.put("tablayout_stgs",MainClass.tablayout_stgs);
         hashElems.put("viewpager_stgs",MainClass.viewpager_stgs);
-      //  hashElems.put("elv",findViewById(R.id.conversation_expandable));
 
         hashElems.put("toolbar_settings",Settings.toolbar_settings);
         hashElems.put("relative_layout_stgs",Settings.relative_layout_stgs);

@@ -30,6 +30,9 @@ import hr.foi.air.t18.webservice.IListener;
 import hr.foi.air.t18.webservice.MainAsync.SaveImageAsync;
 import hr.foi.air.t18.webservice.WebServiceResult;
 
+/**
+ * Created by Laptop on 16.11.2015..
+ */
 public class ImagePickerActivity extends AppCompatActivity implements View.OnClickListener, SaveAttachments {
 
     Button fromSdCard, saveImage;
@@ -109,7 +112,7 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
 
     /**
      * Method for loading image to imageView
-     * @param file
+     * @param file - string to decode to bitmap
      */
     private void loadImage(final String file) {
         new Thread(new Runnable() {
@@ -216,7 +219,6 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
                     if (progress.isShowing()) {
                         progress.dismiss();
                     }
-                    Toast.makeText(getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
                     if (result.status == 0) {
                         ChatUpPreferences.setDefaults(
                                 "UserProfilePictureBase64",
@@ -229,7 +231,6 @@ public class ImagePickerActivity extends AppCompatActivity implements View.OnCli
             });
             process.execute();
         } else {
-            Log.w("USER_MAIL", "User mail is null from Shared Preferences!");
         }
     }
 }

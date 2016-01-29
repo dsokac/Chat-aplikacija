@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.widget.Toast;
 
 /**
  * Class for handling background service.
@@ -34,7 +33,6 @@ public class BackgroundService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        Toast.makeText(getApplicationContext(),"bound",Toast.LENGTH_SHORT).show();
         return mBinder;
     }
 

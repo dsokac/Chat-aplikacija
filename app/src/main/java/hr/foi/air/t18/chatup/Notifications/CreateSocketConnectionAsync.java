@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.github.nkzawa.socketio.client.Socket;
 
@@ -55,11 +54,9 @@ public class CreateSocketConnectionAsync extends SocketAbstractAsync implements 
 
     }
 
-    //Može se obrisat!
     @Override
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
-        Toast.makeText(ctx,"Connected to Socket",Toast.LENGTH_SHORT).show();
     }
 
     /**

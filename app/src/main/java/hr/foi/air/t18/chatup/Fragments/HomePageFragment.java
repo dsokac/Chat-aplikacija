@@ -16,7 +16,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -93,10 +92,8 @@ public class HomePageFragment extends Fragment {
 
                         registerForContextMenu(lv);
                     } catch (Exception e) {
-                        Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -170,11 +167,6 @@ public class HomePageFragment extends Fragment {
             @Override
             public void onFinish(WebServiceResult<Void> result)
             {
-                Toast.makeText(
-                    getActivity().getApplicationContext(),
-                    result.message,
-                    Toast.LENGTH_LONG
-                ).show();
             }
         });
 

@@ -21,8 +21,8 @@ public class NewMessageNotifsAsync extends SocketAbstractAsync implements ISocke
 
     /***
      * Defines function which sends notification to server when you send a message.
-     * @param eventName
-     * @param params
+     * @param eventName - name of socket event
+     * @param params - parameters
      */
     @Override
     public void sendToServer(SocketEvents eventName, JSONObject params) {
@@ -36,9 +36,9 @@ public class NewMessageNotifsAsync extends SocketAbstractAsync implements ISocke
      * Function which listen when server sends you notification
      * that somebody has sent you a message
      * @param snManager - socket notification manager which manages whole notification module
-     * @param socketEvents
-     * @param title
-     * @param icon
+     * @param socketEvents - socket event
+     * @param title - title of notification
+     * @param icon - icon for notification
      * @param pendingIntent
      */
     @Override

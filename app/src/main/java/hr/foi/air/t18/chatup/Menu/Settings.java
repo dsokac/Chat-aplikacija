@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 import java.util.HashMap;
 
 import hr.foi.air.t18.core.ChatUpPreferences;
@@ -70,29 +69,6 @@ public class Settings extends AppCompatActivity {
                 String searchSettings_text = getCheckedRadioButtonText(search_radiogroup);
                 ChatUpPreferences.setDefaults(getString(R.string.SettingsSearch), searchSettings_text, getApplicationContext());
 
-                /*hashElems.clear();
-                hashElems.put("toolbar_stgs", MainClass.toolbar_stgs);
-                hashElems.put("tablayout_stgs",MainClass.tablayout_stgs);
-                hashElems.put("viewpager_stgs",MainClass.viewpager_stgs);
-                hashElems.put("toolbar_settings",Settings.toolbar_settings);
-                hashElems.put("relative_layout_stgs",Settings.relative_layout_stgs);
-                hashElems.put("btnSettingsSave",Settings.btnSettingsSave);
-
-                IState state = null;
-
-                if (settings_id.equals("0")) {
-                    state = new Pink(hashElems);
-                }
-
-                else if (settings_id.equals("1")) {
-                    state = new Black(hashElems);
-                }
-                else if (settings_id.equals("2")) {
-                    state = new Blue(hashElems);
-                }
-
-                state.applyChange(context,null);*/
-                Toast.makeText(getApplicationContext(), "Update successfully", Toast.LENGTH_SHORT).show();
                 Settings.this.finish();
             }
         });

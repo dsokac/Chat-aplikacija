@@ -116,7 +116,6 @@ public class RegisterActivity extends AppCompatActivity
                 if (progress.isShowing()) {
                     progress.dismiss();
                 }
-                Toast.makeText(getApplicationContext(), wsResult.message, Toast.LENGTH_SHORT).show();
                 if (wsResult.status == 0) {
                     finish();
                 }

@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import hr.foi.air.t18.chatup.MainClass;
 import hr.foi.air.t18.chatup.R;
@@ -145,7 +144,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onFinish(WebServiceResult<Void> wsResult) {
                 if(progress.isShowing()) progress.dismiss();
 
-                Toast.makeText(getApplicationContext(), wsResult.message, Toast.LENGTH_LONG).show();
                 if(wsResult.status == 0)
                 {
                     finish();
@@ -203,7 +201,6 @@ public class LoginActivity extends AppCompatActivity {
                     );
                 }
 
-                Toast.makeText(getApplicationContext(),"Fetching done",Toast.LENGTH_SHORT).show();
                 MiddleMan.setUserObject(user);
                 startActivity(intent);
             }

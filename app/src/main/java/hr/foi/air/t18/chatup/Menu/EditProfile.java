@@ -128,10 +128,8 @@ public class EditProfile extends AppCompatActivity {
                         }
 
                     } catch (Exception e) {
-                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), result.message, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -192,7 +190,6 @@ public class EditProfile extends AppCompatActivity {
                         editTextEditUsername.setText("");
                         editTextEditPassword.setText("");
                         editTextEditPassword2.setText("");
-                        Toast.makeText(getApplicationContext(), "Update profile successfully.", Toast.LENGTH_SHORT).show();
                         Log.d(selectedGender,selectedGender);
                         finish();
                         overridePendingTransition( 0, 0);
